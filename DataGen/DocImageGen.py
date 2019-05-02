@@ -1,4 +1,6 @@
 import numpy as np
+from enum import Enum
+
 
 class DocGenerator():
     def __initd__(self):
