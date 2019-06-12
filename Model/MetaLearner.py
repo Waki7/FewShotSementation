@@ -6,33 +6,35 @@ import torch.nn.functional as F
 
 
 class LifeNetwork(nn.Module):
-    def __init__(self, totalWeights):
-        super(LifeNetwork, self).__init__()
-
-        self.agent = agent
-        numS = 8
+    def __init__(self, inputSize):
+        numHU = 8
         bias = False
-        l1_out_features = 0
-        self.wl1 = {}
-        for i in range(0, len(self.agent.inputChannels)):
-            inputChannel = self.agent.inputChannels[i]
-            self.wl1[inputChannel] = nn.Linear(
-                in_features=self.agent.inputShpes[i], out_features=numS, bias=bias).cuda()
-            l1_out_features += self.wl1[inputChannel].out_features
 
-        self.wl2 = nn.Linear(
-            in_features=l1_out_features, out_features=numS, bias=bias)
+        self.wi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
 
-        self.wly = {}
-        for i in range(0, len(self.agent.outputChannels)):
-            outputChannel = self.agent.outputChannels[i]
-            self.wly[outputChannel] = nn.Linear(
-                in_features=self.wl2.out_features, out_features=self.agent.outputShpes[i], bias=bias).cuda()
+        self.wf = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
 
 
-    def forward(self, envInput, selfInput):
-        l0, l1, l1_cmbn = {}, {}, []
-        input = torch.cat((envInput, selfInput), dim=1)
+        self.wg = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+
+        self.wo = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+
+
+        self.wxi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+        self.wxi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+
+
+    def forward(self, h_t1, dL_t, L_t, th_t1, i_t1, f_t1, c_t1):
+        x_t = torch.cat((dL_t, L_t, th_t1), dim=1)
+        i_t = torch.sigmoid(self.wi(torch.cat((x_t, i_t1), dim=1)))
+        f_t = torch.sigmoid(self.wf(torch.cat((x_t, f_t1), dim=1)))
+        xh = torch.cat((x_t, h_t1), dim=1) #todo try splitting so that it is wx (x) + wh (h) instead of wxh(w;h)
+        g_t = torch.tanh(self.wg(xh))
+        o_t = torch.sigmoid(self.wo(xh))
+        c_t = torch.add(torch.dot(f_t, c_t1), torch.dot(i_t, g_t))
+        h_t = torch.dot(o_t, torch.tanh(c_t))
+        return h_t, i_t, f_t, c_t # i_t is learning rate, c_t is dL_t
+
 
 def main():
     pass
