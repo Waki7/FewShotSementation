@@ -5,7 +5,7 @@ import torch.nn.functional as F
 
 
 
-class LifeNetwork(nn.Module):
+class MetaLearner(nn.Module):
     def __init__(self, inputSize):
         numHU = 8
         bias = False
@@ -29,15 +29,8 @@ class LifeNetwork(nn.Module):
         i_t = torch.sigmoid(self.wi(torch.cat((x_t, i_t1), dim=1)))
         f_t = torch.sigmoid(self.wf(torch.cat((x_t, f_t1), dim=1)))
         xh = torch.cat((x_t, h_t1), dim=1) #todo try splitting so that it is wx (x) + wh (h) instead of wxh(w;h)
-        g_t = torch.tanh(self.wg(xh))
+        ci_t = torch.tanh(self.wg(xh))
         o_t = torch.sigmoid(self.wo(xh))
-        c_t = torch.add(torch.dot(f_t, c_t1), torch.dot(i_t, g_t))
+        c_t = torch.add(torch.dot(f_t, c_t1), torch.dot(i_t, ci_t))
         h_t = torch.dot(o_t, torch.tanh(c_t))
-        return h_t, i_t, f_t, c_t # i_t is learning rate, c_t is dL_t
-
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()
+        return h_t, i_t, f_t, c_t # i_t is learning rate, ci_t is dL_t. c_t1= old parameters,
