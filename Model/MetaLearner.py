@@ -6,7 +6,7 @@ import torch.nn.functional as F
 
 
 class MetaLearner(nn.Module):
-    def __init__(self, inputSize):
+    def __init__(self, inputSize = 1):
         numHU = 8
         bias = False
 
@@ -33,4 +33,13 @@ class MetaLearner(nn.Module):
         o_t = torch.sigmoid(self.wo(xh))
         c_t = torch.add(torch.dot(f_t, c_t1), torch.dot(i_t, ci_t))
         h_t = torch.dot(o_t, torch.tanh(c_t))
-        return h_t, i_t, f_t, c_t # i_t is learning rate, ci_t is dL_t. c_t1= old parameters,
+        self.lr_ = i_t
+        self.th_t1_c = f_t
+        self.dL_t = ci_t
+        self.th_t1 = c_t1
+        return h_t, i_t, f_t, c_t # i_t is learning rate, ci_t is -dL_t. c_t1= old parameters,
+
+
+    def update(self, w):
+
+        return (self.th_t1_c * self.th_t1) + (self.lr_ * self.dL_t)
