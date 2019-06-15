@@ -24,7 +24,7 @@ class MetaLearner(nn.Module):
         self.wxi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
 
 
-    def forward(self, h_t1, dL_t, L_t, th_t1, i_t1, f_t1, c_t1):
+    def forward(self, dL_t, h_t1, L_t, th_t1, i_t1, f_t1, c_t1):
         x_t = torch.cat((dL_t, L_t, th_t1), dim=1)
         i_t = torch.sigmoid(self.wi(torch.cat((x_t, i_t1), dim=1)))
         f_t = torch.sigmoid(self.wf(torch.cat((x_t, f_t1), dim=1)))
