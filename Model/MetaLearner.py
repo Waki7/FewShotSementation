@@ -41,4 +41,4 @@ class MetaLearner(nn.Module):
 
 
     def update(self):
-        return torch.sum(torch.dot(self.th_t1_c, self.th_t1), torch.dot(self.lr_, self.dL_t)).detach()
+        return torch.sum(torch.dot(self.th_t1_c, self.th_t1), torch.dot(self.lr_, self.dL_t))

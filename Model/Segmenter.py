@@ -41,3 +41,17 @@ class Segmenter(nn.Module):
         # Size changes from (1, 64) to (1, 10)
         x = self.fc2(x)
         return (x)
+
+    def getData(self):
+        pass
+
+def ValidateSegmenter:
+
+    pass
+
+def main():
+    ValidateSegmenter()
+
+
+if __name__ == '__main__':
+    main()
