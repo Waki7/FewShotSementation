@@ -45,8 +45,7 @@ class Segmenter(nn.Module):
     def getData(self):
         pass
 
-def ValidateSegmenter:
-
+def ValidateSegmenter():
     pass
 
 def main():

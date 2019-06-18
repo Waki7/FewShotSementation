@@ -5,30 +5,52 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
 
-BSR_path_labels = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\train' # 0
-BSR_path_images = '..\\Data\\BSR\\BSDS500\\data\\images\\train'
-BSRTestKey = 'groundTruth'
 
-def process(directoryPath, dataExt = '.jpg'): # should just get all files in directory as ndarray
+
+class BSRLabels():
+    def __init__(self):
+        self.fileExt = '.mat'
+        self.rootPath = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
+        self.paths = [self.rootPath + i for i in ['train', 'test', 'val']]
+        self.matKey = 'groundTruth'
+        self.segmentationIndex = 0
+        self.boundaryIndex = 1
+
+    def fileReader(self, file):
+        mat = scipy.io.loadmat(file)
+        mat_data = np.squeeze(mat[self.matKey][0, 0]).item(0)
+        datum = mat_data[self.segmentationIndex] #segementation ground truth, mat_data[1] is the boundary boxes
+        return datum
+
+class BSRImages():
+    def __init__(self):
+        self.fileExt = '.jpg'
+        self.rootPath = '..\\Data\\BSR\\BSDS500\\data\\images\\'
+        self.paths = [self.rootPath + i for i in ['train', 'test', 'val']]
+
+    def fileReader(self, file):
+        datum = scipy.misc.imread(file)
+        return datum
+
+def process(directoryPath, dataSet): # should just get all files in directory as ndarray
     data = []
+    for filename in os.listdir(directoryPath):
+        if filename.endswith(dataSet.ext):
+            samplePath = join(directoryPath, filename)
+            data.append(dataSet.fileReader(samplePath))
+            plt.imshow(data[0])
+            plt.show()
+            return
+
+def processBSR():
+    x = []
+    y = []
     for set in ['train', 'test', 'val']: #do this specific splitting logic outside of this method
-        for filename in os.listdir(directoryPath):
-            if filename.endswith(dataExt):
-                samplePath = join(directoryPath, filename)
+        process(BSR_path_images + set)
+        process(BSR_path_labels + set)
 
-                mat = scipy.io.loadmat(samplePath)
-                mat_data = np.squeeze(mat[BSRTestKey][0,0]).item(0)
-                segmentationGroundTruth = mat_data[0]
-                #mat[1] is the boundaries
-                print(segmentationGroundTruth.shape)
-
-                plt.imshow(segmentationGroundTruth)
-                plt.show()
-                plt.show()
-
-                print(exit(9))
 def main():
-    process(BSR_path)
+    processBSR()
 
 
 if __name__=='__main__':
