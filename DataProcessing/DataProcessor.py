@@ -19,10 +19,14 @@ class DataSet():
         return np.pad(image,
                       pad_width=pad_width, mode='constant')
 
-    def saveData(self, path, filename, array):
+    def saveData(self, path, filename, array, compress=True):
         if not os.path.exists(path):
             os.makedirs(path)
-        # array = np.ndarray(array, dtype=np.float16)
+        if compress:
+            if np.issubdtype(array.dtype, np.integer):
+                array.astype(np.int8)
+            if np.issubdtype(array.dtype, np.floating):
+                array.astype(np.float16)
         with open(path + filename, 'wb') as f: pickle.dump(array, f)
 
     def loadArray(self, path, filename):

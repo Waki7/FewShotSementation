@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import DataProcessing.DataProcessor as data
 
 
 
@@ -46,7 +47,22 @@ class Segmenter(nn.Module):
         pass
 
 def ValidateSegmenter():
-    pass
+    epochs = 10
+    batch_size = 100
+
+
+    x, y = data.processBSR()
+    n_train = x.shape[0]
+    model = Segmenter(x.shape[-1] if len(x.shape) > 3 else 1)
+    opt = torch.optim.SGD(model.parameters(), lr=.1)
+    shuffled_indexes = torch.randperm(n_train)
+
+    for e in range(epochs):
+        for i in range(0, n_train, batch_size):
+            indexes = shuffled_indexes[i:i+batch_size]
+            x_batch = x[indexes]
+            y_batch = y[indexes]
+
 
 def main():
     ValidateSegmenter()
