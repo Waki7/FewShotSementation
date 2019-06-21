@@ -2,24 +2,31 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import DataProcessing.DataProcessor as data
+import numpy as np
 
 
 
 
 class Segmenter(nn.Module):
-    def __init__(self, inputChannels):
-        numHU = 8
+    def __init__(self, inputShape, classes):
+        super(Segmenter, self).__init__()
+
+        numHU = 64
         bias = False
+        if len(inputShape) <=2:
+            channels = 1
+        channels = inputShape[-1] if len(inputShape) > 3 else 1
+        strideC_1 = 2
+        kernel_size_1 = 3
+        strideP_1 = 2
+        out_channels_1 = 18
 
-        # Input channels = 3, output channels = 18
-        self.conv1 = torch.nn.Conv2d(3, 18, kernel_size=3, stride=1, padding=1)
-        self.pool = torch.nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+        self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels = out_channels_1, kernel_size=kernel_size_1,
+                                     stride=strideC_1, padding=kernel_size_1)
 
-        # 4608 input features, 64 output features (see sizing flow below)
-        self.fc1 = torch.nn.Linear(18 * 16 * 16, 64)
-
-        # 64 input features, 10 output features for our 10 defined classes
-        self.fc2 = torch.nn.Linear(64, 10)
+        self.pool = torch.nn.MaxPool2d(kernel_size=2, stride=strideP_1, padding=0)
+        self.fc1 = torch.nn.Linear(in_features=inputShape[0]//(strideC_1*strideP_1), out_features=numHU)
+        self.fc2 = torch.nn.Linear(numHU, classes)
 
     def forward(self, x):
         # Computes the activation of the first convolution
@@ -52,9 +59,12 @@ def ValidateSegmenter():
 
 
     x, y = data.processBSR()
+    x, y = torch.tensor(x).cuda(), torch.tensor(y).cuda()
     n_train = x.shape[0]
-    model = Segmenter(x.shape[-1] if len(x.shape) > 3 else 1)
+    classes = np.prod(y.shape[1:])
+    model = Segmenter(x.shape, classes)
     opt = torch.optim.SGD(model.parameters(), lr=.1)
+    criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
 
     for e in range(epochs):
@@ -62,7 +72,12 @@ def ValidateSegmenter():
             indexes = shuffled_indexes[i:i+batch_size]
             x_batch = x[indexes]
             y_batch = y[indexes]
-
+            y_out = model.forward(x_batch)
+            loss = criterion(input=y_out, target=y_batch)
+            print(loss.data)
+            loss.backward(retain_graph=False)
+            opt.step()
+            opt.zero_grad()
 
 def main():
     ValidateSegmenter()

@@ -24,9 +24,10 @@ class DataSet():
             os.makedirs(path)
         if compress:
             if np.issubdtype(array.dtype, np.integer):
-                array.astype(np.int8)
+                array = array.astype(np.int8)
+                print(array.dtype)
             if np.issubdtype(array.dtype, np.floating):
-                array.astype(np.float16)
+                array = array.astype(np.float16)
         with open(path + filename, 'wb') as f: pickle.dump(array, f)
 
     def loadArray(self, path, filename):
@@ -105,11 +106,15 @@ class BSRImages(DataSet):
         return data
 
 
-def processBSR():
+def processBSR(dtype = np.uint8):
     labels = BSRLabels()
     images = BSRImages()
-    x = labels.getData()
-    y = images.getData()
+    x = images.getData()
+    y = labels.getData()
+    if x.dtype != dtype:
+        x = x.astype(dtype)
+    if y.dtype != dtype:
+        y = x.astype(dtype)
     return x, y
 
 def main():
