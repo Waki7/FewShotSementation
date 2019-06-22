@@ -16,39 +16,30 @@ class Segmenter(nn.Module):
         if len(inputShape) <=2:
             channels = 1
         channels = inputShape[-1] if len(inputShape) > 3 else 1
-        strideC_1 = 2
-        kernel_size_1 = 3
-        strideP_1 = 2
+        strideC_1 = 1
+        strideP_1 = 1
+
+        kernel_sizeC_1 = 5
+        kernel_sizeP_1 = 3
         out_channels_1 = 18
 
-        self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels = out_channels_1, kernel_size=kernel_size_1,
-                                     stride=strideC_1, padding=kernel_size_1)
+        self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels = out_channels_1, kernel_size=kernel_sizeC_1,
+                                     stride=strideC_1, padding=kernel_sizeC_1//2)
+        self.pool1 = torch.nn.MaxPool2d(kernel_size=kernel_sizeP_1,
+                                        stride=strideP_1, padding=kernel_sizeP_1//2)
 
-        self.pool = torch.nn.MaxPool2d(kernel_size=2, stride=strideP_1, padding=0)
-        self.fc1 = torch.nn.Linear(in_features=inputShape[0]//(strideC_1*strideP_1), out_features=numHU)
-        self.fc2 = torch.nn.Linear(numHU, classes)
+        strideC_2 = 1
+        kernel_sizeC_2 = 7
+
+        self.conv2 = torch.nn.Conv2d(in_channels=out_channels_1, out_channels = 1, kernel_size=kernel_sizeC_2, #out channels 1 cause labels
+                                     stride=strideC_2, padding=kernel_sizeC_2//2)
 
     def forward(self, x):
-        # Computes the activation of the first convolution
-        # Size changes from (3, 32, 32) to (18, 32, 32)
-        x = F.relu(self.conv1(x))
-
-        # Size changes from (18, 32, 32) to (18, 16, 16)
-        x = self.pool(x)
-
-        # Reshape data to input to the input layer of the neural net
-        # Size changes from (18, 16, 16) to (1, 4608)
-        # Recall that the -1 infers this dimension from the other given dimension
-        x = x.view(-1, 18 * 16 * 16)
-
-        # Computes the activation of the first fully connected layer
-        # Size changes from (1, 4608) to (1, 64)
-        x = F.relu(self.fc1(x))
-
-        # Computes the second fully connected layer (activation applied later)
-        # Size changes from (1, 64) to (1, 10)
-        x = self.fc2(x)
-        return (x)
+        # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2
+        c1 = F.relu(self.conv1(x))
+        p1 = self.pool1(c1)
+        c2 = F.sigmoid(self.conv2(p1)) # probabilistic interpretation for last layer classification, we could add channels if multiple labels for each pixel
+        return c2
 
     def getData(self):
         pass
