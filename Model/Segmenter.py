@@ -8,14 +8,12 @@ import numpy as np
 
 
 class Segmenter(nn.Module):
-    def __init__(self, inputShape, classes):
+    def __init__(self, inputShape, classes = 1):
         super(Segmenter, self).__init__()
 
         numHU = 64
         bias = False
-        if len(inputShape) <=2:
-            channels = 1
-        channels = inputShape[-1] if len(inputShape) > 3 else 1
+        channels = inputShape[1] if len(inputShape) > 3 else 1
         strideC_1 = 1
         strideP_1 = 1
 
@@ -51,9 +49,10 @@ def ValidateSegmenter():
 
     x, y = data.processBSR()
     x, y = torch.tensor(x).cuda(), torch.tensor(y).cuda()
+    x = x.permute(0,3,1,2)
     n_train = x.shape[0]
     classes = np.prod(y.shape[1:])
-    model = Segmenter(x.shape, classes)
+    model = Segmenter(x.shape)
     opt = torch.optim.SGD(model.parameters(), lr=.1)
     criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
