@@ -4,7 +4,12 @@ import torch.nn.functional as F
 import DataProcessing.DataProcessor as data
 import numpy as np
 
-
+if torch.cuda.is_available():
+    device = torch.device('cuda')
+else:
+    device = torch.device('cpu')
+type = torch.float
+args = {'device': device, 'dtype': type}
 
 
 class Segmenter(nn.Module):
@@ -48,11 +53,10 @@ def ValidateSegmenter():
 
 
     x, y = data.processBSR()
-    x, y = torch.tensor(x).cuda(), torch.tensor(y).cuda()
-    x = x.permute(0,3,1,2)
+    x = np.transpose(x, (0,3,1,2))
     n_train = x.shape[0]
     classes = np.prod(y.shape[1:])
-    model = Segmenter(x.shape)
+    model = Segmenter(x.shape).to(device)
     opt = torch.optim.SGD(model.parameters(), lr=.1)
     criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
@@ -60,8 +64,9 @@ def ValidateSegmenter():
     for e in range(epochs):
         for i in range(0, n_train, batch_size):
             indexes = shuffled_indexes[i:i+batch_size]
-            x_batch = x[indexes]
-            y_batch = y[indexes]
+            x_batch = torch.tensor(x[indexes], **args)
+            y_batch = torch.tensor(y[indexes], **args)
+
             y_out = model.forward(x_batch)
             loss = criterion(input=y_out, target=y_batch)
             print(loss.data)
