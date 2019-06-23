@@ -4,9 +4,10 @@ import torch.nn.functional as F
 import DataProcessing.DataProcessor as data
 import numpy as np
 
-device = torch.device('cuda')
-# device = torch.device('cpu') #todo: can't go between cpu and gpu seamlessly, implementation errors: RuntimeError: _thnn_conv2d_forward is not implemented for type torch.HalfTensor
-type = torch.float16
+
+use_cpu = True
+device = torch.device('cpu') if use_cpu else torch.device('cuda')
+type = torch.float32 if use_cpu else torch.float16
 args = {'device': device, 'dtype': type}
 
 
@@ -58,11 +59,13 @@ def ValidateSegmenter():
     batch_size = 2
 
     x, y = data.processBSR(x_dtype = np.float16, y_dtype = np.float16)
+    assert not np.any(np.isnan(x))
+    assert not np.any(np.isnan(y))
     x = np.transpose(x, (0, 3, 1, 2))
     classes = int(np.max(y))
     n_train = x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
-    opt = torch.optim.SGD(model.parameters(), lr=.1)
+    opt = torch.optim.SGD(model.parameters(), lr=.001)
     criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
 
@@ -71,10 +74,11 @@ def ValidateSegmenter():
             indexes = shuffled_indexes[i:i + batch_size]
             x_batch = torch.tensor(x[indexes]).to(**args)
             y_batch = torch.tensor(y[indexes]).to(device).long() #todo: torch CrossEntropyLoss requires long... too much memory usage, might have to implement myself...
-
             y_out = model.forward(x_batch)
-            loss = criterion(input=y_out, target=y_batch)
+            loss = criterion.forward(input=y_out, target=y_batch)
+            print(torch.min(y_out))
             print(loss.data)
+            print(exit(9))
             loss.backward(retain_graph=False)
             opt.step()
             opt.zero_grad()
