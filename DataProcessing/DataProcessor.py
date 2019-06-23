@@ -25,7 +25,6 @@ class DataSet():
         if compress:
             if np.issubdtype(array.dtype, np.integer):
                 array = array.astype(np.int8)
-                print(array.dtype)
             if np.issubdtype(array.dtype, np.floating):
                 array = array.astype(np.float16)
         with open(path + filename, 'wb') as f: pickle.dump(array, f)
@@ -66,6 +65,9 @@ class BSRLabels(DataSet):
         mat = scipy.io.loadmat(file)
         mat_data = np.squeeze(mat[self.matKey][0, 0]).item(0)
         datum = mat_data[self.segmentationIndex] #segementation ground truth, mat_data[1] is the boundary boxes
+        # datum1 = mat_data[1]
+        # plt.imshow(datum)
+        # plt.show()
         return datum
 
     def getData(self):
@@ -106,15 +108,15 @@ class BSRImages(DataSet):
         return data
 
 
-def processBSR(dtype = np.uint8):
+def processBSR(x_dtype = np.float16, y_dtype = np.float16):
     labels = BSRLabels()
     images = BSRImages()
     x = images.getData()
     y = labels.getData()
-    if x.dtype != dtype:
-        x = x.astype(dtype)
-    if y.dtype != dtype:
-        y = x.astype(dtype)
+    if x.dtype != x_dtype:
+        x = x.astype(x_dtype)
+    if y.dtype != y_dtype:
+        y = y.astype(y_dtype)
     return x, y
 
 def main():
