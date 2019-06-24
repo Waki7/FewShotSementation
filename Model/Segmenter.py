@@ -5,9 +5,9 @@ import DataProcessing.DataProcessor as data
 import numpy as np
 
 
-use_cpu = True
+use_cpu = False
 device = torch.device('cpu') if use_cpu else torch.device('cuda')
-type = torch.float32 if use_cpu else torch.float16
+type = torch.float32 #if use_cpu else torch.float32 #xentropy doesn't support float16
 args = {'device': device, 'dtype': type}
 
 
@@ -56,7 +56,7 @@ class Segmenter(nn.Module):
 
 def ValidateSegmenter():
     epochs = 10
-    batch_size = 2
+    batch_size = 4
 
     x, y = data.processBSR(x_dtype = np.float16, y_dtype = np.float16)
     assert not np.any(np.isnan(x))
@@ -65,20 +65,19 @@ def ValidateSegmenter():
     classes = int(np.max(y))
     n_train = x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
-    opt = torch.optim.SGD(model.parameters(), lr=.001)
+    opt = torch.optim.Adam(model.parameters(), lr=.001)
     criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
+    # x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
 
     for e in range(epochs):
         for i in range(0, n_train, batch_size):
             indexes = shuffled_indexes[i:i + batch_size]
-            x_batch = torch.tensor(x[indexes]).to(**args)
-            y_batch = torch.tensor(y[indexes]).to(device).long() #todo: torch CrossEntropyLoss requires long... too much memory usage, might have to implement myself...
+            x_batch, y_batch = x[indexes], y[indexes]
+            x_batch, y_batch = torch.tensor(x_batch).to(**args), torch.tensor(y_batch).to(device).long()
             y_out = model.forward(x_batch)
             loss = criterion.forward(input=y_out, target=y_batch)
-            print(torch.min(y_out))
             print(loss.data)
-            print(exit(9))
             loss.backward(retain_graph=False)
             opt.step()
             opt.zero_grad()
