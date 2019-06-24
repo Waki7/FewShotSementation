@@ -21,8 +21,8 @@ class Segmenter(nn.Module):
         strideC_1 = 1
         strideP_1 = 1
 
-        kernel_sizeC_1 = 5
-        kernel_sizeP_1 = 3
+        kernel_sizeC_1 = 9
+        kernel_sizeP_1 = 7
         out_channels_1 = 18
 
         self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
@@ -31,7 +31,7 @@ class Segmenter(nn.Module):
                                         stride=strideP_1, padding=kernel_sizeP_1 // 2)
 
         strideC_2 = 1
-        kernel_sizeC_2 = 7
+        kernel_sizeC_2 = 9
 
         self.conv2 = torch.nn.Conv2d(in_channels=out_channels_1, out_channels=classes, kernel_size=kernel_sizeC_2,
                                      # out channels 1 cause labels
@@ -62,10 +62,10 @@ def ValidateSegmenter():
     assert not np.any(np.isnan(x))
     assert not np.any(np.isnan(y))
     x = np.transpose(x, (0, 3, 1, 2))
-    classes = int(np.max(y))
+    classes = int(np.max(y)+1)
     n_train = x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
-    opt = torch.optim.Adam(model.parameters(), lr=.001)
+    opt = torch.optim.Adam(model.parameters(), lr=.00005)
     criterion = torch.nn.CrossEntropyLoss()
     shuffled_indexes = torch.randperm(n_train)
     # x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
