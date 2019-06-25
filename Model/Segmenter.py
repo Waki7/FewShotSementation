@@ -56,8 +56,8 @@ class Segmenter(nn.Module):
 
 
 def ValidateSegmenter():
-    epochs = 100
-    batch_size = 4
+    epochs = 1000
+    batch_size = 2
 
     x, y = data.processBSR(x_dtype = np.float16, y_dtype = np.float16)
 
@@ -69,9 +69,6 @@ def ValidateSegmenter():
     unique, counts = np.unique(y, return_counts=True)
     print(counts)
     print(unique)
-    print(sum(counts))
-    print(481*481*500)
-    print(exit(9))
     n_train = 5#x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
     opt = torch.optim.Adam(model.parameters(), lr=.00005)
