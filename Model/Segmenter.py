@@ -57,7 +57,7 @@ class Segmenter(nn.Module):
 
 def ValidateSegmenter():
     epochs = 1000
-    batch_size = 2
+    batch_size = 1
 
     x, y = data.processBSR(x_dtype = np.float16, y_dtype = np.float16)
 
@@ -67,12 +67,14 @@ def ValidateSegmenter():
     classes = int(np.max(y)+1)
     print(classes)
     unique, counts = np.unique(y, return_counts=True)
+    totalCount = sum(counts)
+    weights = torch.tensor([totalCount/c for c in counts]).to(**args)
     print(counts)
     print(unique)
-    n_train = 5#x.shape[0]
+    n_train = 1#x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
-    opt = torch.optim.Adam(model.parameters(), lr=.00005)
-    criterion = torch.nn.CrossEntropyLoss()
+    opt = torch.optim.Adam(model.parameters(), lr=.005)
+    criterion = torch.nn.CrossEntropyLoss(weight=weights)
     shuffled_indexes = torch.randperm(n_train)
     x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
 
