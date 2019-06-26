@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision import transforms
 import DataProcessing.DataProcessor as data
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,15 +17,14 @@ class Segmenter(nn.Module):
     def __init__(self, inputShape, classes=1):
         super(Segmenter, self).__init__()
 
-        numHU = 64
         bias = False
         channels = inputShape[1] if len(inputShape) > 3 else 1
         strideC_1 = 1
         strideP_1 = 1
 
-        kernel_sizeC_1 = 9
+        kernel_sizeC_1 = 13
         kernel_sizeP_1 = 7
-        out_channels_1 = 18
+        out_channels_1 = 27
 
         self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
                                      stride=strideC_1, padding=kernel_sizeC_1 // 2)
@@ -32,7 +32,7 @@ class Segmenter(nn.Module):
                                         stride=strideP_1, padding=kernel_sizeP_1 // 2)
 
         strideC_2 = 1
-        kernel_sizeC_2 = 9
+        kernel_sizeC_2 = 15
 
         self.conv2 = torch.nn.Conv2d(in_channels=out_channels_1, out_channels=classes, kernel_size=kernel_sizeC_2,
                                      # out channels 1 cause labels
@@ -41,7 +41,7 @@ class Segmenter(nn.Module):
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2
         # get size of memory allocation in bytes : tensorname.element_size() * tensorname.nelement()
-        c1 = torch.sigmoid(self.conv1(x))
+        c1 = self.conv1(x)
         p1 = self.pool1(c1)
         c2 = self.conv2(
             p1)
@@ -64,6 +64,7 @@ def ValidateSegmenter():
     assert not np.any(np.isnan(x))
     assert not np.any(np.isnan(y))
     x = np.transpose(x, (0, 3, 1, 2))
+    x = x/255.0 # scale [0,255] -> [0,1]
     classes = int(np.max(y)+1)
     print(classes)
     unique, counts = np.unique(y, return_counts=True)
