@@ -24,12 +24,19 @@ class Segmenter(nn.Module):
 
         kernel_sizeC_1 = 13
         kernel_sizeP_1 = 7
-        out_channels_1 = 27
+        out_channels_1 = 13
 
-        self.conv1 = torch.nn.Conv2d(in_channels=channels, out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
-                                     stride=strideC_1, padding=kernel_sizeC_1 // 2)
-        self.pool1 = torch.nn.MaxPool2d(kernel_size=kernel_sizeP_1,
-                                        stride=strideP_1, padding=kernel_sizeP_1 // 2)
+        self.l1 = nn.Sequential(
+            # dw
+            nn.Conv2d(in_channels=channels, out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
+                                     stride=strideC_1, padding=kernel_sizeC_1 // 2),
+            nn.BatchNorm2d(out_channels_1),
+            nn.ReLU6(inplace=True),
+            # pw-linear
+            nn.Conv2d(in_channels=out_channels_1, out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
+                      stride=strideC_1, padding=kernel_sizeC_1 // 2),
+            nn.BatchNorm2d(out_channels_1),
+        )
 
         strideC_2 = 1
         kernel_sizeC_2 = 15
@@ -41,10 +48,8 @@ class Segmenter(nn.Module):
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2
         # get size of memory allocation in bytes : tensorname.element_size() * tensorname.nelement()
-        c1 = self.conv1(x)
-        p1 = self.pool1(c1)
-        c2 = self.conv2(
-            p1)
+        l1 = self.l1(x)
+        c2 = self.conv2(l1)
         out = F.softmax(c2, dim=1)  # probabilistic interpretation for last layer classification, we could add channels if multiple labels for each pixel
         # class0 = out.data[0,:,0,0]
         # print(class0.shape)
@@ -74,7 +79,7 @@ def ValidateSegmenter():
     print(unique)
     n_train = 1#x.shape[0]
     model = Segmenter(x.shape, classes).to(**args)
-    opt = torch.optim.Adam(model.parameters(), lr=.005)
+    opt = torch.optim.Adam(model.parameters(), lr=.01)
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     shuffled_indexes = torch.randperm(n_train)
     x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
