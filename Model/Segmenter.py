@@ -20,10 +20,8 @@ class Segmenter(nn.Module):
         bias = False
         channels = inputShape[1] if len(inputShape) > 3 else 1
         strideC_1 = 1
-        strideP_1 = 1
 
         kernel_sizeC_1 = 13
-        kernel_sizeP_1 = 7
         out_channels_1 = 13
 
         self.l1 = nn.Sequential(
