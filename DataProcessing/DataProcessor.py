@@ -112,6 +112,10 @@ def processBSR(x_dtype = np.float16, y_dtype = np.float16):
         x = x.astype(x_dtype)
     if y.dtype != y_dtype:
         y = y.astype(y_dtype)
+    x = cleanInput(x)
+    y = getClassWeights(y)
+    assert not np.any(np.isnan(x))
+    assert not np.any(np.isnan(y))
     return x, y
 
 def main():
@@ -120,3 +124,16 @@ def main():
 
 if __name__=='__main__':
     main()
+
+
+def cleanInput(x):
+    if len(x.shape) == 4:
+        x = np.transpose(x, (0, 3, 1, 2))
+        x = x / np.max(x)  # scale [0,255] -> [0,1]
+    return x
+
+
+def getClassWeights(y):
+    unique, counts = np.unique(y, return_counts=True)
+    totalCount = sum(counts)
+    return [totalCount/c for c in counts]

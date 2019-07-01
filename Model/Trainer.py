@@ -1,5 +1,5 @@
 import Model.MetaLearner as ml
-import Model.Segmenter as seg
+import Model.Encoders as seg
 import torch
 from typing import List
 import math
