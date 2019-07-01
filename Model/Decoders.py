@@ -40,7 +40,7 @@ class SegDecoder(nn.Module):  # based on PPM
         )
 
     def forward(self, conv_out, segSize=None):
-        conv5 = conv_out[-1]
+        conv5 = conv_out[-1] # passing in last layer of encoder?
 
         input_size = conv5.size()
         ppm_out = [conv5]
