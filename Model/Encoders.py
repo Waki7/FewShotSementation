@@ -18,8 +18,8 @@ class SegEncoder(nn.Module):
         channels = in_shape[1] if len(in_shape) > 3 else 1
         strideC_1 = 1
 
-        kernel_sizeC_1 = 13
-        out_channels_1 = 13
+        kernel_sizeC_1 = 5
+        out_channels_1 = 16
 
         self.l1 = nn.Sequential(
             # dw
@@ -36,18 +36,34 @@ class SegEncoder(nn.Module):
         )
 
         strideC_2 = 1
-        kernel_sizeC_2 = 15
+        kernel_sizeC_2 = 5
+        out_channels_2 = 16
+        print(out_channels_1)
+        print(n_class)
+        print()
 
-        self.conv2 = torch.nn.Conv2d(in_channels=out_channels_1,
-                                     out_channels=n_class, kernel_size=kernel_sizeC_2,
-                                     # out channels 1 cause labels
-                                     stride=strideC_2, padding=kernel_sizeC_2 // 2)
+        self.l2 = nn.Sequential(
+            # dw
+            nn.Conv2d(in_channels=channels,
+                      out_channels=out_channels_2, kernel_size=kernel_sizeC_2,
+                      stride=strideC_2, padding=kernel_sizeC_2 // 2),
+            nn.BatchNorm2d(out_channels_1),
+            nn.ReLU6(inplace=True),
+            # pw-linear
+            nn.Conv2d(in_channels=out_channels_2,
+                      out_channels=out_channels_2, kernel_size=kernel_sizeC_2,
+                      stride=strideC_2, padding=kernel_sizeC_2 // 2),
+            nn.BatchNorm2d(out_channels_2),
+        )
+        final_dim = -1#todo
+        self.fc = nn.Linear(in_features=out_channels_2*final_dim)
 
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2
         # get size of memory allocation in bytes : tensorname.element_size() * tensorname.nelement()
         l1 = self.l1(x)
         l2 = self.conv2(l1)
-
-        return l2
+        fc = self.fc(l2)
+        conv_out = [l2, fc]
+        return conv_out
 
