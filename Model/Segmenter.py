@@ -18,8 +18,8 @@ class Segmenter(nn.Module):
 
     def forward(self, input):
         encoded_features = self.encoder(input)
-        predictions = self.decoder(encoded_features)
-        return predictions
+        (pred, pred_deepsup) = self.decoder(encoded_features)
+        return pred
 
 def ValidateSegmenter():
     epochs = 1000

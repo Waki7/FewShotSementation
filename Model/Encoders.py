@@ -62,6 +62,5 @@ class SegEncoder(nn.Module):
         l2 = self.conv2(l1)
         l2_flattened = l2.view(l2.size(0), -1)
         fc = self.fc(l2_flattened)
-        conv_out = [l2, fc]
-        return conv_out
+        return fc
 

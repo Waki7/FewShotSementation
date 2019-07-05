@@ -7,9 +7,21 @@ device = torch.device('cpu') if use_cpu else torch.device('cuda')
 type = torch.float32  # if use_cpu else torch.float32 #xentropy doesn't support float16
 args = {'device': device, 'dtype': type}
 
+def conv3x3(in_planes, out_planes, stride=1, has_bias=False):
+    "3x3 convolution with padding"
+    return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
+                     padding=1, bias=has_bias)
+
+
+def conv3x3_bn_relu(in_planes, out_planes, stride=1):
+    return nn.Sequential(
+            conv3x3(in_planes, out_planes, stride),
+            nn.BatchNorm2d(out_planes),
+            nn.ReLU(inplace=True),
+            )
 
 class SegDecoder(nn.Module):  # based on PPM
-    def __init__(self, n_class, fc_dim,
+    def __init__(self, n_class, n_encoded_channels,
                  use_softmax=False, pool_scales=(1, 2, 3, 6)):
         super(SegDecoder, self).__init__()
         self.use_softmax = use_softmax
@@ -21,7 +33,7 @@ class SegDecoder(nn.Module):  # based on PPM
         for scale in pool_scales:
             self.ppm.append(nn.Sequential(
                 nn.AdaptiveAvgPool2d(scale),
-                nn.Conv2d(in_channels=fc_dim,
+                nn.Conv2d(in_channels=n_encoded_channels,
                           out_channels=out_channels_1,
                           kernel_size=1, bias=False),
                 nn.BatchNorm2d(out_channels_1),
@@ -30,7 +42,7 @@ class SegDecoder(nn.Module):  # based on PPM
         self.l1 = nn.ModuleList(self.ppm)
 
         self.l2 = nn.Sequential(
-            nn.Conv2d(in_channels=fc_dim + len(pool_scales) * out_channels_1, #ework this out by hand
+            nn.Conv2d(in_channels=n_encoded_channels + len(pool_scales) * out_channels_1, #ework this out by hand
                       out_channels=out_channels_2,
                       kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(out_channels_2),
@@ -39,28 +51,45 @@ class SegDecoder(nn.Module):  # based on PPM
             nn.Conv2d(out_channels_2, n_class, kernel_size=1)
         )
 
-    def forward(self, conv_out, segSize=None):
-        fc = conv_out[-1]
-        conv = conv_out[-2]
+        self.cbr_deepsup = conv3x3_bn_relu(fc_dim // 2, fc_dim // 4, 1)
+
+
+        self.conv_last = nn.Conv2d(in_channels=n_encoded_channels // 4,
+                                   out_channels=n_class, kernel_size=1,
+                                   stride=1, padding=0)
+        self.conv_last_deepsup = nn.Conv2d(in_channels=n_encoded_channels // 4,
+                                           out_channels=n_class, kernel_size=1,
+                                           stride=1, padding=0)
+
+    def forward(self, encoded_features, segSize=None):
+        '''
+        :param encoded_features: first item is before fc with spatial integrity , second item is flattened conv features through fc
+        :param segSize:
+        :return:
+        '''
+        conv = encoded_features[-2]
+        fc = encoded_features[-1]
         input_size = fc.size()
         ppm_out = [fc]
         for pool_scale in self.ppm:
             ppm_out.append(F.interpolate(
-                pool_scale(fc),
+                pool_scale(conv),
                 (input_size[2], input_size[3]),
                 mode='bilinear', align_corners=False))
-        ppm_out = torch.cat(ppm_out, 1)
-
-        x = self.l2(ppm_out)
+        x = torch.cat(ppm_out, 1)
 
         if self.use_softmax:  # is True during inference
-            x = F.interpolate(
+            x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)
-            x = F.softmax(x, dim=1)
-            # class0 = out.data[0,:,0,0]
-            # print(class0.shape)
-            # print(torch.sum(class0))
-        else:
-            x = F.log_softmax(x, dim=1)
+            x = nn.functional.softmax(x, dim=1)
+            return x
 
-        return x
+        _ = self.cbr_deepsup(fc)
+        _ = self.dropout_deepsup(_)
+        _ = self.conv_last_deepsup(_)
+
+        x = nn.functional.log_softmax(x, dim=1)
+        _ = nn.functional.log_softmax(_, dim=1)
+
+        return (x, _)
+
