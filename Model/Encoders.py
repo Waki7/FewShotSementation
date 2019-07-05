@@ -38,10 +38,6 @@ class SegEncoder(nn.Module):
         strideC_2 = 1
         kernel_sizeC_2 = 5
         out_channels_2 = 16
-        print(out_channels_1)
-        print(n_class)
-        print()
-
         self.l2 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=channels,
@@ -55,15 +51,17 @@ class SegEncoder(nn.Module):
                       stride=strideC_2, padding=kernel_sizeC_2 // 2),
             nn.BatchNorm2d(out_channels_2),
         )
-        final_dim = -1#todo
-        self.fc = nn.Linear(in_features=out_channels_2*final_dim)
+        final_dim = (out_channels_2 // strideC_2) * out_channels_2
+        self.fc = nn.Linear(in_features=final_dim, out_features=n_class)
+        self.out_shape = n_class
 
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2
         # get size of memory allocation in bytes : tensorname.element_size() * tensorname.nelement()
         l1 = self.l1(x)
         l2 = self.conv2(l1)
-        fc = self.fc(l2)
+        l2_flattened = l2.view(l2.size(0), -1)
+        fc = self.fc(l2_flattened)
         conv_out = [l2, fc]
         return conv_out
 

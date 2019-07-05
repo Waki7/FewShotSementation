@@ -11,7 +11,7 @@ class Segmenter(nn.Module):
     def __init__(self, in_shape, n_class):
         super(Segmenter, self).__init__()
         self.encoder = SegEncoder(in_shape=in_shape)
-        self.decoder = SegDecoder(n_class=n_class)
+        self.decoder = SegDecoder(n_class=n_class, fc_dim=self.encoder.out_shape)
 
     def paramters(self):
         return list(self.encoder.parameters()) + list(self.deocder.paramters())

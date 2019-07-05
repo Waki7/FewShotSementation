@@ -9,13 +9,13 @@ args = {'device': device, 'dtype': type}
 
 
 class SegDecoder(nn.Module):  # based on PPM
-    def __init__(self, n_class, fc_dim=4096,
+    def __init__(self, n_class, fc_dim,
                  use_softmax=False, pool_scales=(1, 2, 3, 6)):
         super(SegDecoder, self).__init__()
         self.use_softmax = use_softmax
 
-        out_channels_1 = 256
-        out_channels_2 = 256
+        out_channels_1 = 128
+        out_channels_2 = 128
 
         self.ppm = []
         for scale in pool_scales:
@@ -30,7 +30,7 @@ class SegDecoder(nn.Module):  # based on PPM
         self.l1 = nn.ModuleList(self.ppm)
 
         self.l2 = nn.Sequential(
-            nn.Conv2d(in_channels=fc_dim + len(pool_scales) * out_channels_1, #fix this dimenion, read github, understand it
+            nn.Conv2d(in_channels=fc_dim + len(pool_scales) * out_channels_1, #ework this out by hand
                       out_channels=out_channels_2,
                       kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(out_channels_2),
@@ -40,7 +40,7 @@ class SegDecoder(nn.Module):  # based on PPM
         )
 
     def forward(self, conv_out, segSize=None):
-        fc = conv_out[-1] # this is fc layer wtf, they concatenated it, find where
+        fc = conv_out[-1]
         conv = conv_out[-2]
         input_size = fc.size()
         ppm_out = [fc]
