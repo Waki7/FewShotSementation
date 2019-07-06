@@ -8,10 +8,10 @@ import numpy as np
 
 
 class Segmenter(nn.Module):
-    def __init__(self, in_shape, n_class):
+    def __init__(self, in_shape, n_class, dilation = 4):
         super(Segmenter, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape)
-        self.decoder = SegDecoder(n_class=n_class, fc_dim=self.encoder.out_shape)
+        self.encoder = SegEncoder(in_shape=in_shape, dilation = 8)
+        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape)
 
     def paramters(self):
         return list(self.encoder.parameters()) + list(self.deocder.paramters())
@@ -21,21 +21,20 @@ class Segmenter(nn.Module):
         (pred, pred_deepsup) = self.decoder(encoded_features)
         return pred
 
-def ValidateSegmenter():
+def train():
     epochs = 1000
     batch_size = 1
-
-    x, y = data.processBSR(x_dtype = np.float16, y_dtype = np.float16)
-    x = data.cleanInput(x)
+    downsample = 4
+    x, y = data.processBSR(x_dtype=np.float16, y_dtype=np.int16)
+    x, y = data.downsample(x, y, downsample)
     weights = torch.tensor(data.getClassWeights(y)).to(**args)
-    classes = int(np.max(y)+1)
-    n_train = 1 #x.shape[0]
-    seg_model = Segmenter(in_shape = x.shape, n_class=classes).to(**args)
+    classes = int(np.max(y) + 1)
+    n_train = 1  # x.shape[0]
+    seg_model = Segmenter(in_shape=x.shape, n_class=classes).to(**args)
     opt = torch.optim.Adam(seg_model.parameters(), lr=.01)
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     shuffled_indexes = torch.randperm(n_train)
     x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
-
 
     for e in range(epochs):
         for i in range(0, n_train, batch_size):
@@ -48,16 +47,24 @@ def ValidateSegmenter():
             loss.backward(retain_graph=False)
             opt.step()
             opt.zero_grad()
-    #arbitrarily look at the first 10 images and see their output
+    # arbitrarily look at the first 10 images and see their output
     for i in range(0, 10):
         _, ax = plt.subplots(1, 2)
-        prediction = seg_model.forward(x[i:i+1])
+        prediction = seg_model.forward(x[i:i + 1])
         prediction = prediction.detach().cpu()
         prediction = np.argmax(prediction, axis=1)
         prediction = prediction[0]
         ax[0].imshow(prediction)
-        ax[1].imshow(y[i:i+1].cpu()[0])
+        ax[1].imshow(y[i:i + 1].cpu()[0])
         plt.show()
+
+def test():
+    pass
+
+
+
+def ValidateSegmenter():
+    train()
 
 def main():
     ValidateSegmenter()

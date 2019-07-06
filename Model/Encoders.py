@@ -3,57 +3,60 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-use_cpu = False
+use_cpu = True
 device = torch.device('cpu') if use_cpu else torch.device('cuda')
-type = torch.float32 #if use_cpu else torch.float32 #xentropy doesn't support float16
-args = {'device': device, 'dtype': type}
+dtype = torch.float32 #if use_cpu else torch.float32 #xentropy doesn't support float16
+args = {'device': device, 'dtype': dtype}
 
 
 
-class SegEncoder(nn.Module):
-    def __init__(self, in_shape, n_class=1):
+class SegEncoder(nn.Module): # will maintain same shape as input
+    def __init__(self, in_shape, n_class=1, dilation = 4):
         super(SegEncoder, self).__init__()
 
         bias = False
         channels = in_shape[1] if len(in_shape) > 3 else 1
-        strideC_1 = 1
+        stride1 = 1
+        kernel1 = 5
 
-        kernel_sizeC_1 = 5
-        out_channels_1 = 16
+        out_channels_1 = 32
 
         self.l1 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=channels,
-                      out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
-                      stride=strideC_1, padding=kernel_sizeC_1 // 2),
+                      out_channels=out_channels_1, kernel_size=kernel1,
+                      stride=stride1, padding=self.calcPadding(kernel1, dilation)),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_1,
-                      out_channels=out_channels_1, kernel_size=kernel_sizeC_1,
-                      stride=strideC_1, padding=kernel_sizeC_1 // 2),
+                      out_channels=out_channels_1, kernel_size=kernel1,
+                      stride=stride1, padding=self.calcPadding(kernel1, dilation)),
             nn.BatchNorm2d(out_channels_1),
         )
 
-        strideC_2 = 1
-        kernel_sizeC_2 = 5
-        out_channels_2 = 16
+        stride2 = 1
+        kernel2 = 3
+        out_channels_2 = 32
         self.l2 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=channels,
-                      out_channels=out_channels_2, kernel_size=kernel_sizeC_2,
-                      stride=strideC_2, padding=kernel_sizeC_2 // 2),
+                      out_channels=out_channels_2, kernel_size=kernel2,
+                      stride=stride2, padding=self.calcPadding(kernel2, dilation)),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_2,
-                      out_channels=out_channels_2, kernel_size=kernel_sizeC_2,
-                      stride=strideC_2, padding=kernel_sizeC_2 // 2),
+                      out_channels=out_channels_2, kernel_size=kernel2,
+                      stride=stride2, padding=self.calcPadding(kernel2, dilation)),
             nn.BatchNorm2d(out_channels_2),
         )
-        final_dim = (out_channels_2 // strideC_2) * out_channels_2
+        final_dim = ((in_shape[-1]*in_shape[-2])//stride2) * out_channels_2
         self.fc = nn.Linear(in_features=final_dim, out_features=n_class)
         self.out_shape = n_class
+
+    def calcPadding(self, kernel, dilation):
+        return (dilation//2)*(kernel//2)
 
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2

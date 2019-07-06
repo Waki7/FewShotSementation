@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Decoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Decoders.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Encoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Encoders.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Segmenter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Segmenter.py" afterDir="false" />
@@ -19,8 +19,8 @@
       <file leaf-file-name="Encoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+            <state relative-caret-position="-815">
+              <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -28,11 +28,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Segmenter.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Segmenter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Segmenter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+            <state relative-caret-position="104">
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,17 +43,17 @@
       <file leaf-file-name="Decoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357">
-              <caret line="53" column="49" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="49" />
+            <state relative-caret-position="68">
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataProcessor.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DataProcessor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="136" selection-start-line="136" selection-end-line="136" />
+            <state relative-caret-position="155">
+              <caret line="130" selection-start-line="130" selection-end-line="130" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -100,6 +103,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>conv5</find>
+      <find>inter</find>
+      <find>type</find>
+      <find>downsample</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,18 +119,18 @@
         <option value="$PROJECT_DIR$/Model/Trainer.py" />
         <option value="$PROJECT_DIR$/Model/MetaLearner.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
-        <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/Decoders.py" />
+        <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/Segmenter.py" />
+        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3826" />
-    <option name="y" value="-14" />
-    <option name="width" value="3868" />
-    <option name="height" value="2097" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1944" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -139,6 +145,50 @@
             <path>
               <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
               <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+              <item name="BSDS500" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+              <item name="BSDS500" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+              <item name="BSDS500" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="groundTruth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MMXSide" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+              <item name="BSDS500" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MMXSide" type="b2602c69:ProjectViewProjectNode" />
@@ -167,43 +217,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Segmenter (1)">
-    <configuration name="DataProcessor" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="mmxside" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Ceyer\Anaconda3\envs\NewBrain\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DataProcessing" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="Segmenter (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MMXSide" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Model/Segmenter.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
+  <component name="RunManager" selected="Python.Segmenter">
     <configuration name="Segmenter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MMXSide" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -217,6 +231,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="C:\Users\User\Documents\Repos\MMXSide\Model\Encoders.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="Segmenter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MMXSide" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\User\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Model" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Model/Segmenter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -259,17 +291,14 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.DataProcessor" />
       <item itemvalue="Python.Trainer" />
       <item itemvalue="Python.test" />
       <item itemvalue="Python.Segmenter" />
-      <item itemvalue="Python.Segmenter (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Segmenter (1)" />
         <item itemvalue="Python.Segmenter" />
-        <item itemvalue="Python.DataProcessor" />
+        <item itemvalue="Python.Segmenter" />
         <item itemvalue="Python.Trainer" />
         <item itemvalue="Python.test" />
       </list>
@@ -292,13 +321,14 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24880762" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49871466" visible="true" weight="0.19157393" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3041145" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="8" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="1" sideWeight="0.5012854" side_tool="true" weight="0.19157393" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39892665" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -316,7 +346,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
@@ -355,6 +384,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="19" column="31" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -514,6 +546,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="19" column="31" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -582,37 +617,40 @@
     </entry>
     <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/linear.py" />
     <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/conv.py" />
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
+    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        <state relative-caret-position="68">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Segmenter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+        <state relative-caret-position="-815">
+          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="53" column="49" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Segmenter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="20" column="61" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+        <state relative-caret-position="155">
+          <caret line="130" selection-start-line="130" selection-end-line="130" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
