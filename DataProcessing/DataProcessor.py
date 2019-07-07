@@ -34,34 +34,31 @@ class DataSet():
     def loadArray(self, path, filename):
         with open(path + filename, 'rb') as f: return pickle.load(f)
 
-    def processImages(self, directoryPath, pad = True):
+    def processImages(self, directoryPath):
         data = []
         data_downsampled = []
-        maxShape = None
         for filename in os.listdir(directoryPath):
             if filename.endswith(self.fileExt):
                 samplePath = join(directoryPath, filename)
                 image, image_downsampled = self.readFile(samplePath)
-                if maxShape is None:
-                    maxShape = [0]*len(image.shape)
-                for i in range(len(image.shape)):
-                    maxShape[i] = max(image.shape[i], maxShape[i])
+                if image.shape[0] > image.shape[1]:  # want all images to be in portrait
+                    image = np.swapaxes(image, 0, 1)
+                    image_downsampled = np.swapaxes(image_downsampled, 0, 1)
                 data.append(image)
                 data_downsampled.append(image_downsampled)
-        if pad:
-            data = [self.pad(im, maxShape = maxShape) for im in data]
-            data_downsampled = [self.pad(im, maxShape=[i//self.downsampleRatio for i in maxShape]) for im in data_downsampled]
         return np.stack(data), np.stack(data_downsampled)
 
     def getData(self):
         data = []
         data_downsampled = []
-        if isfile(self.processedDataPath + self.dataFileName) and isfile(self.processedDataPath + self.downDataFileName):
-            data, data_downsampled = self.loadArray(self.processedDataPath, self.dataFileName)
-            print('...loaded array of shape ' + str(data.shape))
+        if isfile(self.processedDataPath + self.dataFileName) and isfile(
+                self.processedDataPath + self.downDataFileName):
+            data = self.loadArray(self.processedDataPath, self.dataFileName)
+            data_downsampled = self.loadArray(self.processedDataPath, self.downDataFileName)
+            print('...loaded arrays of shape ' + str(data.shape) +' and downsampled to '+ str(data_downsampled.shape))
             return data, data_downsampled
         for set in self.paths:
-            processed = self.processImages(set, pad=True)
+            processed = self.processImages(set)
             data.append(processed[0])
             data_downsampled.append(processed[1])
         data = np.vstack(data)
@@ -69,6 +66,7 @@ class DataSet():
         self.saveData(self.processedDataPath, self.dataFileName, data)
         self.saveData(self.processedDataPath, self.downDataFileName, data_downsampled)
         return data, data_downsampled
+
 
 class BSRLabels(DataSet):
     def __init__(self, downsampleRatio):
@@ -87,12 +85,13 @@ class BSRLabels(DataSet):
     def readFile(self, file):
         mat = scipy.io.loadmat(file)
         mat_data = np.squeeze(mat[self.matKey][0, 0]).item(0)
-        datum = mat_data[self.segmentationIndex] #segementation ground truth, mat_data[1] is the boundary boxes
+        datum = mat_data[self.segmentationIndex]  # segementation ground truth, mat_data[1] is the boundary boxes
         datum_downsampled = downsample(datum, ratio=self.downsampleRatio)
         # datum1 = mat_data[1]
         # plt.imshow(datum)
         # plt.show()
         return datum, datum_downsampled
+
 
 class BSRImages(DataSet):
     def __init__(self, downsampleRatio):
@@ -111,11 +110,11 @@ class BSRImages(DataSet):
         return datum, datum_downsampled
 
 
-def processBSR(x_dtype = np.float16, y_dtype = np.float16, downsampleRatio=4): # c x h x w
+def processBSR(x_dtype=np.float16, y_dtype=np.float16, downsampleRatio=4):  # c x h x w
     labels = BSRLabels(downsampleRatio)
     images = BSRImages(downsampleRatio)
-    x = images.getData()
-    y = labels.getData()
+    _, x = images.getData()
+    _, y = labels.getData()
     if x.dtype != x_dtype:
         x = x.astype(x_dtype)
     if y.dtype != y_dtype:
@@ -125,24 +124,26 @@ def processBSR(x_dtype = np.float16, y_dtype = np.float16, downsampleRatio=4): #
     assert not np.any(np.isnan(y))
     return x, y
 
+
 def downsample(img, ratio):
     newH = img.shape[0] // ratio
     newW = img.shape[1] // ratio
     img = cv2.resize(img, (newH, newW), interpolation=cv2.INTER_NEAREST)
     return img
 
+
 def main():
     x, y = processBSR()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
 
 
 def cleanInput(x):
     print('...reshaped from ', x.shape)
     if len(x.shape) > 3:
-        x = np.transpose(x, (3, 2, 0, 1))
+        x = np.transpose(x, (0, 3, 1, 2))
         x = x / np.max(x)  # scale [0,255] -> [0,1]
     print('to ', x.shape)
     return x
@@ -151,4 +152,4 @@ def cleanInput(x):
 def getClassWeights(y):
     unique, counts = np.unique(y, return_counts=True)
     totalCount = sum(counts)
-    return [totalCount/c for c in counts]
+    return [totalCount / c for c in counts]

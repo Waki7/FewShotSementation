@@ -51,15 +51,6 @@ class SegDecoder(nn.Module):  # based on PPM
             nn.Conv2d(out_channels_2, n_class, kernel_size=1)
         )
 
-        self.cbr_deepsup = conv3x3_bn_relu(n_encoded_channels // 2, n_encoded_channels // 4, 1)
-
-
-        self.conv_last = nn.Conv2d(in_channels=n_encoded_channels // 4,
-                                   out_channels=n_class, kernel_size=1,
-                                   stride=1, padding=0)
-        self.conv_last_deepsup = nn.Conv2d(in_channels=n_encoded_channels // 4,
-                                           out_channels=n_class, kernel_size=1,
-                                           stride=1, padding=0)
 
     def forward(self, encoded_features, segSize=None):
         '''
@@ -67,13 +58,11 @@ class SegDecoder(nn.Module):  # based on PPM
         :param segSize:
         :return:
         '''
-        conv = encoded_features[-2]
-        fc = encoded_features[-1]
-        input_size = fc.size()
-        ppm_out = [fc]
+        input_size = encoded_features.size()
+        ppm_out = [encoded_features]
         for pool_scale in self.ppm:
             ppm_out.append(F.interpolate(
-                pool_scale(conv),
+                pool_scale(encoded_features),
                 (input_size[2], input_size[3]),
                 mode='bilinear', align_corners=False))
         x = torch.cat(ppm_out, 1)
@@ -82,14 +71,7 @@ class SegDecoder(nn.Module):  # based on PPM
             x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)
             x = nn.functional.softmax(x, dim=1)
-            return x
-
-        _ = self.cbr_deepsup(fc)
-        _ = self.dropout_deepsup(_)
-        _ = self.conv_last_deepsup(_)
-
-        x = nn.functional.log_softmax(x, dim=1)
-        _ = nn.functional.log_softmax(_, dim=1)
-
-        return (x, _)
+        else:
+            x = nn.functional.log_softmax(x, dim=1)
+        return x
 
