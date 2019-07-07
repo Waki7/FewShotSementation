@@ -19,24 +19,22 @@ class Segmenter(nn.Module):
     def forward(self, input):
         encoded_features = self.encoder(input)
         pred = self.decoder(encoded_features)
-        print(pred.shape)
         return pred
 
 def train():
-    epochs = 1000
+    epochs = 100
     batch_size = 2
     downsample = 4
-    x, y = data.processBSR(x_dtype=np.float16, y_dtype=np.int16)
-    weights = torch.tensor(data.getClassWeights(y)).to(**args)
-    print(len(weights))
-    print(weights)
-    classes = int(np.max(y) + 1)
+    x, xFull, y, yFull = data.processBSR(x_dtype=np.float16, y_dtype=np.int16)
+    weights = torch.tensor(data.getClassWeights(yFull)).to(**args)
+    classes = int(len(weights))
     n_train = 2  # x.shape[0]
     seg_model = Segmenter(in_shape=x.shape, n_class=classes).to(**args)
     opt = torch.optim.Adam(seg_model.parameters(), lr=.01)
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     shuffled_indexes = torch.randperm(n_train)
     x, y = torch.tensor(x).to(**args), torch.tensor(y).to(device).long()
+    seg_model.train()
 
     for e in range(epochs):
         for i in range(0, n_train, batch_size):
@@ -45,11 +43,12 @@ def train():
             # x_batch, y_batch = torch.tensor(x_batch).to(**args), torch.tensor(y_batch).to(device).long()
             y_out = seg_model.forward(x_batch)
             loss = criterion.forward(input=y_out, target=y_batch)
-            print(loss.data)
+            print(e,' ', loss.data)
             loss.backward(retain_graph=False)
             opt.step()
             opt.zero_grad()
     # arbitrarily look at the first 10 images and see their output
+    seg_model.eval()
     for i in range(0, 10):
         _, ax = plt.subplots(1, 2)
         prediction = seg_model.forward(x[i:i + 1])

@@ -113,8 +113,8 @@ class BSRImages(DataSet):
 def processBSR(x_dtype=np.float16, y_dtype=np.float16, downsampleRatio=4):  # c x h x w
     labels = BSRLabels(downsampleRatio)
     images = BSRImages(downsampleRatio)
-    _, x = images.getData()
-    _, y = labels.getData()
+    xFull, x = images.getData()
+    yFull, y = labels.getData()
     if x.dtype != x_dtype:
         x = x.astype(x_dtype)
     if y.dtype != y_dtype:
@@ -122,7 +122,7 @@ def processBSR(x_dtype=np.float16, y_dtype=np.float16, downsampleRatio=4):  # c 
     x = cleanInput(x)
     assert not np.any(np.isnan(x))
     assert not np.any(np.isnan(y))
-    return x, y
+    return x, xFull, y, yFull
 
 
 def downsample(img, ratio):
