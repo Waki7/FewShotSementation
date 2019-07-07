@@ -66,7 +66,7 @@ class SegDecoder(nn.Module):  # based on PPM
                 (input_size[2], input_size[3]),
                 mode='bilinear', align_corners=False))
         x = torch.cat(ppm_out, 1)
-
+        x = self.l2(x)
         if self.use_softmax:  # is True during inference
             x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)

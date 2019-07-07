@@ -11,7 +11,7 @@ args = {'device': device, 'dtype': dtype}
 
 
 class SegEncoder(nn.Module): # will maintain same shape as input
-    def __init__(self, in_shape, n_class, dilation = 4):
+    def __init__(self, in_shape, out_shape=32, dilation = 4):
         super(SegEncoder, self).__init__()
 
         bias = False
@@ -25,13 +25,15 @@ class SegEncoder(nn.Module): # will maintain same shape as input
             # dw
             nn.Conv2d(in_channels=channels,
                       out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calcPadding(kernel1, dilation)),
+                      stride=stride1, padding=self.calcPadding(kernel1, dilation),
+                      dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_1,
                       out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calcPadding(kernel1, dilation)),
+                      stride=stride1, padding=self.calcPadding(kernel1, dilation),
+                      dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
         )
 
@@ -42,13 +44,15 @@ class SegEncoder(nn.Module): # will maintain same shape as input
             # dw
             nn.Conv2d(in_channels=out_channels_1,
                       out_channels=out_channels_2, kernel_size=kernel2,
-                      stride=stride2, padding=self.calcPadding(kernel2, dilation)),
+                      stride=stride2, padding=self.calcPadding(kernel2, dilation),
+                      dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_2,
-                      out_channels=out_channels_2, kernel_size=kernel2,
-                      stride=stride2, padding=self.calcPadding(kernel2, dilation)),
+                      out_channels=out_shape, kernel_size=kernel2,
+                      stride=stride2, padding=self.calcPadding(kernel2, dilation),
+                      dilation=dilation),
             nn.BatchNorm2d(out_channels_2),
         )
         # final_dim = ((in_shape[-1]*in_shape[-2])//stride2) * out_channels_2
@@ -56,7 +60,7 @@ class SegEncoder(nn.Module): # will maintain same shape as input
         self.out_shape = out_channels_2
 
     def calcPadding(self, kernel, dilation):
-        return (dilation//2)*(kernel//2)
+        return (dilation)*(kernel//2)
 
     def forward(self, x):
         # Computes the activation of the first convolution, size will be size of input + padding - kernel size//2

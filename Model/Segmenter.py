@@ -10,7 +10,7 @@ import numpy as np
 class Segmenter(nn.Module):
     def __init__(self, in_shape, n_class, dilation = 4):
         super(Segmenter, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape, n_class=n_class, dilation = 8)
+        self.encoder = SegEncoder(in_shape=in_shape, dilation = 4)
         self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape)
 
     def paramters(self):
@@ -18,7 +18,6 @@ class Segmenter(nn.Module):
 
     def forward(self, input):
         encoded_features = self.encoder(input)
-        print(encoded_features.shape)
         pred = self.decoder(encoded_features)
         print(pred.shape)
         return pred
@@ -29,6 +28,8 @@ def train():
     downsample = 4
     x, y = data.processBSR(x_dtype=np.float16, y_dtype=np.int16)
     weights = torch.tensor(data.getClassWeights(y)).to(**args)
+    print(len(weights))
+    print(weights)
     classes = int(np.max(y) + 1)
     n_train = 2  # x.shape[0]
     seg_model = Segmenter(in_shape=x.shape, n_class=classes).to(**args)
