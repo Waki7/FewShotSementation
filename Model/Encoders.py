@@ -25,14 +25,14 @@ class SegEncoder(nn.Module): # will maintain same shape as input
             # dw
             nn.Conv2d(in_channels=channels,
                       out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calcPadding(kernel1, dilation),
+                      stride=stride1, padding=self.calc_padding(kernel1, dilation),
                       dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_1,
                       out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calcPadding(kernel1, dilation),
+                      stride=stride1, padding=self.calc_padding(kernel1, dilation),
                       dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
         )
@@ -44,14 +44,14 @@ class SegEncoder(nn.Module): # will maintain same shape as input
             # dw
             nn.Conv2d(in_channels=out_channels_1,
                       out_channels=out_channels_2, kernel_size=kernel2,
-                      stride=stride2, padding=self.calcPadding(kernel2, dilation),
+                      stride=stride2, padding=self.calc_padding(kernel2, dilation),
                       dilation=dilation),
             nn.BatchNorm2d(out_channels_1),
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_2,
                       out_channels=out_shape, kernel_size=kernel2,
-                      stride=stride2, padding=self.calcPadding(kernel2, dilation),
+                      stride=stride2, padding=self.calc_padding(kernel2, dilation),
                       dilation=dilation),
             nn.BatchNorm2d(out_channels_2),
         )
@@ -59,7 +59,7 @@ class SegEncoder(nn.Module): # will maintain same shape as input
         # self.fc = nn.Linear(in_features=final_dim, out_features=n_class)
         self.out_shape = out_channels_2
 
-    def calcPadding(self, kernel, dilation):
+    def calc_padding(self, kernel, dilation):
         return (dilation)*(kernel//2)
 
     def forward(self, x):

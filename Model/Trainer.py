@@ -1,4 +1,4 @@
-import Model.MetaLearner as ml
+import Model.MetaLearningModel as ml
 import Model.Encoders as seg
 import torch
 from typing import List
@@ -9,9 +9,9 @@ def getDataSets():
     pass
 
 def getTrainer():
-    return ml.MetaLearner()
+    return ml.MetaLearningModel()
 
-def trainTrainer(data: np.ndarray, trainer: ml.MetaLearner, models: List, kshots = 20, lr = .0005, decay = .005):
+def train_meta_learner(data: np.ndarray, trainer: ml.MetaLearningModel, models: List, kshots = 20, lr = .0005, decay = .005):
     """
     :param kshots: if data can't fit on gpu then increase number of kshots, implemented so that whole batch is ran on gpu
 
@@ -45,8 +45,7 @@ def trainTrainer(data: np.ndarray, trainer: ml.MetaLearner, models: List, kshots
                 optWhole.zero_grad()
 
                 for param in m.parameters():
-                    h_t, i_t, f_t, c_t = trainer.forward(th_t1=param, dL_t = param.grad, L_t = loss,
-                                                         h_t1=h_t, i_t1 = i_t, f_t1 = f_t, c_t1=c_t,)
+                    h_t, i_t, f_t, c_t = trainer.forward(th_t1=param, dL_t = param.grad, L_t = loss)
                     # ^ figuire out how to initialize values before first pass for this shit, in the paper
                     param.data = trainer.update().detach()
 
@@ -60,7 +59,7 @@ def trainTrainer(data: np.ndarray, trainer: ml.MetaLearner, models: List, kshots
 
 
 def main():
-    trainer = ml.MetaLearner()
+    trainer = ml.MetaLearningModel()
 
 
 if __name__ == "__main__":

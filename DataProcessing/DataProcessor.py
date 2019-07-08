@@ -10,13 +10,13 @@ from scipy.io import loadmat
 
 class DataSet():
     def __init__(self):
-        self.fileExt = None
-        self.rootPath = None
-        self.processedDataPath = None
-        self.dataFileName = None
-        self.downDataFileName = None
+        self.file_ext = None
+        self.root_path = None
+        self.stored_data_path = None
+        self.stored_file_name = None
+        self.sampled_file_name = None
         self.paths = None
-        self.downsampleRatio = 1
+        self.downsample_ratio = 1
 
     def readFile(self, file):
         raise NotImplementedError
@@ -38,7 +38,7 @@ class DataSet():
         data = []
         data_downsampled = []
         for filename in os.listdir(directoryPath):
-            if filename.endswith(self.fileExt):
+            if filename.endswith(self.file_ext):
                 samplePath = join(directoryPath, filename)
                 image, image_downsampled = self.readFile(samplePath)
                 if image.shape[0] > image.shape[1]:  # want all images to be in portrait
@@ -51,10 +51,10 @@ class DataSet():
     def getData(self):
         data = []
         data_downsampled = []
-        if isfile(self.processedDataPath + self.dataFileName) and isfile(
-                self.processedDataPath + self.downDataFileName):
-            data = self.loadArray(self.processedDataPath, self.dataFileName)
-            data_downsampled = self.loadArray(self.processedDataPath, self.downDataFileName)
+        if isfile(self.stored_data_path + self.stored_file_name) and isfile(
+                self.stored_data_path + self.sampled_file_name):
+            data = self.loadArray(self.stored_data_path, self.stored_file_name)
+            data_downsampled = self.loadArray(self.stored_data_path, self.sampled_file_name)
             print('...loaded arrays of shape ' + str(data.shape) +' and downsampled to '+ str(data_downsampled.shape))
             return data, data_downsampled
         for set in self.paths:
@@ -63,30 +63,31 @@ class DataSet():
             data_downsampled.append(processed[1])
         data = np.vstack(data)
         data_downsampled = np.vstack(data_downsampled)
-        self.saveData(self.processedDataPath, self.dataFileName, data)
-        self.saveData(self.processedDataPath, self.downDataFileName, data_downsampled)
+        self.saveData(self.stored_data_path, self.stored_file_name, data)
+        self.saveData(self.stored_data_path, self.sampled_file_name, data_downsampled)
         return data, data_downsampled
 
 
 class BSRLabels(DataSet):
     def __init__(self, downsampleRatio):
         super(BSRLabels, self).__init__()
-        self.fileExt = '.mat'
-        self.rootPath = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
-        self.processedDataPath = self.rootPath + 'ProcessedData\\'
-        self.dataFileName = 'processedLabels.pkl'
-        self.downDataFileName = 'downsampledLabels.pkl'
-        self.paths = [self.rootPath + i for i in ['train', 'test', 'val']]
-        self.matKey = 'groundTruth'
-        self.segmentationIndex = 0
-        self.boundaryIndex = 1
-        self.downsampleRatio = downsampleRatio
+        self.file_ext = '.mat'
+        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
+        self.stored_data_path = self.root_path + 'ProcessedData\\'
+        self.stored_file_name = 'processedLabels.pkl'
+        self.sampled_file_name = 'downsampledLabels.pkl'
+        self.paths = [self.root_path + i for i in ['train', 'test', 'val']]
+        self.mat_key = 'groundTruth'
+        self.segmentation_index = 0
+        self.boundary_index = 1
+        self.downsample_ratio = downsampleRatio
 
     def readFile(self, file):
         mat = scipy.io.loadmat(file)
-        mat_data = np.squeeze(mat[self.matKey][0, 0]).item(0)
-        datum = mat_data[self.segmentationIndex]  # segementation ground truth, mat_data[1] is the boundary boxes
-        datum_downsampled = downsample(datum, ratio=self.downsampleRatio)
+        mat_data = np.squeeze(mat[self.mat_key][0, 0]).item(0)
+        datum = mat_data[self.segmentation_index]  # segementation ground truth, mat_data[1] is the boundary boxes
+        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
+                                       interpolation=cv2.INTER_NEAREST)
         # datum1 = mat_data[1]
         # plt.imshow(datum)
         # plt.show()
@@ -96,25 +97,26 @@ class BSRLabels(DataSet):
 class BSRImages(DataSet):
     def __init__(self, downsampleRatio):
         super(BSRImages, self).__init__()
-        self.fileExt = '.jpg'
-        self.rootPath = '..\\Data\\BSR\\BSDS500\\data\\images\\'
-        self.processedDataPath = self.rootPath + 'ProcessedData\\'
-        self.dataFileName = 'processedImages.pkl'
-        self.downDataFileName = 'downsampledImages.pkl'
-        self.paths = [self.rootPath + i for i in ['train', 'test', 'val']]
-        self.downsampleRatio = downsampleRatio
+        self.file_ext = '.jpg'
+        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\images\\'
+        self.stored_data_path = self.root_path + 'ProcessedData\\'
+        self.stored_file_name = 'processedImages.pkl'
+        self.sampled_file_name = 'downsampledImages.pkl'
+        self.paths = [self.root_path + i for i in ['train', 'test', 'val']]
+        self.downsample_ratio = downsampleRatio
 
     def readFile(self, file):
         datum = scipy.misc.imread(file)
-        datum_downsampled = downsample(datum, ratio=self.downsampleRatio)
+        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
+                                       interpolation=cv2.INTER_LINEAR)
         return datum, datum_downsampled
 
 
-def processBSR(x_dtype=np.float16, y_dtype=np.float16, downsampleRatio=4):  # c x h x w
-    labels = BSRLabels(downsampleRatio)
-    images = BSRImages(downsampleRatio)
-    xFull, x = images.getData()
-    yFull, y = labels.getData()
+def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # c x h x w
+    labels = BSRLabels(downsample_ratio)
+    images = BSRImages(downsample_ratio)
+    x_full, x = images.getData()
+    y_full, y = labels.getData()
     if x.dtype != x_dtype:
         x = x.astype(x_dtype)
     if y.dtype != y_dtype:
@@ -122,18 +124,18 @@ def processBSR(x_dtype=np.float16, y_dtype=np.float16, downsampleRatio=4):  # c 
     x = cleanInput(x)
     assert not np.any(np.isnan(x))
     assert not np.any(np.isnan(y))
-    return x, xFull, y, yFull
+    return x, x_full, y, y_full
 
 
-def downsample(img, ratio):
-    newH = img.shape[0] // ratio
-    newW = img.shape[1] // ratio
-    img = cv2.resize(img, (newH, newW), interpolation=cv2.INTER_NEAREST)
+def downsample(img, ratio, interpolation = cv2.INTER_NEAREST):
+    new_h = img.shape[0] // ratio
+    new_w = img.shape[1] // ratio
+    img = cv2.resize(img, (new_h, new_w), interpolation=interpolation)
     return img
 
 
 def main():
-    x, y = processBSR()
+    x, y = process_BSR()
 
 
 if __name__ == '__main__':
