@@ -2,10 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-use_cpu = False
-device = torch.device('cpu') if use_cpu else torch.device('cuda')
-dtype = torch.float32  # if use_cpu else torch.float32 #xentropy doesn't support float16
-args = {'device': device, 'dtype': dtype}
 
 def conv3x3(in_planes, out_planes, stride=1, has_bias=False):
     "3x3 convolution with padding"
@@ -26,8 +22,10 @@ class SegDecoder(nn.Module):  # based on PPM
         super(SegDecoder, self).__init__()
         self.use_softmax = use_softmax
 
-        out_channels_1 = 64
-        out_channels_2 = 64
+        out_channels_1 = 256
+        out_channels_2 = 256
+
+        bias=True
 
         self.ppm = []
         for scale in pool_scales:
@@ -35,7 +33,7 @@ class SegDecoder(nn.Module):  # based on PPM
                 nn.AdaptiveAvgPool2d(scale),
                 nn.Conv2d(in_channels=n_encoded_channels,
                           out_channels=out_channels_1,
-                          kernel_size=1, bias=False),
+                          kernel_size=1, bias=bias),
                 nn.BatchNorm2d(out_channels_1),
                 nn.ReLU(inplace=True)
             ))
@@ -44,7 +42,7 @@ class SegDecoder(nn.Module):  # based on PPM
         self.l2 = nn.Sequential(
             nn.Conv2d(in_channels=n_encoded_channels + len(pool_scales) * out_channels_1, #ework this out by hand
                       out_channels=out_channels_2,
-                      kernel_size=3, padding=1, bias=False),
+                      kernel_size=3, padding=1, bias=bias),
             nn.BatchNorm2d(out_channels_2),
             nn.ReLU(inplace=True),
             nn.Dropout2d(0.1),

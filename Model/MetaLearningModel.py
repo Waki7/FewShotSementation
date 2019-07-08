@@ -15,8 +15,7 @@ class MetaLearner():
 
     def load_model(self):
         if isfile(self.model_path):
-            self.model = MetaLearningModel()
-            self.model.load_state_dict(torch.load(self.model_path))
+            self.model = torch.load(self.model_path)
             return True
         return False
 
