@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Encoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Encoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/MetaLearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Segmenter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Trainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/MetaLearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +17,7 @@
       <file leaf-file-name="Encoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="868">
+            <state relative-caret-position="664">
               <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -31,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SegmentationModel.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SegmentationModel.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+            <state relative-caret-position="306">
+              <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -55,8 +50,8 @@
       <file leaf-file-name="MetaLearningModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+            <state relative-caret-position="255">
+              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="20" selection-end-column="20" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -76,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataProcessor.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataProcessor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="340">
               <caret line="110" column="69" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -130,18 +125,17 @@
         <option value="$PROJECT_DIR$/Model/Decoders.py" />
         <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/Segmenter.py" />
-        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
         <option value="$PROJECT_DIR$/Model/Trainer.py" />
-        <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
+        <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
+        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="y" value="-12" />
-    <option name="width" value="1944" />
-    <option name="height" value="1044" />
+    <option name="x" value="949" />
+    <option name="width" value="980" />
+    <option name="height" value="1031" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -359,7 +353,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24880762" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22734499" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
@@ -607,10 +601,13 @@
         <state relative-caret-position="-102" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-251">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+        <state relative-caret-position="340">
+          <caret line="110" column="69" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -624,20 +621,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
+    <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+        <state relative-caret-position="664">
+          <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
+    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="868">
-          <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+        <state relative-caret-position="-251">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="20" selection-end-column="20" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
@@ -646,20 +650,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        <state relative-caret-position="306">
+          <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="110" column="69" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

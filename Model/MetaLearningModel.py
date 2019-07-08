@@ -11,12 +11,14 @@ class MetaLearner():
         self.model_name = 'MetaLearningModel.pk1'
         self.model_path = join(self.model_path, self.model_name)
         self.model = None
-        self.try_load_model()
+        self.load_model()
 
-    def try_load_model(self):
+    def load_model(self):
         if isfile(self.model_path):
             self.model = MetaLearningModel()
             self.model.load_state_dict(torch.load(self.model_path))
+            return True
+        return False
 
     def get_optimizer(self, parameters):
         if self.model is None:

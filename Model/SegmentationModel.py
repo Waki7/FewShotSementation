@@ -1,6 +1,7 @@
 from Model.Encoders import *
 from Model.Decoders import *
 import torch
+from os.path import isfile
 from torchvision import transforms
 import DataProcessing.DataProcessor as data
 import matplotlib.pyplot as plt
@@ -23,6 +24,8 @@ class SegmentationModel(nn.Module):
 
 class Segmenter():
     def __init__(self, model: SegmentationModel = None, downsample_ratio=4):
+        self.model_path = '..\\StoredModels\\'
+        self.model_name = 'FullBSRSegmenter.pkl'
         self.model = model
         if model is None:
             self.build_model(downsample_ratio)
@@ -63,7 +66,7 @@ class Segmenter():
         seg_model.eval()
         for i in range(0, 10):
             _, ax = plt.subplots(1, 2)
-            prediction = seg_model.forward(x[i:i + 1])
+            prediction = seg_model.forward(self.x[i:i + 1])
             prediction = prediction.detach().cpu()
             prediction = np.argmax(prediction, axis=1)
             prediction = prediction[0]
@@ -71,7 +74,15 @@ class Segmenter():
             ax[1].imshow(self.y[i:i + 1].cpu()[0])
             plt.show()
 
+    def save_model(self):
+        pass
 
+    def load_model(self):
+        if isfile(self.model_path):
+            self.model = SegmentationModel()
+            self.model.load_state_dict(torch.load(self.model_path))
+            return True
+        return False
 
     def validate_segmenter(self):
         self.train()
