@@ -22,8 +22,8 @@ class SegDecoder(nn.Module):  # based on PPM
         super(SegDecoder, self).__init__()
         self.scale_up = scale_up
 
-        out_channels_1 = 128
-        out_channels_2 = 128
+        out_channels_1 = 64
+        out_channels_2 = 64
 
         bias=True
 

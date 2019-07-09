@@ -10,7 +10,7 @@ class SegEncoder(nn.Module): # will maintain same shape as input
         stride1 = 1
         kernel1 = 5
 
-        out_channels_1 = 128
+        out_channels_1 = 64
 
         self.l1 = nn.Sequential(
             # dw
@@ -30,7 +30,8 @@ class SegEncoder(nn.Module): # will maintain same shape as input
 
         stride2 = 1
         kernel2 = 3
-        out_channels_2 = 128
+        out_channels_2 = 64
+
         self.l2 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=out_channels_1,

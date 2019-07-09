@@ -22,7 +22,7 @@ class SegmentationModel(nn.Module):
         return pred
 
 class Segmenter():
-    def __init__(self, model: SegmentationModel = None, downsample_ratio=4, lr = .01):
+    def __init__(self, model: SegmentationModel = None, downsample_ratio=2, lr = .01):
         self.downsample_ratio=downsample_ratio
         self.lr = lr
         self.model_directory = '..\\StoredModels\\'
@@ -45,7 +45,7 @@ class Segmenter():
         self.weights = torch.tensor(data.getClassWeights(y_full)).to(**cfg.args)
 
 
-    def train(self, epochs=10, batch_size=40):
+    def train(self, epochs=10, batch_size=55):
         n_train = 440#self.x.shape[0]
         self.model.train()
         mean_loss = 0
@@ -113,7 +113,7 @@ class Segmenter():
 
 
 def main():
-    lrs = [.00001]
+    lrs = [.01, .001, .0001, .00001]
     for lr in lrs:
         print(lr)
         segmenter = Segmenter(lr=lr)

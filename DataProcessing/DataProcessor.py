@@ -123,11 +123,12 @@ class BSRImages(DataSet):
 
 
 class KShotSegmentation():
-    def __init__(self, x=None, y=None, k=5):
+    def __init__(self, x=None, y=None, k=5, downsample_ratio = 2):
         self.root_path = '..\\Data\\MetaLearnerData\\'
         self.file_name = 'BSR_meta_data'+str(k)+'.pkl'
         self.stored_path = join(self.root_path, self.file_name)
         self.meta_data = loadArray(self.stored_path)
+        self.downsample_ratio = downsample_ratio
         if self.meta_data is None:
             if x is None and y is None:
                 x, x_full, y, y_full = process_BSR(x_dtype=np.float32, y_dtype=np.int32,

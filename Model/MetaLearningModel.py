@@ -87,11 +87,12 @@ class MetaLearner():
     def zero_grad(self):
         pass
 
-    def load_data(self, ):
+    def load_data(self):
         self.data = data.KShotSegmentation(k=self.k)
 
 def main():
     meta_learner = MetaLearner()
+    meta_learner.load_data()
     meta_learner.train_model()
 
 
