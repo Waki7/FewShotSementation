@@ -69,12 +69,56 @@ class MetaLearner():
 
     def get_optimizer(self, parameters):
         if self.model is None:
-            self.train_model()
+            self.train_meta_learner()
         self.set_learner(parameters)
         return self.model
 
-    def train_model(self):
-        pass
+    def train_meta_learner(self):
+        n_train = 5
+        for i in range(0, n_train):
+            meta_x, meta_y = self.data.get_dataset(i)
+            self.forward(meta_x, meta_y)
+
+    def train_learner(self, learner_x, learner_y):
+        '''
+        Basically we are going to use x and y to give the meta learner its input paramters after every step
+        :param learner_x:
+        :param learner_y:
+        :return:
+        '''
+        self.learner = Segmenter(lr=lr, downsample_ratio=4)
+
+        optWhole = torch.optim.Adam(
+            list(trainer.parameters()) + list(m.parameters()),
+            # consider taking out trainer params if we want to include more gradient info in updates
+            lr=lr, weight_decay=decay)
+
+        criterion = torch.nn.BCELoss()
+
+        n_train = x.shape[0]
+
+        # potentially k fold on each batch in the future
+        for i in range(0, len(n_train)):
+            x = train_batches[i][:, 1:]
+            y = train_batches[i][:, :1]
+            for k in kshots:
+                Y_out = m.forward(x)
+                loss = criterion(input=Y_out, target=y)
+                loss.backward(retain_graph=True)
+                optWhole.zero_grad()
+
+                for param in m.parameters():
+                    h_t, i_t, f_t, c_t = trainer.forward(th_t1=param, dL_t=param.grad, L_t=loss)
+                    # ^ figuire out how to initialize values before first pass for this shit, in the paper
+                    param.data = trainer.update().detach()
+
+            x = test_batches[i][:, 1:]
+            y = test_batches[i][:, :1]
+            Y_out = m.forward(x)
+            loss = criterion(input=Y_out, target=y)
+            loss.backward(retain_graph=True)
+            optTrainer.step()
+            optWhole.zero_grad()
 
     def set_learner(self, parameters):
         self.parameters = parameters

@@ -167,7 +167,7 @@ class KShotSegmentation():
         self.meta_ys = meta_ys
         saveData([meta_xs, meta_ys], self.folder_path, self.file_name)
 
-    def get_data_set(self, idx):
+    def get_dataset(self, idx):
         return self.meta_xs[idx], self.meta_ys[idx]
 
 
