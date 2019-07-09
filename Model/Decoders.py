@@ -18,12 +18,12 @@ def conv3x3_bn_relu(in_planes, out_planes, stride=1):
 
 class SegDecoder(nn.Module):  # based on PPM
     def __init__(self, n_class, n_encoded_channels,
-                 use_softmax=False, pool_scales=(1, 2, 3, 6)):
+                 scale_up=False, pool_scales=(2, 4, 8)):
         super(SegDecoder, self).__init__()
-        self.use_softmax = use_softmax
+        self.scale_up = scale_up
 
-        out_channels_1 = 256
-        out_channels_2 = 256
+        out_channels_1 = 128
+        out_channels_2 = 128
 
         bias=True
 
@@ -40,7 +40,7 @@ class SegDecoder(nn.Module):  # based on PPM
         self.l1 = nn.ModuleList(self.ppm)
 
         self.l2 = nn.Sequential(
-            nn.Conv2d(in_channels=n_encoded_channels + len(pool_scales) * out_channels_1, #ework this out by hand
+            nn.Conv2d(in_channels=n_encoded_channels + len(pool_scales) * out_channels_1,
                       out_channels=out_channels_2,
                       kernel_size=3, padding=1, bias=bias),
             nn.BatchNorm2d(out_channels_2),
@@ -65,11 +65,9 @@ class SegDecoder(nn.Module):  # based on PPM
                 mode='bilinear', align_corners=False))
         x = torch.cat(ppm_out, 1)
         x = self.l2(x)
-        if self.use_softmax:  # is True during inference
+        if self.scale_up:  # is True during inference
             x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)
-            x = nn.functional.softmax(x, dim=1)
-        else:
-            x = nn.functional.softmax(x, dim=1)
+        x = nn.functional.softmax(x, dim=1)
         return x
 

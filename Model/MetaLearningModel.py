@@ -2,42 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from os.path import join, isfile
+import DataProcessing.DataProcessor as data
+import numpy as np
+import Model.Config as cfg
 
 
-
-class MetaLearner():
-    def __init__(self):
-        self.model_path = '..\\StoredModels\\'
-        self.model_name = 'MetaLearningModel.pk1'
-        self.model_path = join(self.model_path, self.model_name)
-        self.model = None
-        self.load_model()
-
-    def load_model(self):
-        if isfile(self.model_path):
-            self.model = torch.load(self.model_path)
-            return True
-        return False
-
-    def get_optimizer(self, parameters):
-        if self.model is None:
-            self.train_model()
-        self.set_learner(parameters)
-        return self.model
-
-    def train_model(self):
-        pass
-
-    def set_learner(self, parameters):
-        self.parameters = parameters
-
-    def step(self, loss):
-        for param in self.parameters:
-            weight_update = self.forward(param, param.grad.data, loss)
-            param.data = self.model.update().detach()
-
-    def zero_grad(self):
-        pass
 
 
 class MetaLearningModel(nn.Module):
@@ -81,3 +50,50 @@ class MetaLearningModel(nn.Module):
 
     def update(self):
         return torch.sum(torch.dot(self.th_t1_c, self.th_t1), torch.dot(self.lr_, self.dL_t))
+
+
+class MetaLearner():
+    def __init__(self, k = 5):
+        self.k = 5
+        self.model_path = '..\\StoredModels\\'
+        self.model_name = 'MetaLearningModel.pk1'
+        self.model_path = join(self.model_path, self.model_name)
+        self.model = None
+        self.load_model()
+
+    def load_model(self):
+        if isfile(self.model_path):
+            self.model = torch.load(self.model_path)
+            return True
+        return False
+
+    def get_optimizer(self, parameters):
+        if self.model is None:
+            self.train_model()
+        self.set_learner(parameters)
+        return self.model
+
+    def train_model(self):
+        pass
+
+    def set_learner(self, parameters):
+        self.parameters = parameters
+
+    def step(self, loss):
+        for param in self.parameters:
+            weight_update = self.forward(param, param.grad.data, loss)
+            param.data = self.model.update().detach()
+
+    def zero_grad(self):
+        pass
+
+    def load_data(self, ):
+        self.data = data.KShotSegmentation(k=self.k)
+
+def main():
+    meta_learner = MetaLearner()
+    meta_learner.train_model()
+
+
+if __name__ == "__main__":
+    main()

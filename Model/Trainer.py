@@ -56,11 +56,3 @@ def train_meta_learner(data: np.ndarray, trainer: ml.MetaLearningModel, models: 
             loss.backward(retain_graph=True)
             optTrainer.step()
             optWhole.zero_grad()
-
-
-def main():
-    trainer = ml.MetaLearningModel()
-
-
-if __name__ == "__main__":
-    main()

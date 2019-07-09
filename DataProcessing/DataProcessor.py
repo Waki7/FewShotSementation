@@ -9,14 +9,21 @@ from scipy.io import loadmat
 from torchvision import transforms
 
 
-def saveData(path, filename, array):
+def saveData(array, path, filename=None):
+    if filename is not None:
+        path = os.join(path, filename)
     if not os.path.exists(path):
         os.makedirs(path)
-    with open(path + filename, 'wb') as f: pickle.dump(array, f)
+    with open(path, 'wb') as f: pickle.dump(array, f)
 
 
-def loadArray(path, filename):
-    with open(path + filename, 'rb') as f: return pickle.load(f)
+def loadArray(path, filename = None):
+    if filename is not None:
+        path = join(path, filename)
+    if isfile(path):
+        with open(path, 'rb') as f: return pickle.load(f)
+    else:
+        return None
 
 class DataSet():
     def __init__(self):
@@ -66,8 +73,8 @@ class DataSet():
             data_downsampled.append(processed[1])
         data = np.vstack(data)
         data_downsampled = np.vstack(data_downsampled)
-        saveData(self.stored_data_path, self.stored_file_name, data)
-        saveData(self.stored_data_path, self.sampled_file_name, data_downsampled)
+        saveData(data, self.stored_data_path, self.stored_file_name)
+        saveData(data_downsampled, self.stored_data_path, self.sampled_file_name)
         return data, data_downsampled
 
 
@@ -116,31 +123,50 @@ class BSRImages(DataSet):
 
 
 class KShotSegmentation():
-    def __init__(self, x, y, k=5):
-        train_x = []
-        train_y = []
+    def __init__(self, x=None, y=None, k=5):
+        self.root_path = '..\\Data\\MetaLearnerData\\'
+        self.file_name = 'BSR_meta_data'+str(k)+'.pkl'
+        self.stored_path = join(self.root_path, self.file_name)
+        self.meta_data = loadArray(self.stored_path)
+        if self.meta_data is None:
+            if x is None and y is None:
+                x, x_full, y, y_full = process_BSR(x_dtype=np.float32, y_dtype=np.int32,
+                                                          downsample_ratio=self.downsample_ratio)
+            self.make_data(x, y, k)
+        else:
+            self.meta_xs = self.meta_data[0]
+            self.meta_ys = self.meta_data[1]
 
-        meta_label_x = []
-        meta_label_y = []
 
-        meta_data_x = []
-        meta_data_y = []
+    def make_data(self, x, y, k):
+        meta_xs = []
+        meta_ys = []
 
-        for target_idx in range(0, x.shape[0]):
-            target_x = x[target_idx]
-            target_y = y[target_idx]
+        for meta_idx in range(0, x.shape[0]):
+            target_x = x[meta_idx]
+            target_y = y[meta_idx]
             labels = np.unique(target_y, return_counts=False)
-            meta_label_x.append(target_x)
-            meta_label_y.append(target_y)
-
-            for label in labels:
+            ks = [k]*len(labels)
+            meta_ys.append((target_x, target_y))
+            meta_x = []
+            for label_idx in range(len(labels)):
+                label = labels[label_idx]
+                ks[label_idx] -= np.sum([label in img[1] for img in meta_x])
                 for data_idx in range(0, x.shape[0]):
+                    if ks[label_idx] == 0:
+                        break
                     data_x = x[data_idx]
                     data_y = y[data_idx]
                     if label in data_y:
-                        meta_label_x.append(target_x)
-                        meta_label_y.append(target_y)
+                        ks[label_idx] -= 1
+                        meta_x.append((data_x, data_y))
+            meta_xs.append(meta_x)
+        self.meta_xs = meta_xs
+        self.meta_ys = meta_ys
+        saveData([meta_xs, meta_ys], self.stored_path)
 
+    def get_data_set(self, idx):
+        return self.meta_xs[idx], self.meta_ys[idx]
 
 
 def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # c x h x w
