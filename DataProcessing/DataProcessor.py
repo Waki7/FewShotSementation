@@ -6,7 +6,17 @@ import cv2
 import pickle
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
+from torchvision import transforms
 
+
+def saveData(path, filename, array):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(path + filename, 'wb') as f: pickle.dump(array, f)
+
+
+def loadArray(path, filename):
+    with open(path + filename, 'rb') as f: return pickle.load(f)
 
 class DataSet():
     def __init__(self):
@@ -26,13 +36,6 @@ class DataSet():
         return np.pad(image,
                       pad_width=pad_width, mode='constant')
 
-    def saveData(self, path, filename, array):
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(path + filename, 'wb') as f: pickle.dump(array, f)
-
-    def loadArray(self, path, filename):
-        with open(path + filename, 'rb') as f: return pickle.load(f)
 
     def processImages(self, directoryPath):
         data = []
@@ -53,9 +56,9 @@ class DataSet():
         data_downsampled = []
         if isfile(self.stored_data_path + self.stored_file_name) and isfile(
                 self.stored_data_path + self.sampled_file_name):
-            data = self.loadArray(self.stored_data_path, self.stored_file_name)
-            data_downsampled = self.loadArray(self.stored_data_path, self.sampled_file_name)
-            print('...loaded arrays of shape ' + str(data.shape) +' and downsampled to '+ str(data_downsampled.shape))
+            data = loadArray(self.stored_data_path, self.stored_file_name)
+            data_downsampled = loadArray(self.stored_data_path, self.sampled_file_name)
+            print('...loaded arrays of shape ' + str(data.shape) + ' and downsampled to ' + str(data_downsampled.shape))
             return data, data_downsampled
         for set in self.paths:
             processed = self.processImages(set)
@@ -63,8 +66,8 @@ class DataSet():
             data_downsampled.append(processed[1])
         data = np.vstack(data)
         data_downsampled = np.vstack(data_downsampled)
-        self.saveData(self.stored_data_path, self.stored_file_name, data)
-        self.saveData(self.stored_data_path, self.sampled_file_name, data_downsampled)
+        saveData(self.stored_data_path, self.stored_file_name, data)
+        saveData(self.stored_data_path, self.sampled_file_name, data_downsampled)
         return data, data_downsampled
 
 
@@ -112,6 +115,34 @@ class BSRImages(DataSet):
         return datum, datum_downsampled
 
 
+class KShotSegmentation():
+    def __init__(self, x, y, k=5):
+        train_x = []
+        train_y = []
+
+        meta_label_x = []
+        meta_label_y = []
+
+        meta_data_x = []
+        meta_data_y = []
+
+        for target_idx in range(0, x.shape[0]):
+            target_x = x[target_idx]
+            target_y = y[target_idx]
+            labels = np.unique(target_y, return_counts=False)
+            meta_label_x.append(target_x)
+            meta_label_y.append(target_y)
+
+            for label in labels:
+                for data_idx in range(0, x.shape[0]):
+                    data_x = x[data_idx]
+                    data_y = y[data_idx]
+                    if label in data_y:
+                        meta_label_x.append(target_x)
+                        meta_label_y.append(target_y)
+
+
+
 def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # c x h x w
     labels = BSRLabels(downsample_ratio)
     images = BSRImages(downsample_ratio)
@@ -127,7 +158,7 @@ def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # 
     return x, x_full, y, y_full
 
 
-def downsample(img, ratio, interpolation = cv2.INTER_NEAREST):
+def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_h = img.shape[0] // ratio
     new_w = img.shape[1] // ratio
     img = cv2.resize(img, (new_h, new_w), interpolation=interpolation)
@@ -144,9 +175,16 @@ if __name__ == '__main__':
 
 def cleanInput(x):
     print('...reshaped from ', x.shape)
+    channel_averages = [np.average(x[:, :, i]) for i in range(x.shape[-1])]
+    for i in range(x.shape[-1]):
+        average = np.average(x[:, :, :, i])
+        x[:, :, :, i] = (x[:, :, :, i] - average) / average
+        # print(average)
+        # print(x[:,:,:,i].shape)
+        # print(np.average(x[:,:,:,i]))
     if len(x.shape) > 3:
         x = np.transpose(x, (0, 3, 1, 2))
-        x = x / np.max(x)  # scale [0,255] -> [0,1]
+        # x = x / np.max(x)  # scale [0,255] -> [0,1]
     print('to ', x.shape)
     return x
 

@@ -1,7 +1,7 @@
 from Model.Encoders import *
 from Model.Decoders import *
 from Model.Config import *
-from os.path import isfile
+from os.path import join, isfile
 import DataProcessing.DataProcessor as data
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,10 +22,12 @@ class SegmentationModel(nn.Module):
         return pred
 
 class Segmenter():
-    def __init__(self, model: SegmentationModel = None, downsample_ratio=4):
+    def __init__(self, model: SegmentationModel = None, downsample_ratio=4, lr = .01):
         self.downsample_ratio=downsample_ratio
-        self.model_path = '..\\StoredModels\\'
-        self.model_name = 'FullBSRSegmenter.pkl'
+        self.lr = lr
+        self.model_directory = '..\\StoredModels\\'
+        self.model_name = 'FullBSRSegmenter'+str(lr)+'.pkl'
+        self.model_path = join(self.model_directory, self.model_name)
         self.model = model
         if model is None:
             self.build_model()
@@ -34,7 +36,7 @@ class Segmenter():
         self.load_data()
         self.classes = int(len(self.weights))
         self.model = SegmentationModel(in_shape=self.x.shape, n_class=self.classes).to(**args)
-        self.opt = torch.optim.Adam(self.model.parameters(), lr=.01)
+        self.opt = torch.optim.Adam(self.model.parameters(), lr=self.lr)
         self.criterion = torch.nn.CrossEntropyLoss(weight=self.weights)
 
     def load_data(self, ):
@@ -68,20 +70,20 @@ class Segmenter():
         self.model.eval()
         averages = []
         for i in range(400, 500):
-            _, ax = plt.subplots(1, 2)
+            # _, ax = plt.subplots(1, 2)
             x_batch = torch.tensor(self.x[i:i + 1]).to(**args)
             prediction = self.model.forward(x_batch)
             prediction = prediction.detach().cpu().numpy()
             prediction = np.argmax(prediction, axis=1)
             prediction = prediction[0]
             ground_truth = self.y[i:i + 1][0]
-            ax[0].imshow(prediction)
-            ax[1].imshow(ground_truth)
-            plt.show()
+            # ax[0].imshow(prediction)
+            # ax[1].imshow(ground_truth)
+            # plt.show()
             pixel_accuracy = np.average(prediction == ground_truth)
-            print(pixel_accuracy)
             averages.append(pixel_accuracy)
         print(averages)
+        print(np.average(averages))
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -95,10 +97,14 @@ class Segmenter():
 
 
 def main():
-    segmenter = Segmenter()
-    segmenter.train(epochs=100)
-    segmenter.save_model()
-    segmenter.test()
+    lrs = [.001, .0001]
+    for lr in lrs:
+        print(lr)
+        segmenter = Segmenter(lr=lr)
+        segmenter.train(epochs=1000)
+        segmenter.save_model()
+        segmenter.test()
+        print('_______________')
 
 
 if __name__ == '__main__':
