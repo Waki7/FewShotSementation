@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Decoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Decoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Encoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Encoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/MetaLearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.0001.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.0001.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,12 +20,12 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="590">
-                    <caret line="89" column="22" lean-forward="true" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
+                  <state relative-caret-position="1411">
+                    <caret line="89" column="22" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
                     <folding>
                       <element signature="e#0#12#0" expanded="true" />
                     </folding>
@@ -31,23 +33,11 @@
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="false">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Model/Trainer.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="901">
+                  <state relative-caret-position="701">
                     <caret line="58" selection-start-line="58" selection-end-line="58" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="206">
-                    <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
-                    <folding>
-                      <element signature="e#0#15#0" expanded="true" />
-                    </folding>
                   </state>
                 </provider>
               </entry>
@@ -60,9 +50,21 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="191" selection-start-line="191" selection-end-line="191" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
+            <state relative-caret-position="544">
               <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
             </state>
           </provider>
@@ -71,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="115" column="27" lean-forward="true" selection-start-line="115" selection-start-column="27" selection-end-line="115" selection-end-column="27" />
+            <state relative-caret-position="255">
+              <caret line="117" column="32" selection-start-line="117" selection-start-column="32" selection-end-line="117" selection-end-column="32" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -81,10 +83,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model/console.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4499">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/console_.01_2000.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-67719">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-476">
-              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+            <state>
+              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -93,10 +113,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/pooling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-49">
+              <caret line="971" column="6" selection-start-line="971" selection-start-column="6" selection-end-line="971" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
+            <state relative-caret-position="102">
+              <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -131,7 +160,10 @@
       <find>forward</find>
       <find>cleaninput</find>
       <find>data_downsampled</find>
+      <find>32</find>
       <find>saveData</find>
+      <find>loadArray</find>
+      <find>[</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,14 +176,14 @@
         <option value="$PROJECT_DIR$/Model/test.py" />
         <option value="$PROJECT_DIR$/Model/MetaLearner.py" />
         <option value="$PROJECT_DIR$/Model/Segmenter.py" />
-        <option value="$PROJECT_DIR$/Model/Config.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Model/Trainer.py" />
-        <option value="$PROJECT_DIR$/Model/Decoders.py" />
         <option value="$PROJECT_DIR$/Model/Encoders.py" />
-        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
         <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
+        <option value="$PROJECT_DIR$/Model/Config.py" />
+        <option value="$PROJECT_DIR$/Model/Decoders.py" />
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
+        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
       </list>
     </option>
   </component>
@@ -167,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -183,12 +214,37 @@
             <path>
               <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
               <item name="mmxside" type="462c0819:PsiDirectoryNode" />
-              <item name="StoredModels" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="BSR" type="462c0819:PsiDirectoryNode" />
+              <item name="BSDS500" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="MetaLearnerData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="DataProcessing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -207,7 +263,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MetaLearningModel">
+  <component name="RunManager" selected="Python.SegmentationModel">
     <configuration name="MetaLearningModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MMXSide" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -310,7 +366,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="py.test in SegmentationModel.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in SegmentationModel.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="MMXSide" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -328,16 +384,16 @@
     <list>
       <item itemvalue="Python.test" />
       <item itemvalue="Python.Segmenter" />
-      <item itemvalue="Python tests.py.test in SegmentationModel.py" />
       <item itemvalue="Python.SegmentationModel" />
       <item itemvalue="Python.MetaLearningModel" />
+      <item itemvalue="Python tests.pytest in SegmentationModel.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.SegmentationModel" />
         <item itemvalue="Python.MetaLearningModel" />
         <item itemvalue="Python.Segmenter" />
-        <item itemvalue="Python tests.py.test in SegmentationModel.py" />
+        <item itemvalue="Python tests.pytest in SegmentationModel.py" />
         <item itemvalue="Python.Segmenter" />
       </list>
     </recent_temporary>
@@ -388,25 +444,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24866469" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27820513" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39892665" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../NewBrain/Environment/Simulation.py" />
@@ -414,13 +451,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="18" selection-end-line="13" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DocImageGen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -462,20 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="852">
@@ -483,57 +499,106 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="89" column="22" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcessing/DocImageGen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/pooling.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="971" column="6" selection-start-line="971" selection-start-column="6" selection-end-line="971" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Trainer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-1372551007/cv2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="9224" column="4" selection-start-line="9224" selection-start-column="4" selection-end-line="9224" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="191" selection-start-line="191" selection-end-line="191" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
+        <state relative-caret-position="544">
           <caret line="32" column="27" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="115" column="27" lean-forward="true" selection-start-line="115" selection-start-column="27" selection-end-line="115" selection-end-column="27" />
+        <state relative-caret-position="255">
+          <caret line="117" column="32" selection-start-line="117" selection-start-column="32" selection-end-line="117" selection-end-column="32" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Trainer.py">
+    <entry file="file://$PROJECT_DIR$/Model/console_.01_2000.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="-67719">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
+    <entry file="file://$PROJECT_DIR$/Model/console.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="89" column="22" lean-forward="true" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-476">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-4499">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>

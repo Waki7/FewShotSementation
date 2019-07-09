@@ -5,6 +5,7 @@ from os.path import join, isfile
 import DataProcessing.DataProcessor as data
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 
 class SegmentationModel(nn.Module):
@@ -12,9 +13,6 @@ class SegmentationModel(nn.Module):
         super(SegmentationModel, self).__init__()
         self.encoder = SegEncoder(in_shape=in_shape, out_shape=128, dilation = dilation)
         self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape)
-
-    def paramters(self):
-        return list(self.encoder.parameters()) + list(self.deocder.paramters())
 
     def forward(self, input):
         encoded_features = self.encoder(input)
@@ -45,7 +43,7 @@ class Segmenter():
         self.weights = torch.tensor(data.getClassWeights(y_full)).to(**cfg.args)
 
 
-    def train(self, epochs=10, batch_size=55):
+    def train(self, epochs=10, batch_size=50):
         n_train = 440#self.x.shape[0]
         self.model.train()
         mean_loss = 0
@@ -61,8 +59,8 @@ class Segmenter():
                 loss.backward(retain_graph=False)
                 self.opt.step()
                 self.opt.zero_grad()
-            print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1))
-            print(self.pixel_accuracy(440, 460))
+            print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1), **cfg.prnt)
+            print('val accuracy ', self.pixel_accuracy(440, 460), **cfg.prnt)
             mean_loss = 0
         return self.model
 
@@ -98,8 +96,8 @@ class Segmenter():
             # plt.show()
             pixel_accuracy = np.average(prediction == ground_truth)
             averages.append(pixel_accuracy)
-        print(averages)
-        print(np.average(averages))
+        print(averages, **cfg.prnt)
+        print(np.average(averages), **cfg.prnt)
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -113,14 +111,14 @@ class Segmenter():
 
 
 def main():
-    lrs = [.01, .001, .0001, .00001]
+    lrs = [.00001, .05, .005, .01, .001, .0001, .1] #
     for lr in lrs:
-        print(lr)
-        segmenter = Segmenter(lr=lr)
-        segmenter.train(epochs=1000)
+        print(lr, **cfg.prnt)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4)
+        segmenter.train(epochs=2000)
         segmenter.save_model()
         segmenter.test()
-        print('_______________')
+        print('_______________', **cfg.prnt)
 
 
 if __name__ == '__main__':

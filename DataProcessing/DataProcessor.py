@@ -9,19 +9,20 @@ from scipy.io import loadmat
 from torchvision import transforms
 
 
-def saveData(array, path, filename=None):
-    if filename is not None:
-        path = os.join(path, filename)
+def saveData(array, path, filename):
     if not os.path.exists(path):
         os.makedirs(path)
-    with open(path, 'wb') as f: pickle.dump(array, f)
+    path = join(path, filename)
+    with open(path, 'wb') as f:
+        pickle.dump(array, f)
 
 
-def loadArray(path, filename = None):
+def loadArray(path, filename):
     if filename is not None:
         path = join(path, filename)
     if isfile(path):
-        with open(path, 'rb') as f: return pickle.load(f)
+        with open(path, 'rb') as f:
+            return pickle.load(f)
     else:
         return None
 
@@ -124,10 +125,10 @@ class BSRImages(DataSet):
 
 class KShotSegmentation():
     def __init__(self, x=None, y=None, k=5, downsample_ratio = 2):
-        self.root_path = '..\\Data\\MetaLearnerData\\'
+        self.folder_path = '..\\Data\\MetaLearnerData\\'
         self.file_name = 'BSR_meta_data'+str(k)+'.pkl'
-        self.stored_path = join(self.root_path, self.file_name)
-        self.meta_data = loadArray(self.stored_path)
+        self.stored_path = join(self.folder_path, self.file_name)
+        self.meta_data = loadArray(self.folder_path, self.file_name)
         self.downsample_ratio = downsample_ratio
         if self.meta_data is None:
             if x is None and y is None:
@@ -164,13 +165,13 @@ class KShotSegmentation():
             meta_xs.append(meta_x)
         self.meta_xs = meta_xs
         self.meta_ys = meta_ys
-        saveData([meta_xs, meta_ys], self.stored_path)
+        saveData([meta_xs, meta_ys], self.folder_path, self.file_name)
 
     def get_data_set(self, idx):
         return self.meta_xs[idx], self.meta_ys[idx]
 
 
-def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # c x h x w
+def process_BSR(x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):  # c x h x w
     labels = BSRLabels(downsample_ratio)
     images = BSRImages(downsample_ratio)
     x_full, x = images.getData()
@@ -188,7 +189,7 @@ def process_BSR(x_dtype=np.float16, y_dtype=np.float16, downsample_ratio=4):  # 
 def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_h = img.shape[0] // ratio
     new_w = img.shape[1] // ratio
-    img = cv2.resize(img, (new_h, new_w), interpolation=interpolation)
+    img = cv2.resize(img, (new_w, new_h), interpolation=interpolation) #opencv takes w x h instead of h x w in numpy
     return img
 
 
