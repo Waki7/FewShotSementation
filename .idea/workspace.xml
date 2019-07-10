@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Decoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Decoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Encoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Encoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/MetaLearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/console.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Model/console.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.0001.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.0001.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.005.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.005.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.01.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.01.pkl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +79,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -101,10 +91,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/console.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-790">
+            <state relative-caret-position="-7134">
               <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
@@ -197,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="3826" />
     <option name="y" value="-14" />
     <option name="width" value="3868" />
@@ -426,7 +416,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3834" y="-6" width="1719" height="932" extended-state="6" />
+    <frame x="3834" y="-6" width="1719" height="932" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24866469" />
@@ -594,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/console.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-790">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -608,6 +591,13 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/console.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7134">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
