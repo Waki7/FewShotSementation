@@ -11,33 +11,46 @@ import Model.Config as cfg
 
 
 class MetaLearningModel(nn.Module):
-    def __init__(self, inputSize = 1):
+    def __init__(self, input_size = 1):
         numHU = 8
         bias = False
+        states_initialized = False
+        self.input_size = input_size
 
-        self.wi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+        self.wi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
 
-        self.wf = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
-
-
-        self.wg = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
-
-        self.wo = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+        self.wf = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
 
 
-        self.wxi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
-        self.wxi = nn.Linear(in_features=inputSize, out_features=numHU, bias=bias)
+        self.wg = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
+
+        self.wo = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
+
+
+        self.wxi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
+        self.wxi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
+
+    def initalize_states(self, th_t1):  # initialize bias to be higher for forget gate i believe and lwoer for other
+        self.i_t1 = torch.ones(self.input_size)
+        self.f_t1 = torch.ones(
+            self.input_size)  # i believe this at 1 means assume we don't forget any of original paramter
+        self.c_t1 = th_t1
+        self.h_t1 = torch.zeros(self.input_size)  # shape like output of o_t, torch.tanh(c_t)
+        self.states_initialized = True
 
     def forward(self, th_t1, dL_t, L_t):
+        if not self.states_initialized:
+            self.initalize_states(th_t1)
         x_t = torch.cat((dL_t, L_t, th_t1), dim=1)
         i_t = torch.sigmoid(self.wi(torch.cat((x_t, self.i_t1), dim=1)))
         f_t = torch.sigmoid(self.wf(torch.cat((x_t, self.f_t1), dim=1)))
+
         xh = torch.cat((x_t, self.h_t1), dim=1) #todo try splitting so that it is wx (x) + wh (h) instead of wxh(w;h)
         ci_t = torch.tanh(self.wg(xh))
         o_t = torch.sigmoid(self.wo(xh))
         c_t = torch.add(torch.dot(f_t, self.c_t1), torch.dot(i_t, ci_t))
         h_t = torch.dot(o_t, torch.tanh(c_t))
-
+        print(h_t.shape)
         self.h_t1 = h_t
         self.i_t1 = i_t
         self.f_t1 = f_t
