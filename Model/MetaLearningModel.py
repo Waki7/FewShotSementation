@@ -91,8 +91,8 @@ class MetaLearner():
         :param meta_y:
         :return:
         '''
-        unique = np.unique(meta_y)
-        learner = seg.SegmentationModel(meta_x[0].shape, len(unique))
+        unique = np.unique(meta_y[1])
+        learner = seg.SegmentationModel(meta_x[0][0].shape, len(unique))
 
         optWhole = torch.optim.Adam(
             list(learner.parameters()) + list(self.model.parameters()),
@@ -101,11 +101,11 @@ class MetaLearner():
 
         criterion = torch.nn.BCELoss()
 
-        n_train = meta_x.shape[0]
+        n_train = meta_x[0].shape[0]
 
         # potentially k fold on each batch in the future
 
-        for x, y in meta_x: #todo
+        for x, y in meta_x:
             Y_out = learner.forward(x)
             loss = criterion(input=Y_out, target=y)
             loss.backward(retain_graph=True)
@@ -139,7 +139,7 @@ class MetaLearner():
 def main():
     meta_learner = MetaLearner()
     meta_learner.load_data()
-    meta_learner.train_model()
+    meta_learner.train_meta_learner()
 
 
 if __name__ == "__main__":

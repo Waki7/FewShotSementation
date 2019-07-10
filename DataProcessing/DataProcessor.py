@@ -155,13 +155,14 @@ class KShotSegmentation():
                 label = labels[label_idx]
                 ks[label_idx] -= np.sum([label in img[1] for img in meta_x])
                 for data_idx in range(0, x.shape[0]):
-                    if ks[label_idx] <= 0:
-                        break
-                    data_x = x[data_idx]
-                    data_y = y[data_idx]
-                    if label in data_y:
-                        ks[label_idx] -= 1
-                        meta_x.append((data_x, data_y))
+                    if data_idx != meta_idx:
+                        if ks[label_idx] <= 0:
+                            break
+                        data_x = x[data_idx]
+                        data_y = y[data_idx]
+                        if label in data_y:
+                            ks[label_idx] -= 1
+                            meta_x.append((data_x, data_y))
             meta_xs.append(meta_x)
         self.meta_xs = meta_xs
         self.meta_ys = meta_ys

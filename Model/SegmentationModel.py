@@ -116,7 +116,7 @@ class Segmenter():
 
 
 def main():
-    lrs = [.5, .01, .1] # .05 dece, probably bigger model needed?
+    lrs = [.001, .01, .1, 1] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
         segmenter = Segmenter(lr=lr, downsample_ratio=4)
