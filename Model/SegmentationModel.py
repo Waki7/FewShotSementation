@@ -11,7 +11,7 @@ import sys
 class SegmentationModel(nn.Module):
     def __init__(self, in_shape, n_class, dilation = 2):
         super(SegmentationModel, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape, out_shape=128, dilation = dilation)
+        self.encoder = SegEncoder(in_shape=in_shape, out_shape=256, dilation = dilation)
         self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape)
 
     def forward(self, input):
@@ -34,8 +34,12 @@ class Segmenter():
         self.load_data()
         self.classes = int(len(self.weights))
         self.model = SegmentationModel(in_shape=self.x.shape, n_class=self.classes).to(**cfg.args)
-        self.opt = torch.optim.Adam(self.model.parameters(), lr=self.lr)
-        self.criterion = torch.nn.CrossEntropyLoss(weight=self.weights)
+        self.opt = torch.optim.SGD(
+        self.model.parameters(),
+        lr=self.lr,
+        momentum=0.9,
+        weight_decay=.0001)
+        self.criterion = nn.NLLLoss(weight=self.weights, ignore_index=-1)
 
     def load_data(self, ):
         self.x, x_full, self.y, y_full = data.process_BSR(x_dtype=np.float32, y_dtype=np.int32,
@@ -43,7 +47,7 @@ class Segmenter():
         self.weights = torch.tensor(data.getClassWeights(y_full)).to(**cfg.args)
 
 
-    def train(self, epochs=10, batch_size=50):
+    def train(self, epochs=10, batch_size=10):
         n_train = 440#self.x.shape[0]
         self.model.train()
         mean_loss = 0
@@ -61,6 +65,7 @@ class Segmenter():
                 self.opt.zero_grad()
             print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1), **cfg.prnt)
             print('val accuracy ', self.pixel_accuracy(440, 460), **cfg.prnt)
+            print('train accuracy ', self.pixel_accuracy(0, 440), **cfg.prnt)
             mean_loss = 0
         return self.model
 
@@ -111,11 +116,11 @@ class Segmenter():
 
 
 def main():
-    lrs = [.00001, .05, .005, .01, .001, .0001, .1] # .05 dece, probably bigger model needed?
+    lrs = [.5, .01, .1] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
         segmenter = Segmenter(lr=lr, downsample_ratio=4)
-        segmenter.train(epochs=2000)
+        segmenter.train(epochs=1000)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)

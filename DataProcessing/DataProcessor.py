@@ -155,7 +155,7 @@ class KShotSegmentation():
                 label = labels[label_idx]
                 ks[label_idx] -= np.sum([label in img[1] for img in meta_x])
                 for data_idx in range(0, x.shape[0]):
-                    if ks[label_idx] == 0:
+                    if ks[label_idx] <= 0:
                         break
                     data_x = x[data_idx]
                     data_y = y[data_idx]

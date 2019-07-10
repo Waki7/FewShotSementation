@@ -8,10 +8,10 @@ class SegEncoder(nn.Module): # will maintain same shape as input
         bias = True
         channels = in_shape[1] if len(in_shape) > 3 else 1
         stride1 = 1
-        kernel1 = 5
+        kernel1 = 7
 
-        out_channels_1 = 64
-
+        out_channels_1 = 256
+        out_channels_2 = 256
         self.l1 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=channels,
@@ -30,7 +30,6 @@ class SegEncoder(nn.Module): # will maintain same shape as input
 
         stride2 = 1
         kernel2 = 3
-        out_channels_2 = 64
 
         self.l2 = nn.Sequential(
             # dw
