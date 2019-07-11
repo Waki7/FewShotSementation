@@ -22,7 +22,8 @@ class SegmentationModel(nn.Module):
         return pred
 
 class Segmenter():
-    def __init__(self, model: SegmentationModel = None, downsample_ratio=2, lr = .01):
+    def __init__(self, model: SegmentationModel = None, downsample_ratio=2, lr = .01, size_scale=2):
+        self.size_scale = size_scale
         self.downsample_ratio=downsample_ratio
         self.lr = lr
         self.model_directory = '..\\StoredModels\\'
@@ -35,7 +36,9 @@ class Segmenter():
     def build_model(self):
         self.load_data()
         self.classes = int(len(self.weights))
-        self.model = SegmentationModel(in_shape=self.x.shape, n_class=self.classes).to(**cfg.args)
+        self.model = SegmentationModel(in_shape=self.x.shape,
+                                       n_class=self.classes,
+                                       size_scale=self.size_scale).to(**cfg.args)
         self.opt = torch.optim.SGD(
         self.model.parameters(),
         lr=self.lr,
@@ -121,8 +124,8 @@ def main():
     lrs = [.01, .1, 1] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4, size = 1)
-        segmenter.train(epochs=100)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 2)
+        segmenter.train(epochs=500, batch_size=40)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)
