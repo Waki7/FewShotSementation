@@ -9,10 +9,12 @@ import sys
 
 
 class SegmentationModel(nn.Module):
-    def __init__(self, in_shape, n_class, dilation = 2):
+    def __init__(self, in_shape, n_class, dilation = 2, size_scale = 1):
         super(SegmentationModel, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape, out_shape=256, dilation = dilation)
-        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape)
+        base_size = 64
+        size = int(base_size * size_scale)
+        self.encoder = SegEncoder(in_shape=in_shape, out_shape=size, dilation = dilation, size=size)
+        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape, size = size)
 
     def forward(self, input):
         encoded_features = self.encoder(input)
@@ -39,7 +41,7 @@ class Segmenter():
         lr=self.lr,
         momentum=0.9,
         weight_decay=.0001)
-        self.criterion = nn.NLLLoss(weight=self.weights, ignore_index=-1)
+        self.criterion = nn.NLLLoss(ignore_index=-1)
 
     def load_data(self, ):
         self.x, x_full, self.y, y_full = data.process_BSR(x_dtype=np.float32, y_dtype=np.int32,
@@ -119,8 +121,8 @@ def main():
     lrs = [.01, .1, 1] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4)
-        segmenter.train(epochs=1000)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4, size = 1)
+        segmenter.train(epochs=100)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)

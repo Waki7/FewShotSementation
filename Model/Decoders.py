@@ -18,12 +18,12 @@ def conv3x3_bn_relu(in_planes, out_planes, stride=1):
 
 class SegDecoder(nn.Module):  # based on PPM
     def __init__(self, n_class, n_encoded_channels,
-                 scale_up=False, pool_scales=(1, 4, 6, 10)):
+                 scale_up=False, pool_scales=(1, 4, 6, 10), size = 256):
         super(SegDecoder, self).__init__()
         self.scale_up = scale_up
 
-        out_channels_1 = 256
-        out_channels_2 = 256
+        out_channels_1 = size
+        out_channels_2 = size
 
         kernel2 = 3
 
