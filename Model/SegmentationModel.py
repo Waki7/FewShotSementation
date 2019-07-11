@@ -65,7 +65,7 @@ class Segmenter():
                 self.opt.zero_grad()
             print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1), **cfg.prnt)
             print('val accuracy ', self.pixel_accuracy(440, 460), **cfg.prnt)
-            print('train accuracy ', self.pixel_accuracy(0, 440), **cfg.prnt)
+            print('train accuracy ', self.pixel_accuracy(0, 100), **cfg.prnt)
             mean_loss = 0
         return self.model
 
@@ -116,7 +116,7 @@ class Segmenter():
 
 
 def main():
-    lrs = [.001, .01, .1, 1] # .05 dece, probably bigger model needed?
+    lrs = [.01, .1, 1] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
         segmenter = Segmenter(lr=lr, downsample_ratio=4)
