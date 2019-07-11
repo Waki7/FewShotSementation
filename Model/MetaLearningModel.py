@@ -12,6 +12,8 @@ import Model.Config as cfg
 
 class MetaLearningModel(nn.Module):
     def __init__(self, input_size = 1):
+        super(MetaLearningModel, self).__init__()
+
         numHU = 8
         bias = False
         states_initialized = False
@@ -81,6 +83,7 @@ class MetaLearner():
         if isfile(self.model_path):
             self.model = torch.load(self.model_path)
             return True
+        self.model = MetaLearningModel()
         return False
 
     def get_optimizer(self, parameters):
@@ -93,11 +96,11 @@ class MetaLearner():
         n_train = 5
         for i in range(0, n_train):
             meta_x, meta_y = self.data.get_dataset(i)
-            self.train_learner(meta_x, meta_y)
+            self.meta_forward(meta_x, meta_y)
 
 
 
-    def train_learner(self, meta_x, meta_y):
+    def meta_forward(self, meta_x, meta_y):
         '''
         Basically we are going to use x and y to give the meta learner its input paramters after every step
         :param meta_x:
@@ -105,35 +108,37 @@ class MetaLearner():
         :return:
         '''
         unique = np.unique(meta_y[1])
-        learner = seg.SegmentationModel(meta_x[0][0].shape, len(unique))
+        learner = seg.SegmentationModel(np.expand_dims(meta_x[0][0], axis=0).shape, len(unique))
+        for learner_x, learner_y in meta_x:
+            opt_full = torch.optim.Adam(
+                list(learner.parameters()) + list(self.model.parameters()),
+                # consider taking out trainer params if we want to include more gradient info in updates
+                lr=self.lr, weight_decay=self.decay)
+            criterion = torch.nn.BCELoss()
+            criterion = self.train_learner(learner, opt_full, criterion, learner_x, learner_y)
 
-        optWhole = torch.optim.Adam(
-            list(learner.parameters()) + list(self.model.parameters()),
-            # consider taking out trainer params if we want to include more gradient info in updates
-            lr=self.lr, weight_decay=self.decay)
 
-        criterion = torch.nn.BCELoss()
+        meta_y_x = meta_y[0]
+        meta_y_y = meta_y[1]
+        Y_out = learner.forward(torch.Tensor(meta_y_x).to(**cfg.args))
+        loss = criterion(input=Y_out, target=torch.Tensor(meta_y_y).to(cfg.device).long())
+        loss.backward()
+        opt_full.step()
+        opt_full.zero_grad()
 
-        n_train = meta_x[0].shape[0]
 
-        # potentially k fold on each batch in the future
-
-        for x, y in meta_x:
-            Y_out = learner.forward(x)
-            loss = criterion(input=Y_out, target=y)
-            loss.backward(retain_graph=True)
-            optWhole.zero_grad()
-
-            for param in learner.parameters():
-                h_t, i_t, f_t, c_t = self.model.forward(th_t1=param, dL_t=param.grad, L_t=loss)
-                # ^ figuire out how to initialize values before first pass for this shit, in the paper
-                param.data = self.model.update().detach()
-
-        Y_out = self.model.forward(meta_y[0])
-        loss = criterion(input=Y_out, target=meta_y[1])
+    def train_learner(self, learner, opt, criterion, x, y):
+        x, y = torch.Tensor(x).to(**cfg.args), torch.Tensor(y).to(cfg.device).long()
+        x, y = torch.unsqueeze(x, dim=0), torch.unsqueeze(y, dim=0)
+        Y_out = learner.forward(x)
+        loss = criterion(input=Y_out, target=y)
         loss.backward(retain_graph=True)
-        optWhole.step()
-        optWhole.zero_grad()
+        opt.zero_grad()
+
+        for param in learner.parameters():
+            h_t, i_t, f_t, c_t = self.model.forward(th_t1=param, dL_t=param.grad, L_t=loss)
+            # ^ figuire out how to initialize values before first pass for this shit, in the paper
+            param.data = self.model.update().detach()
 
     def set_learner(self, parameters):
         self.parameters = parameters
