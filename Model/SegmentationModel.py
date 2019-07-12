@@ -124,8 +124,8 @@ def main():
     lrs = [.01] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 4)
-        segmenter.train(epochs=500, batch_size=20)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 6)
+        segmenter.train(epochs=1000, batch_size=15)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)
