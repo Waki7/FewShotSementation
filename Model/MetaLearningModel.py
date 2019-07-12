@@ -16,7 +16,6 @@ class MetaLearningModel(nn.Module):
 
         numHU = 8
         bias = False
-        states_initialized = False
         self.input_size = input_size
 
         self.wi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
@@ -32,17 +31,8 @@ class MetaLearningModel(nn.Module):
         self.wxi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
         self.wxi = nn.Linear(in_features=input_size, out_features=numHU, bias=bias)
 
-    def initalize_states(self, th_t1):  # initialize bias to be higher for forget gate i believe and lwoer for other
-        self.i_t1 = torch.ones(self.input_size)
-        self.f_t1 = torch.ones(
-            self.input_size)  # i believe this at 1 means assume we don't forget any of original paramter
-        self.c_t1 = th_t1
-        self.h_t1 = torch.zeros(self.input_size)  # shape like output of o_t, torch.tanh(c_t)
-        self.states_initialized = True
 
     def forward(self, th_t1, dL_t, L_t):
-        if not self.states_initialized:
-            self.initalize_states(th_t1)
         x_t = torch.cat((dL_t, L_t, th_t1), dim=1)
         i_t = torch.sigmoid(self.wi(torch.cat((x_t, self.i_t1), dim=1)))
         f_t = torch.sigmoid(self.wf(torch.cat((x_t, self.f_t1), dim=1)))
@@ -84,7 +74,20 @@ class MetaLearner():
             self.model = torch.load(self.model_path)
             return True
         self.model = MetaLearningModel()
+        self.states_initialized = False
         return False
+
+    def initalize_states(self, th_t1):  # initialize bias to be higher for forget gate i believe and lwoer for other
+        self.model.i_t1 = torch.ones(self.model.input_size)
+        self.model.f_t1 = torch.ones(
+            self.model.input_size)  # i believe this at 1 means assume we don't forget any of original paramter
+        self.model.c_t1 = th_t1
+        self.model.h_t1 = torch.zeros(self.model.input_size)  # shape like output of o_t, torch.tanh(c_t)
+        self.states_initialized = True
+        self.states = [(None, self.h_t1)]
+        # store states of LSTM, since one lstm is being trained for all of the hyper parameters,
+        # let's check this w paper though, and make sure there isnt' a better way...
+        # we can also make the batch size large enough so that pytorch does this storing for us, i believe
 
     def get_optimizer(self, parameters):
         if self.model is None:
@@ -99,6 +102,18 @@ class MetaLearner():
             self.meta_forward(meta_x, meta_y)
 
 
+    def meta_backward(self, criterion, y_out, y_targ, n_train):
+        loss = criterion.forward(input=y_out, target=y_targ)
+        for i in range(n_train):  # back prop through previous time steps
+            for j in range(5):
+                loss.backward(retain_graph=True)
+
+                if self.states[-j - 2][0] is None:
+                    print('wtf')
+                    break
+                self.states[-j - 2][0].grad.data.zero_()
+                curr_grad = self.states[-j - 1][0].grad
+                self.states[-j - 2][1].backward(curr_grad, retain_graph=True)
 
     def meta_forward(self, meta_x, meta_y):
         '''
@@ -136,6 +151,8 @@ class MetaLearner():
         opt.zero_grad()
 
         for param in learner.parameters():
+            if not self.states_initialized:
+                self.initalize_states(param)
             h_t, i_t, f_t, c_t = self.model.forward(th_t1=param, dL_t=param.grad, L_t=loss)
             # ^ figuire out how to initialize values before first pass for this shit, in the paper
             param.data = self.model.update().detach()

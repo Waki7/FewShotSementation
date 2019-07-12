@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Model/MetaLearningModel.py" line="155" />
+    <bookmark url="file://$PROJECT_DIR$/Model/MetaLearningModel.py" line="172" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Decoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Decoders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/MetaLearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/console.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Model/console.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.001.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.1.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/StoredModels/FullBSRSegmenter0.1.pkl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +22,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="744">
-                    <caret line="113" selection-start-line="113" selection-end-line="113" />
+                  <state relative-caret-position="272">
+                    <caret line="76" column="39" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
                     <folding>
                       <element signature="e#0#12#0" expanded="true" />
                     </folding>
@@ -63,14 +59,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="108">
               <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model/console.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4085">
+              <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -101,15 +106,6 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/console.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21799">
-              <caret line="1498" column="28" selection-start-line="1498" selection-start-column="9" selection-end-line="1498" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -164,8 +160,8 @@
       <find>average loss for epoch  0</find>
       <find>for epoch  1 :</find>
       <find>loss for epoch  0</find>
-      <find>loss for epoch  499</find>
       <find>inplace</find>
+      <find>loss for epoch  499</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,10 +179,10 @@
         <option value="$PROJECT_DIR$/Model/console.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
-        <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
         <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
         <option value="$PROJECT_DIR$/Model/Decoders.py" />
+        <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
       </list>
     </option>
   </component>
@@ -422,12 +418,12 @@
     <frame x="-7" y="-7" width="1380" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31124347" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31124347" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291592" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30612245" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30612245" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39892665" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -564,29 +560,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/console.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21799">
-          <caret line="1498" column="28" selection-start-line="1498" selection-start-column="9" selection-end-line="1498" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1332">
           <caret line="127" column="48" selection-start-line="127" selection-start-column="48" selection-end-line="127" selection-end-column="48" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -600,8 +579,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
+        <state relative-caret-position="108">
           <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/console.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4085">
+          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="76" column="39" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
