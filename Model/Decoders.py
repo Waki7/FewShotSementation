@@ -37,7 +37,7 @@ class SegDecoder(nn.Module):  # based on PPM
                           out_channels=out_channels_1,
                           kernel_size=1, bias=bias),
                 nn.BatchNorm2d(out_channels_1),
-                nn.ReLU(inplace=True)
+                nn.ReLU()
             ))
         self.l1 = nn.ModuleList(self.ppm)
 
@@ -46,7 +46,7 @@ class SegDecoder(nn.Module):  # based on PPM
                       out_channels=out_channels_2,
                       kernel_size=kernel2, padding=kernel2 // 2, bias=bias),
             nn.BatchNorm2d(out_channels_2),
-            nn.ReLU(inplace=True),
+            nn.ReLU(),
             nn.Conv2d(out_channels_2, n_class, kernel_size=1)
         )
 

@@ -43,7 +43,7 @@ class Segmenter():
         self.model.parameters(),
         lr=self.lr,
         momentum=0.9,
-        weight_decay=.0001)
+        weight_decay=.001)
         self.criterion = nn.NLLLoss(ignore_index=-1)
 
     def load_data(self, ):
@@ -121,11 +121,11 @@ class Segmenter():
 
 
 def main():
-    lrs = [.01, .1, 1] # .05 dece, probably bigger model needed?
+    lrs = [.01] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 2)
-        segmenter.train(epochs=500, batch_size=40)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 4)
+        segmenter.train(epochs=500, batch_size=20)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)
