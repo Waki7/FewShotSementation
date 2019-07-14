@@ -22,7 +22,8 @@ class SegmentationModel(nn.Module):
         return pred
 
 class Segmenter():
-    def __init__(self, model: SegmentationModel = None, downsample_ratio=2, lr = .01, size_scale=2):
+    def __init__(self, model: SegmentationModel = None, downsample_ratio=2,
+                 lr = .01, size_scale=2, data : data.ProcessedDataSet = None):
         self.size_scale = size_scale
         self.downsample_ratio=downsample_ratio
         self.lr = lr
@@ -30,6 +31,7 @@ class Segmenter():
         self.model_name = 'FullBSRSegmenter'+str(lr)+'.pkl'
         self.model_path = join(self.model_directory, self.model_name)
         self.model = model
+        self.data = data
         if model is None:
             self.build_model()
 
@@ -124,8 +126,8 @@ def main():
     lrs = [.01] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 6)
-        segmenter.train(epochs=1000, batch_size=15)
+        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 2)
+        segmenter.train(epochs=10, batch_size=45)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)

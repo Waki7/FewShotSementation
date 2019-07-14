@@ -26,6 +26,11 @@ def loadArray(path, filename):
     else:
         return None
 
+class ProcessedDataSet():
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
 class DataSet():
     def __init__(self):
         self.file_ext = None
