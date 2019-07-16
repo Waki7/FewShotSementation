@@ -28,31 +28,40 @@ def loadArray(path, filename):
 
 class ProcessedDataSet():
     def __init__(self, x_dtype=None, y_dtype=None):
+        self.x = None
+        self.y = None
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
+        self.class_weights = None
 
 
-    def get_class_weights(self, y):
-        unique, counts = np.unique(self.y, return_counts=True)
+    def calc_class_weights(self, y):
+        unique, counts = np.unique(y, return_counts=True)
         totalCount = sum(counts)
-        return [totalCount / c for c in counts]
+        self.class_weights = [totalCount / c for c in counts]
+
+    def get_data(self):
+        if self.x is None and self.y is None:
+            self.process_data()
+        return self.x, self.y
+
+    def get_class_weights(self):
+        return self.class_weights
 
     def process_data(self):
         raise NotImplementedError
 
 class DataBSR(ProcessedDataSet):
-    def __init__(self, x_dtype=np.float32, y_dtype=np.float32):
-        super(DataBSR, x_dtype, y_dtype).__init__() # passing in args to super
+    def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
+        super(DataBSR, self).__init__(x_dtype, y_dtype)
+        self.downsample_ratio = downsample_ratio
 
-
-    def get_data(self):
-        return self.x, self.y
-
-    def process_data(self, downsample_ratio=4):  # c x h x w
-        labels = BSRLabels(downsample_ratio)
-        images = BSRImages(downsample_ratio)
+    def process_data(self):  # c x h x w
+        labels = BSRLabels(self.downsample_ratio)
+        images = BSRImages(self.downsample_ratio)
         x_full, x = images.getData()
         y_full, y = labels.getData()
+        self.calc_class_weights(y_full)
         if self.x_dtype is not None and x.dtype != self.x_dtype:
             x = x.astype(self.x_dtype)
         if self.y_dtype is not None and y.dtype != self.y_dtype:
@@ -61,6 +70,7 @@ class DataBSR(ProcessedDataSet):
         self.y = y
         assert not np.any(np.isnan(x))
         assert not np.any(np.isnan(y))
+        return self.x, self.y
 
 class DataSet():
     def __init__(self):
@@ -168,8 +178,8 @@ class KShotSegmentation():
         self.downsample_ratio = downsample_ratio
         if self.meta_data is None:
             if x is None and y is None:
-                x, x_full, y, y_full = process_BSR(x_dtype=np.float32, y_dtype=np.int32,
-                                                          downsample_ratio=self.downsample_ratio)
+                data = DataBSR(x_dtype=np.float32, y_dtype=np.int32)
+                x, y = data.process_data()
             self.make_data(x, y, k)
         else:
             self.meta_xs = self.meta_data[0]
@@ -214,14 +224,6 @@ def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_w = img.shape[1] // ratio
     img = cv2.resize(img, (new_w, new_h), interpolation=interpolation) #opencv takes w x h instead of h x w in numpy
     return img
-
-
-def main():
-    x, y = process_BSR()
-
-
-if __name__ == '__main__':
-    main()
 
 
 def cleanInput(x):

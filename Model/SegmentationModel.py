@@ -37,7 +37,7 @@ class Segmenter():
 
     def build_model(self):
         self.load_data()
-        self.classes = int(len(self.weights))
+        self.classes = int(len(self.class_weights))
         self.model = SegmentationModel(in_shape=self.x.shape,
                                        n_class=self.classes,
                                        size_scale=self.size_scale).to(**cfg.args)
@@ -48,10 +48,9 @@ class Segmenter():
         weight_decay=.001)
         self.criterion = nn.NLLLoss(ignore_index=-1)
 
-    def load_data(self, ):
-        self.x, x_full, self.y, y_full = data.process_BSR(x_dtype=np.float32, y_dtype=np.int32,
-                                                          downsample_ratio=self.downsample_ratio)
-        self.weights = torch.tensor(data.getClassWeights(y_full)).to(**cfg.args)
+    def load_data(self):
+        self.x, self.y = self.data.process_data()
+        self.class_weights = torch.tensor(self.data.get_class_weights()).to(**cfg.args)
 
 
     def train(self, epochs=10, batch_size=10):
@@ -127,7 +126,10 @@ def main():
     lrs = [.01] # .05 dece, probably bigger model needed?
     for lr in lrs:
         print(lr, **cfg.prnt)
-        segmenter = Segmenter(lr=lr, downsample_ratio=4, size_scale = 2)
+        downsample_ratio = 4
+        dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
+                                                          downsample_ratio=downsample_ratio)
+        segmenter = Segmenter(lr=lr, downsample_ratio=downsample_ratio, size_scale = 2, data = dataset)
         segmenter.train(epochs=10, batch_size=45)
         segmenter.save_model()
         segmenter.test()
