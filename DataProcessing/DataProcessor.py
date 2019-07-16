@@ -27,9 +27,40 @@ def loadArray(path, filename):
         return None
 
 class ProcessedDataSet():
-    def __init__(self, x, y):
-        self.x = x
+    def __init__(self, x_dtype=None, y_dtype=None):
+        self.x_dtype = x_dtype
+        self.y_dtype = y_dtype
+
+
+    def get_class_weights(self, y):
+        unique, counts = np.unique(self.y, return_counts=True)
+        totalCount = sum(counts)
+        return [totalCount / c for c in counts]
+
+    def process_data(self):
+        raise NotImplementedError
+
+class DataBSR(ProcessedDataSet):
+    def __init__(self, x_dtype=np.float32, y_dtype=np.float32):
+        super(DataBSR, x_dtype, y_dtype).__init__() # passing in args to super
+
+
+    def get_data(self):
+        return self.x, self.y
+
+    def process_data(self, downsample_ratio=4):  # c x h x w
+        labels = BSRLabels(downsample_ratio)
+        images = BSRImages(downsample_ratio)
+        x_full, x = images.getData()
+        y_full, y = labels.getData()
+        if self.x_dtype is not None and x.dtype != self.x_dtype:
+            x = x.astype(self.x_dtype)
+        if self.y_dtype is not None and y.dtype != self.y_dtype:
+            y = y.astype(self.y_dtype)
+        self.x = cleanInput(x)
         self.y = y
+        assert not np.any(np.isnan(x))
+        assert not np.any(np.isnan(y))
 
 class DataSet():
     def __init__(self):
@@ -177,20 +208,6 @@ class KShotSegmentation():
         return self.meta_xs[idx], self.meta_ys[idx]
 
 
-def process_BSR(x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):  # c x h x w
-    labels = BSRLabels(downsample_ratio)
-    images = BSRImages(downsample_ratio)
-    x_full, x = images.getData()
-    y_full, y = labels.getData()
-    if x.dtype != x_dtype:
-        x = x.astype(x_dtype)
-    if y.dtype != y_dtype:
-        y = y.astype(y_dtype)
-    x = cleanInput(x)
-    assert not np.any(np.isnan(x))
-    assert not np.any(np.isnan(y))
-    return x, x_full, y, y_full
-
 
 def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_h = img.shape[0] // ratio
@@ -222,8 +239,3 @@ def cleanInput(x):
     print('to ', x.shape)
     return x
 
-
-def getClassWeights(y):
-    unique, counts = np.unique(y, return_counts=True)
-    totalCount = sum(counts)
-    return [totalCount / c for c in counts]

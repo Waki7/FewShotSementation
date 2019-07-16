@@ -77,6 +77,7 @@ class Segmenter():
         return self.model
 
     def pixel_accuracy(self, start_idx, end_idx):
+        #todo let's observe patterns among data that's decently predicted vs not
         self.model.eval()
         averages = []
         for i in range(start_idx, end_idx):
