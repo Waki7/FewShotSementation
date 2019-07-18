@@ -9,10 +9,8 @@ import sys
 
 
 class SegmentationModel(nn.Module):
-    def __init__(self, in_shape, n_class, dilation = 2, size_scale = 1):
+    def __init__(self, in_shape, n_class, dilation = 2, size = 1):
         super(SegmentationModel, self).__init__()
-        base_size = 64
-        size = int(base_size * size_scale)
         self.encoder = SegEncoder(in_shape=in_shape, out_shape=size, dilation = dilation, size=size)
         self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape, size = size)
 
@@ -40,7 +38,7 @@ class Segmenter():
         self.classes = int(len(self.class_weights))
         self.model = SegmentationModel(in_shape=self.x.shape,
                                        n_class=self.classes,
-                                       size_scale=self.size_scale).to(**cfg.args)
+                                       size=self.size_scale).to(**cfg.args)
         self.opt = torch.optim.SGD(
         self.model.parameters(),
         lr=self.lr,
@@ -95,7 +93,7 @@ class Segmenter():
         # arbitrarily look at the first 10 images and see their output
         self.model.eval()
         averages = []
-        for i in range(440, 500):
+        for i in range(0, 500):
             # _, ax = plt.subplots(1, 2)
             x_batch = torch.tensor(self.x[i:i + 1]).to(**cfg.args)
             prediction = self.model.forward(x_batch)
@@ -110,6 +108,7 @@ class Segmenter():
             averages.append(pixel_accuracy)
         print(averages, **cfg.prnt)
         print(np.average(averages), **cfg.prnt)
+        print(self.pixel_accuracy(440, 500))
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -129,8 +128,8 @@ def main():
         downsample_ratio = 4
         dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
                                                           downsample_ratio=downsample_ratio)
-        segmenter = Segmenter(lr=lr, downsample_ratio=downsample_ratio, size_scale = 2, data = dataset)
-        segmenter.train(epochs=10, batch_size=45)
+        segmenter = Segmenter(lr=lr, downsample_ratio=downsample_ratio, size_scale = 128, data = dataset)
+        segmenter.train(epochs=1000, batch_size=40)
         segmenter.save_model()
         segmenter.test()
         print('_______________', **cfg.prnt)

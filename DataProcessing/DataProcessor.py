@@ -143,6 +143,7 @@ class BSRLabels(DataSet):
         mat = scipy.io.loadmat(file)
         mat_data = np.squeeze(mat[self.mat_key][0, 0]).item(0)
         datum = mat_data[self.segmentation_index]  # segementation ground truth, mat_data[1] is the boundary boxes
+        datum = datum - 1
         datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
                                        interpolation=cv2.INTER_NEAREST)
         # datum1 = mat_data[1]
