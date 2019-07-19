@@ -25,7 +25,7 @@ class Segmenter():
         self.size_scale = size_scale
         self.downsample_ratio=downsample_ratio
         self.lr = lr
-        self.model_directory = '..\\StoredModels\\'
+        self.model_directory = cfg.experiment_path
         self.model_name = 'FullBSRSegmenter'+str(lr)+'.pkl'
         self.model_path = join(self.model_directory, self.model_name)
         self.model = model
@@ -68,47 +68,44 @@ class Segmenter():
                 self.opt.step()
                 self.opt.zero_grad()
             print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1), **cfg.prnt)
-            print('val accuracy ', self.pixel_accuracy(440, 460), **cfg.prnt)
-            print('train accuracy ', self.pixel_accuracy(0, 100), **cfg.prnt)
+            print('val accuracy ', self.pixel_accuracy(440, 460, batch_size), **cfg.prnt)
+            print('train accuracy ', self.pixel_accuracy(0, 100, batch_size), **cfg.prnt)
             mean_loss = 0
         return self.model
 
-    def pixel_accuracy(self, start_idx, end_idx):
-        #todo let's observe patterns among data that's decently predicted vs not
-        self.model.eval()
-        averages = []
-        for i in range(start_idx, end_idx):
-            x_batch = torch.tensor(self.x[i:i + 1]).to(**cfg.args)
-            prediction = self.model.forward(x_batch)
-            prediction = prediction.detach().cpu().numpy()
-            prediction = np.argmax(prediction, axis=1)
-            prediction = prediction[0]
-            ground_truth = self.y[i:i + 1][0]
-            pixel_accuracy = np.average(prediction == ground_truth)
-            averages.append(pixel_accuracy)
-        self.model.train()
-        return np.average(averages)
+    def pixel_accuracy(self, start_idx, end_idx, batch_size):
+        predictions, ground_truths = self.predict(self, start_idx, end_idx, batch_size)
+        accuracies = []
+        for pred, truth in zip(predictions, ground_truths):
+            pixel_accuracy = np.average(pred == truth)
+            accuracies.append(pixel_accuracy)
+        return np.average(accuracies)
 
-    def test(self):
-        # arbitrarily look at the first 10 images and see their output
+    def predict(self, start_idx, end_idx, batch_size):
         self.model.eval()
-        averages = []
-        for i in range(0, 500):
-            # _, ax = plt.subplots(1, 2)
+        predictions = []
+        ground_truths = []
+        for i in range(start_idx, end_idx, batch_size):
             x_batch = torch.tensor(self.x[i:i + 1]).to(**cfg.args)
             prediction = self.model.forward(x_batch)
             prediction = prediction.detach().cpu().numpy()
             prediction = np.argmax(prediction, axis=1)
             prediction = prediction[0]
             ground_truth = self.y[i:i + 1][0]
-            # ax[0].imshow(prediction)
-            # ax[1].imshow(ground_truth)
-            # plt.show()
-            pixel_accuracy = np.average(prediction == ground_truth)
-            averages.append(pixel_accuracy)
-        print(averages, **cfg.prnt)
-        print(np.average(averages), **cfg.prnt)
-        print(self.pixel_accuracy(440, 500))
+            predictions.append(prediction)
+            ground_truths.append(ground_truth)
+        self.model.train()
+        return predictions, ground_truths
+
+    def test(self, batch_size):
+        print('test accuracy', self.pixel_accuracy(440, 500, batch_size), **cfg.prnt)
+        print('accuracy for whole dataset', self.pixel_accuracy(0, 500, batch_size), **cfg.prnt)
+
+    def show_predictions(self):
+        pass
+        # ax[0].imshow(prediction)
+        # ax[1].imshow(ground_truth)
+        # plt.show()
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -122,17 +119,15 @@ class Segmenter():
 
 
 def main():
-    lrs = [.01] # .05 dece, probably bigger model needed?
-    for lr in lrs:
-        print(lr, **cfg.prnt)
-        downsample_ratio = 4
-        dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
-                                                          downsample_ratio=downsample_ratio)
-        segmenter = Segmenter(lr=lr, downsample_ratio=downsample_ratio, size_scale = 128, data = dataset)
-        segmenter.train(epochs=1000, batch_size=40)
-        segmenter.save_model()
-        segmenter.test()
-        print('_______________', **cfg.prnt)
+    print(cfg.lr, **cfg.prnt)
+    downsample_ratio = 4
+    dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
+                                                      downsample_ratio=downsample_ratio)
+    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = 128, data = dataset)
+    segmenter.train(epochs=10, batch_size=20)
+    segmenter.save_model()
+    segmenter.test()
+    print('_______________', **cfg.prnt)
 
 
 if __name__ == '__main__':

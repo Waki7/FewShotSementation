@@ -30,6 +30,7 @@ class ProcessedDataSet():
     def __init__(self, x_dtype=None, y_dtype=None):
         self.x = None
         self.y = None
+        self.n_classes = None
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
         self.class_weights = None
@@ -62,6 +63,7 @@ class DataBSR(ProcessedDataSet):
         x_full, x = images.getData()
         y_full, y = labels.getData()
         self.calc_class_weights(y_full)
+        self.n_classes = len(self.class_weights)
         if self.x_dtype is not None and x.dtype != self.x_dtype:
             x = x.astype(self.x_dtype)
         if self.y_dtype is not None and y.dtype != self.y_dtype:
