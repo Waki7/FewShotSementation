@@ -67,14 +67,14 @@ class Segmenter():
                 loss.backward(retain_graph=False)
                 self.opt.step()
                 self.opt.zero_grad()
-            print(' average loss for epoch ', e, ': ', mean_loss / (n_train//batch_size+1), **cfg.prnt)
+            print(' average loss for epoch ', e, ': ', mean_loss, **cfg.prnt)
             print('val accuracy ', self.pixel_accuracy(440, 460, batch_size), **cfg.prnt)
             print('train accuracy ', self.pixel_accuracy(0, 100, batch_size), **cfg.prnt)
             mean_loss = 0
         return self.model
 
     def pixel_accuracy(self, start_idx, end_idx, batch_size):
-        predictions, ground_truths = self.predict(self, start_idx, end_idx, batch_size)
+        predictions, ground_truths = self.predict(start_idx, end_idx, batch_size)
         accuracies = []
         for pred, truth in zip(predictions, ground_truths):
             pixel_accuracy = np.average(pred == truth)
@@ -123,10 +123,11 @@ def main():
     downsample_ratio = 4
     dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
                                                       downsample_ratio=downsample_ratio)
-    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = 128, data = dataset)
-    segmenter.train(epochs=10, batch_size=20)
-    segmenter.save_model()
-    segmenter.test()
+    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = cfg.model_size, data = dataset)
+    segmenter.load_model()
+    # segmenter.train(epochs=3000, batch_size=20)
+    # segmenter.save_model()
+    segmenter.test(20)
     print('_______________', **cfg.prnt)
 
 
