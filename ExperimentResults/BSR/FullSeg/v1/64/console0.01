@@ -1,0 +1,1243 @@
+0.01
+ average loss for epoch  0 :  -0.05986717902123928
+val accuracy  0.0
+train accuracy  0.0
+ average loss for epoch  1 :  -0.06013533752411604
+val accuracy  0.026875
+train accuracy  0.006197916666666667
+ average loss for epoch  2 :  -0.06060645775869489
+val accuracy  0.0278125
+train accuracy  0.00765625
+ average loss for epoch  3 :  -0.06112896278500557
+val accuracy  0.0225
+train accuracy  0.006822916666666666
+ average loss for epoch  4 :  -0.06163646373897791
+val accuracy  0.0153125
+train accuracy  0.008072916666666666
+ average loss for epoch  5 :  -0.06221257196739316
+val accuracy  0.014375
+train accuracy  0.010416666666666668
+ average loss for epoch  6 :  -0.06275299983099103
+val accuracy  0.01625
+train accuracy  0.013020833333333334
+ average loss for epoch  7 :  -0.06346919015049934
+val accuracy  0.016458333333333332
+train accuracy  0.016197916666666666
+ average loss for epoch  8 :  -0.0641089603304863
+val accuracy  0.016458333333333332
+train accuracy  0.020729166666666667
+ average loss for epoch  9 :  -0.06468398775905371
+val accuracy  0.015833333333333335
+train accuracy  0.030208333333333334
+ average loss for epoch  10 :  -0.0653466060757637
+val accuracy  0.015
+train accuracy  0.03671875
+ average loss for epoch  11 :  -0.06594879366457462
+val accuracy  0.014895833333333334
+train accuracy  0.04307291666666667
+ average loss for epoch  12 :  -0.06651064474135637
+val accuracy  0.014583333333333334
+train accuracy  0.050312499999999996
+ average loss for epoch  13 :  -0.06739254482090473
+val accuracy  0.0134375
+train accuracy  0.05880208333333333
+ average loss for epoch  14 :  -0.06814070884138346
+val accuracy  0.013020833333333334
+train accuracy  0.06364583333333333
+ average loss for epoch  15 :  -0.06898716278374195
+val accuracy  0.012395833333333333
+train accuracy  0.06708333333333333
+ average loss for epoch  16 :  -0.06991841364651918
+val accuracy  0.012291666666666666
+train accuracy  0.071875
+ average loss for epoch  17 :  -0.07085037045180798
+val accuracy  0.012916666666666667
+train accuracy  0.07494791666666667
+ average loss for epoch  18 :  -0.07215938623994589
+val accuracy  0.0128125
+train accuracy  0.076875
+ average loss for epoch  19 :  -0.07338367495685816
+val accuracy  0.012708333333333334
+train accuracy  0.08078125
+ average loss for epoch  20 :  -0.07501296419650316
+val accuracy  0.014166666666666666
+train accuracy  0.0846875
+ average loss for epoch  21 :  -0.0778217501938343
+val accuracy  0.016458333333333332
+train accuracy  0.0865625
+ average loss for epoch  22 :  -0.08122228365391493
+val accuracy  0.016770833333333332
+train accuracy  0.08156250000000001
+ average loss for epoch  23 :  -0.08598152361810207
+val accuracy  0.017083333333333332
+train accuracy  0.07197916666666668
+ average loss for epoch  24 :  -0.09357828181236982
+val accuracy  0.016770833333333332
+train accuracy  0.0615625
+ average loss for epoch  25 :  -0.1044472148641944
+val accuracy  0.0159375
+train accuracy  0.04921875
+ average loss for epoch  26 :  -0.11999678798019886
+val accuracy  0.015
+train accuracy  0.04609375
+ average loss for epoch  27 :  -0.1413354855030775
+val accuracy  0.012604166666666666
+train accuracy  0.042604166666666665
+ average loss for epoch  28 :  -0.1601598933339119
+val accuracy  0.011875
+train accuracy  0.03432291666666667
+ average loss for epoch  29 :  -0.19719756953418255
+val accuracy  0.011770833333333333
+train accuracy  0.027916666666666666
+ average loss for epoch  30 :  -0.2386961169540882
+val accuracy  0.013125
+train accuracy  0.027552083333333335
+ average loss for epoch  31 :  -0.256331792101264
+val accuracy  0.015520833333333333
+train accuracy  0.12161458333333333
+ average loss for epoch  32 :  -0.2915754597634077
+val accuracy  0.011354166666666667
+train accuracy  0.07557291666666666
+ average loss for epoch  33 :  -0.344610508531332
+val accuracy  0.017604166666666667
+train accuracy  0.11791666666666666
+ average loss for epoch  34 :  -0.4087960980832577
+val accuracy  0.0221875
+train accuracy  0.12098958333333333
+ average loss for epoch  35 :  -0.4605935998260975
+val accuracy  0.016875
+train accuracy  0.08927083333333333
+ average loss for epoch  36 :  -0.5618943981826305
+val accuracy  0.029375
+train accuracy  0.12229166666666666
+ average loss for epoch  37 :  -0.6287233829498291
+val accuracy  0.043229166666666666
+train accuracy  0.08260416666666666
+ average loss for epoch  38 :  -0.7275663986802101
+val accuracy  0.043125
+train accuracy  0.095625
+ average loss for epoch  39 :  -0.8448655307292938
+val accuracy  0.033125
+train accuracy  0.08166666666666667
+ average loss for epoch  40 :  -0.9545063078403473
+val accuracy  0.0759375
+train accuracy  0.115625
+ average loss for epoch  41 :  -1.0006441920995712
+val accuracy  0.06447916666666667
+train accuracy  0.11875
+ average loss for epoch  42 :  -1.091308206319809
+val accuracy  0.06645833333333333
+train accuracy  0.10114583333333334
+ average loss for epoch  43 :  -1.1942030265927315
+val accuracy  0.08072916666666667
+train accuracy  0.13338541666666667
+ average loss for epoch  44 :  -1.275416076183319
+val accuracy  0.0734375
+train accuracy  0.12239583333333333
+ average loss for epoch  45 :  -1.3534003496170044
+val accuracy  0.08447916666666666
+train accuracy  0.12520833333333334
+ average loss for epoch  46 :  -1.4112985581159592
+val accuracy  0.084375
+train accuracy  0.11442708333333333
+ average loss for epoch  47 :  -1.506627932190895
+val accuracy  0.079375
+train accuracy  0.1175
+ average loss for epoch  48 :  -1.5729830414056778
+val accuracy  0.07802083333333333
+train accuracy  0.131875
+ average loss for epoch  49 :  -1.6500097066164017
+val accuracy  0.0859375
+train accuracy  0.13052083333333334
+ average loss for epoch  50 :  -1.7127707749605179
+val accuracy  0.09
+train accuracy  0.13630208333333332
+ average loss for epoch  51 :  -1.7676176577806473
+val accuracy  0.09760416666666667
+train accuracy  0.14041666666666666
+ average loss for epoch  52 :  -1.7793174237012863
+val accuracy  0.08989583333333333
+train accuracy  0.13755208333333332
+ average loss for epoch  53 :  -1.8156801015138626
+val accuracy  0.1065625
+train accuracy  0.13770833333333332
+ average loss for epoch  54 :  -1.868024319410324
+val accuracy  0.110625
+train accuracy  0.14015625
+ average loss for epoch  55 :  -1.9115354865789413
+val accuracy  0.1
+train accuracy  0.1453125
+ average loss for epoch  56 :  -1.9438507705926895
+val accuracy  0.10802083333333333
+train accuracy  0.13916666666666666
+ average loss for epoch  57 :  -1.980966404080391
+val accuracy  0.113125
+train accuracy  0.14640625000000002
+ average loss for epoch  58 :  -2.0074857771396637
+val accuracy  0.10802083333333333
+train accuracy  0.14322916666666666
+ average loss for epoch  59 :  -2.0290842950344086
+val accuracy  0.10760416666666667
+train accuracy  0.14994791666666668
+ average loss for epoch  60 :  -2.058257043361664
+val accuracy  0.11354166666666667
+train accuracy  0.1428125
+ average loss for epoch  61 :  -2.0763570070266724
+val accuracy  0.114375
+train accuracy  0.15447916666666667
+ average loss for epoch  62 :  -2.098876193165779
+val accuracy  0.10697916666666667
+train accuracy  0.15473958333333332
+ average loss for epoch  63 :  -2.119139149785042
+val accuracy  0.10677083333333333
+train accuracy  0.15765625
+ average loss for epoch  64 :  -2.144322171807289
+val accuracy  0.10541666666666667
+train accuracy  0.15119791666666665
+ average loss for epoch  65 :  -2.157693326473236
+val accuracy  0.10395833333333333
+train accuracy  0.1553125
+ average loss for epoch  66 :  -2.173983871936798
+val accuracy  0.10854166666666666
+train accuracy  0.15760416666666666
+ average loss for epoch  67 :  -2.1898270696401596
+val accuracy  0.10895833333333334
+train accuracy  0.15744791666666666
+ average loss for epoch  68 :  -2.202378422021866
+val accuracy  0.10020833333333333
+train accuracy  0.15505208333333334
+ average loss for epoch  69 :  -2.2070458084344864
+val accuracy  0.10864583333333333
+train accuracy  0.15869791666666666
+ average loss for epoch  70 :  -2.2077188044786453
+val accuracy  0.089375
+train accuracy  0.15208333333333335
+ average loss for epoch  71 :  -2.2290567755699158
+val accuracy  0.10229166666666667
+train accuracy  0.15630208333333334
+ average loss for epoch  72 :  -2.2453664988279343
+val accuracy  0.09885416666666667
+train accuracy  0.156875
+ average loss for epoch  73 :  -2.261807858943939
+val accuracy  0.1009375
+train accuracy  0.15645833333333334
+ average loss for epoch  74 :  -2.267784133553505
+val accuracy  0.10333333333333333
+train accuracy  0.15333333333333332
+ average loss for epoch  75 :  -2.256448343396187
+val accuracy  0.096875
+train accuracy  0.15338541666666666
+ average loss for epoch  76 :  -2.276347130537033
+val accuracy  0.10364583333333334
+train accuracy  0.15442708333333333
+ average loss for epoch  77 :  -2.289440870285034
+val accuracy  0.10739583333333333
+train accuracy  0.155
+ average loss for epoch  78 :  -2.2981677055358887
+val accuracy  0.09604166666666666
+train accuracy  0.15744791666666666
+ average loss for epoch  79 :  -2.304908335208893
+val accuracy  0.090625
+train accuracy  0.15661458333333333
+ average loss for epoch  80 :  -2.2994734048843384
+val accuracy  0.09645833333333333
+train accuracy  0.15723958333333332
+ average loss for epoch  81 :  -2.3200921714305878
+val accuracy  0.08729166666666667
+train accuracy  0.15114583333333334
+ average loss for epoch  82 :  -2.329210475087166
+val accuracy  0.09447916666666667
+train accuracy  0.15421875
+ average loss for epoch  83 :  -2.341383695602417
+val accuracy  0.09604166666666666
+train accuracy  0.15395833333333334
+ average loss for epoch  84 :  -2.352343887090683
+val accuracy  0.09458333333333334
+train accuracy  0.15401041666666668
+ average loss for epoch  85 :  -2.3712313771247864
+val accuracy  0.09822916666666667
+train accuracy  0.15604166666666666
+ average loss for epoch  86 :  -2.367965817451477
+val accuracy  0.08270833333333333
+train accuracy  0.15088541666666666
+ average loss for epoch  87 :  -2.3708750307559967
+val accuracy  0.10197916666666666
+train accuracy  0.15598958333333335
+ average loss for epoch  88 :  -2.3829123973846436
+val accuracy  0.08510416666666666
+train accuracy  0.15338541666666666
+ average loss for epoch  89 :  -2.390322834253311
+val accuracy  0.0921875
+train accuracy  0.15463541666666666
+ average loss for epoch  90 :  -2.4062068164348602
+val accuracy  0.08166666666666667
+train accuracy  0.1511458333333333
+ average loss for epoch  91 :  -2.4026655703783035
+val accuracy  0.10322916666666666
+train accuracy  0.1559375
+ average loss for epoch  92 :  -2.4024969935417175
+val accuracy  0.08010416666666667
+train accuracy  0.15145833333333333
+ average loss for epoch  93 :  -2.4086607694625854
+val accuracy  0.0803125
+train accuracy  0.15005208333333334
+ average loss for epoch  94 :  -2.422369509935379
+val accuracy  0.08229166666666667
+train accuracy  0.15119791666666665
+ average loss for epoch  95 :  -2.4422154426574707
+val accuracy  0.08979166666666667
+train accuracy  0.15244791666666666
+ average loss for epoch  96 :  -2.447601318359375
+val accuracy  0.08677083333333334
+train accuracy  0.15026041666666667
+ average loss for epoch  97 :  -2.4593304991722107
+val accuracy  0.06625
+train accuracy  0.1496354166666667
+ average loss for epoch  98 :  -2.4556324630975723
+val accuracy  0.07510416666666667
+train accuracy  0.14994791666666668
+ average loss for epoch  99 :  -2.478880226612091
+val accuracy  0.07229166666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  100 :  -2.4901939034461975
+val accuracy  0.0628125
+train accuracy  0.1496354166666667
+ average loss for epoch  101 :  -2.503625214099884
+val accuracy  0.0675
+train accuracy  0.1496354166666667
+ average loss for epoch  102 :  -2.509733557701111
+val accuracy  0.07104166666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  103 :  -2.5131644904613495
+val accuracy  0.07145833333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  104 :  -2.522681713104248
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  105 :  -2.533227801322937
+val accuracy  0.06864583333333334
+train accuracy  0.1496354166666667
+ average loss for epoch  106 :  -2.5358393788337708
+val accuracy  0.06854166666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  107 :  -2.5415446758270264
+val accuracy  0.06760416666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  108 :  -2.545069009065628
+val accuracy  0.06958333333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  109 :  -2.549524426460266
+val accuracy  0.0659375
+train accuracy  0.1496354166666667
+ average loss for epoch  110 :  -2.5547017008066177
+val accuracy  0.060208333333333336
+train accuracy  0.1496354166666667
+ average loss for epoch  111 :  -2.558117985725403
+val accuracy  0.06927083333333334
+train accuracy  0.1496354166666667
+ average loss for epoch  112 :  -2.5614116489887238
+val accuracy  0.06802083333333334
+train accuracy  0.1496354166666667
+ average loss for epoch  113 :  -2.563606023788452
+val accuracy  0.06416666666666666
+train accuracy  0.1496354166666667
+ average loss for epoch  114 :  -2.5632469058036804
+val accuracy  0.0678125
+train accuracy  0.1496354166666667
+ average loss for epoch  115 :  -2.5646909922361374
+val accuracy  0.06197916666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  116 :  -2.5684836208820343
+val accuracy  0.070625
+train accuracy  0.1496354166666667
+ average loss for epoch  117 :  -2.5707167983055115
+val accuracy  0.06614583333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  118 :  -2.5711558163166046
+val accuracy  0.06229166666666667
+train accuracy  0.1496354166666667
+ average loss for epoch  119 :  -2.5666070580482483
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  120 :  -2.5621969401836395
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  121 :  -2.5639354586601257
+val accuracy  0.06208333333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  122 :  -2.564627230167389
+val accuracy  0.058958333333333335
+train accuracy  0.1496354166666667
+ average loss for epoch  123 :  -2.5667516589164734
+val accuracy  0.0578125
+train accuracy  0.1496354166666667
+ average loss for epoch  124 :  -2.5740921199321747
+val accuracy  0.05875
+train accuracy  0.1496354166666667
+ average loss for epoch  125 :  -2.575341671705246
+val accuracy  0.058333333333333334
+train accuracy  0.1496354166666667
+ average loss for epoch  126 :  -2.5742554366588593
+val accuracy  0.058645833333333335
+train accuracy  0.1496354166666667
+ average loss for epoch  127 :  -2.5764144361019135
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  128 :  -2.5761217772960663
+val accuracy  0.06125
+train accuracy  0.1496354166666667
+ average loss for epoch  129 :  -2.579074800014496
+val accuracy  0.05708333333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  130 :  -2.5759322345256805
+val accuracy  0.05875
+train accuracy  0.1496354166666667
+ average loss for epoch  131 :  -2.576674699783325
+val accuracy  0.0596875
+train accuracy  0.1496354166666667
+ average loss for epoch  132 :  -2.576763927936554
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  133 :  -2.576279729604721
+val accuracy  0.0596875
+train accuracy  0.1496354166666667
+ average loss for epoch  134 :  -2.577401489019394
+val accuracy  0.058125
+train accuracy  0.1496354166666667
+ average loss for epoch  135 :  -2.579310417175293
+val accuracy  0.0575
+train accuracy  0.1496354166666667
+ average loss for epoch  136 :  -2.58160799741745
+val accuracy  0.058125
+train accuracy  0.1496354166666667
+ average loss for epoch  137 :  -2.5851795077323914
+val accuracy  0.0578125
+train accuracy  0.1496354166666667
+ average loss for epoch  138 :  -2.5857874155044556
+val accuracy  0.059479166666666666
+train accuracy  0.1496354166666667
+ average loss for epoch  139 :  -2.583677977323532
+val accuracy  0.0584375
+train accuracy  0.1496354166666667
+ average loss for epoch  140 :  -2.5831242501735687
+val accuracy  0.058229166666666665
+train accuracy  0.1496354166666667
+ average loss for epoch  141 :  -2.5826079845428467
+val accuracy  0.05708333333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  142 :  -2.58160936832428
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  143 :  -2.5832230150699615
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  144 :  -2.58512681722641
+val accuracy  0.0571875
+train accuracy  0.1496875
+ average loss for epoch  145 :  -2.5826759338378906
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  146 :  -2.5807140171527863
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  147 :  -2.581550508737564
+val accuracy  0.057916666666666665
+train accuracy  0.1496354166666667
+ average loss for epoch  148 :  -2.579587697982788
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  149 :  -2.582950472831726
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  150 :  -2.5857219099998474
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  151 :  -2.5838614404201508
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  152 :  -2.5863954722881317
+val accuracy  0.057291666666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  153 :  -2.5875974595546722
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  154 :  -2.588555693626404
+val accuracy  0.05739583333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  155 :  -2.589600920677185
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  156 :  -2.588392496109009
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  157 :  -2.588640570640564
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  158 :  -2.590580552816391
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  159 :  -2.589832603931427
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  160 :  -2.5864919126033783
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  161 :  -2.5872079133987427
+val accuracy  0.057291666666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  162 :  -2.5887210369110107
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  163 :  -2.590260237455368
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  164 :  -2.5910831689834595
+val accuracy  0.0571875
+train accuracy  0.1496354166666667
+ average loss for epoch  165 :  -2.58960098028183
+val accuracy  0.056979166666666664
+train accuracy  0.1496354166666667
+ average loss for epoch  166 :  -2.5916612446308136
+val accuracy  0.05708333333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  167 :  -2.592202067375183
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  168 :  -2.5917353332042694
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  169 :  -2.5931548327207565
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  170 :  -2.5918935537338257
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  171 :  -2.5921736359596252
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  172 :  -2.5917839407920837
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  173 :  -2.5866602063179016
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  174 :  -2.5896187126636505
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  175 :  -2.5888539850711823
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  176 :  -2.586883068084717
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  177 :  -2.5917418897151947
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  178 :  -2.591637998819351
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  179 :  -2.594063490629196
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  180 :  -2.5945290625095367
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  181 :  -2.5946362018585205
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  182 :  -2.594793349504471
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  183 :  -2.589648127555847
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  184 :  -2.591194063425064
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  185 :  -2.591749221086502
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  186 :  -2.5941878855228424
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  187 :  -2.5944463908672333
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  188 :  -2.5928062796592712
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  189 :  -2.592176526784897
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  190 :  -2.5898908972740173
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  191 :  -2.5902001559734344
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  192 :  -2.5891865491867065
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  193 :  -2.5912276208400726
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  194 :  -2.59269443154335
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  195 :  -2.594014197587967
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  196 :  -2.5964840948581696
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  197 :  -2.5967078804969788
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  198 :  -2.596555322408676
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  199 :  -2.5952736735343933
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  200 :  -2.5962228775024414
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  201 :  -2.5966067612171173
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  202 :  -2.5983480513095856
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  203 :  -2.5970086455345154
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  204 :  -2.597933769226074
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  205 :  -2.5988015234470367
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  206 :  -2.5966399013996124
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  207 :  -2.5970973074436188
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  208 :  -2.5967814326286316
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  209 :  -2.5986310243606567
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  210 :  -2.5989319682121277
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  211 :  -2.599008023738861
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  212 :  -2.5969525575637817
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  213 :  -2.585564225912094
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  214 :  -2.5819761157035828
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  215 :  -2.587995260953903
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  216 :  -2.5908453166484833
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  217 :  -2.5955666601657867
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  218 :  -2.5967523753643036
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  219 :  -2.597089320421219
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  220 :  -2.597562313079834
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  221 :  -2.5988649427890778
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  222 :  -2.5972348749637604
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  223 :  -2.5983909368515015
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  224 :  -2.597946524620056
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  225 :  -2.595610409975052
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  226 :  -2.5944832861423492
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  227 :  -2.5910481214523315
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  228 :  -2.595068007707596
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  229 :  -2.593986541032791
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  230 :  -2.5978088676929474
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  231 :  -2.6002149879932404
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  232 :  -2.6012772023677826
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  233 :  -2.6018082201480865
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  234 :  -2.6030369997024536
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  235 :  -2.6028265357017517
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  236 :  -2.6004053354263306
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  237 :  -2.598166823387146
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  238 :  -2.60000142455101
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  239 :  -2.6015170216560364
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  240 :  -2.6027650237083435
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  241 :  -2.603431820869446
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  242 :  -2.602988839149475
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  243 :  -2.6020646691322327
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  244 :  -2.602419912815094
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  245 :  -2.6027166843414307
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  246 :  -2.602387621998787
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  247 :  -2.601621776819229
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  248 :  -2.6019841134548187
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  249 :  -2.6027230322360992
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  250 :  -2.6033237874507904
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  251 :  -2.6037207394838333
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  252 :  -2.6041926443576813
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  253 :  -2.6048616468906403
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  254 :  -2.604343742132187
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  255 :  -2.604358732700348
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  256 :  -2.606302499771118
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  257 :  -2.6054632663726807
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  258 :  -2.605163723230362
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  259 :  -2.602576732635498
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  260 :  -2.602638602256775
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  261 :  -2.602604776620865
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  262 :  -2.607322782278061
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  263 :  -2.608658015727997
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  264 :  -2.608979254961014
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  265 :  -2.6121129989624023
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  266 :  -2.61206316947937
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  267 :  -2.6130146086215973
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  268 :  -2.6137261986732483
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  269 :  -2.6137308180332184
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  270 :  -2.610031336545944
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  271 :  -2.5964125990867615
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  272 :  -2.5919385850429535
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  273 :  -2.5923936665058136
+val accuracy  0.056875
+train accuracy  0.14989583333333334
+ average loss for epoch  274 :  -2.5936443507671356
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  275 :  -2.600657492876053
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  276 :  -2.608954578638077
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  277 :  -2.613219052553177
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  278 :  -2.6168625950813293
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  279 :  -2.6212555170059204
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  280 :  -2.620258867740631
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  281 :  -2.625320076942444
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  282 :  -2.6230545341968536
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  283 :  -2.6236069798469543
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  284 :  -2.6248143315315247
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  285 :  -2.629633992910385
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  286 :  -2.631783038377762
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  287 :  -2.6346555948257446
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  288 :  -2.6353535056114197
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  289 :  -2.638047605752945
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  290 :  -2.6391614079475403
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  291 :  -2.637769728899002
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  292 :  -2.6413733661174774
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  293 :  -2.6472462117671967
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  294 :  -2.6479371786117554
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  295 :  -2.6495411694049835
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  296 :  -2.647005468606949
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  297 :  -2.6484754979610443
+val accuracy  0.056875
+train accuracy  0.14973958333333331
+ average loss for epoch  298 :  -2.638771712779999
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  299 :  -2.6462124586105347
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  300 :  -2.6521471738815308
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  301 :  -2.655888617038727
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  302 :  -2.661860555410385
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  303 :  -2.6591970026493073
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  304 :  -2.6647053360939026
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  305 :  -2.664086729288101
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  306 :  -2.6663043200969696
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  307 :  -2.669717848300934
+val accuracy  0.056875
+train accuracy  0.14927083333333335
+ average loss for epoch  308 :  -2.6716665029525757
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  309 :  -2.6742642521858215
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  310 :  -2.680792599916458
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  311 :  -2.687029153108597
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  312 :  -2.6874290704727173
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  313 :  -2.687534749507904
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  314 :  -2.6803895235061646
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  315 :  -2.690810054540634
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  316 :  -2.6781204640865326
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  317 :  -2.65785875916481
+val accuracy  0.056875
+train accuracy  0.14932291666666667
+ average loss for epoch  318 :  -2.6688667833805084
+val accuracy  0.0575
+train accuracy  0.1496354166666667
+ average loss for epoch  319 :  -2.682700276374817
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  320 :  -2.688299596309662
+val accuracy  0.057604166666666665
+train accuracy  0.1496354166666667
+ average loss for epoch  321 :  -2.7004426419734955
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  322 :  -2.7134919464588165
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  323 :  -2.7034354507923126
+val accuracy  0.056875
+train accuracy  0.15005208333333334
+ average loss for epoch  324 :  -2.7104541659355164
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  325 :  -2.7117592990398407
+val accuracy  0.057604166666666665
+train accuracy  0.1496354166666667
+ average loss for epoch  326 :  -2.724126935005188
+val accuracy  0.059375
+train accuracy  0.15135416666666668
+ average loss for epoch  327 :  -2.7175628542900085
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  328 :  -2.7380459010601044
+val accuracy  0.058541666666666665
+train accuracy  0.15145833333333333
+ average loss for epoch  329 :  -2.7259458005428314
+val accuracy  0.0775
+train accuracy  0.16958333333333334
+ average loss for epoch  330 :  -2.724054843187332
+val accuracy  0.06302083333333333
+train accuracy  0.16786458333333332
+ average loss for epoch  331 :  -2.7409470677375793
+val accuracy  0.056875
+train accuracy  0.1496875
+ average loss for epoch  332 :  -2.7331634163856506
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  333 :  -2.768826812505722
+val accuracy  0.058020833333333334
+train accuracy  0.15135416666666668
+ average loss for epoch  334 :  -2.7807718217372894
+val accuracy  0.069375
+train accuracy  0.1521875
+ average loss for epoch  335 :  -2.7939081490039825
+val accuracy  0.06947916666666666
+train accuracy  0.15739583333333335
+ average loss for epoch  336 :  -2.7959616482257843
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  337 :  -2.8130606412887573
+val accuracy  0.06729166666666667
+train accuracy  0.15135416666666668
+ average loss for epoch  338 :  -2.8198347985744476
+val accuracy  0.056875
+train accuracy  0.15598958333333335
+ average loss for epoch  339 :  -2.810405522584915
+val accuracy  0.06583333333333333
+train accuracy  0.15197916666666667
+ average loss for epoch  340 :  -2.8024106323719025
+val accuracy  0.06739583333333334
+train accuracy  0.15161458333333333
+ average loss for epoch  341 :  -2.833709418773651
+val accuracy  0.06125
+train accuracy  0.15197916666666667
+ average loss for epoch  342 :  -2.843490570783615
+val accuracy  0.056875
+train accuracy  0.1496875
+ average loss for epoch  343 :  -2.8536317050457
+val accuracy  0.05739583333333333
+train accuracy  0.1496354166666667
+ average loss for epoch  344 :  -2.8627730906009674
+val accuracy  0.059583333333333335
+train accuracy  0.1496875
+ average loss for epoch  345 :  -2.83403941988945
+val accuracy  0.059479166666666666
+train accuracy  0.15182291666666667
+ average loss for epoch  346 :  -2.8234364688396454
+val accuracy  0.057291666666666664
+train accuracy  0.16125
+ average loss for epoch  347 :  -2.7751754820346832
+val accuracy  0.07729166666666666
+train accuracy  0.13645833333333335
+ average loss for epoch  348 :  -2.757969081401825
+val accuracy  0.07697916666666667
+train accuracy  0.16166666666666668
+ average loss for epoch  349 :  -2.842613011598587
+val accuracy  0.0609375
+train accuracy  0.14927083333333335
+ average loss for epoch  350 :  -2.839316964149475
+val accuracy  0.06260416666666667
+train accuracy  0.11130208333333333
+ average loss for epoch  351 :  -2.863244950771332
+val accuracy  0.0659375
+train accuracy  0.14994791666666668
+ average loss for epoch  352 :  -2.869637578725815
+val accuracy  0.0771875
+train accuracy  0.12848958333333332
+ average loss for epoch  353 :  -2.8772195279598236
+val accuracy  0.056875
+train accuracy  0.15125
+ average loss for epoch  354 :  -2.8903852999210358
+val accuracy  0.0575
+train accuracy  0.1574479166666667
+ average loss for epoch  355 :  -2.8822218477725983
+val accuracy  0.056875
+train accuracy  0.14989583333333334
+ average loss for epoch  356 :  -2.882845312356949
+val accuracy  0.066875
+train accuracy  0.16484375
+ average loss for epoch  357 :  -2.9104415476322174
+val accuracy  0.06354166666666666
+train accuracy  0.1540625
+ average loss for epoch  358 :  -2.9170171320438385
+val accuracy  0.0784375
+train accuracy  0.16453125000000002
+ average loss for epoch  359 :  -2.9292402863502502
+val accuracy  0.058541666666666665
+train accuracy  0.1496875
+ average loss for epoch  360 :  -2.9462175965309143
+val accuracy  0.060833333333333336
+train accuracy  0.15463541666666666
+ average loss for epoch  361 :  -2.9556514620780945
+val accuracy  0.056875
+train accuracy  0.1496875
+ average loss for epoch  362 :  -2.9766179025173187
+val accuracy  0.06322916666666667
+train accuracy  0.16062500000000002
+ average loss for epoch  363 :  -2.9699865877628326
+val accuracy  0.056875
+train accuracy  0.15151041666666665
+ average loss for epoch  364 :  -2.9384387135505676
+val accuracy  0.060208333333333336
+train accuracy  0.15890625
+ average loss for epoch  365 :  -2.9238290190696716
+val accuracy  0.06677083333333333
+train accuracy  0.16723958333333333
+ average loss for epoch  366 :  -2.9142542481422424
+val accuracy  0.07197916666666666
+train accuracy  0.14671875
+ average loss for epoch  367 :  -2.948428213596344
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  368 :  -2.9834852814674377
+val accuracy  0.061875
+train accuracy  0.15057291666666667
+ average loss for epoch  369 :  -2.9652243852615356
+val accuracy  0.056875
+train accuracy  0.15479166666666666
+ average loss for epoch  370 :  -2.969017446041107
+val accuracy  0.058854166666666666
+train accuracy  0.15416666666666667
+ average loss for epoch  371 :  -2.9696030020713806
+val accuracy  0.0575
+train accuracy  0.13234374999999998
+ average loss for epoch  372 :  -2.981104254722595
+val accuracy  0.0621875
+train accuracy  0.1534375
+ average loss for epoch  373 :  -2.97287854552269
+val accuracy  0.06572916666666667
+train accuracy  0.15671875000000002
+ average loss for epoch  374 :  -2.9900011718273163
+val accuracy  0.0584375
+train accuracy  0.15776041666666668
+ average loss for epoch  375 :  -3.0100974440574646
+val accuracy  0.056875
+train accuracy  0.1575
+ average loss for epoch  376 :  -3.0233691036701202
+val accuracy  0.06427083333333333
+train accuracy  0.15911458333333334
+ average loss for epoch  377 :  -3.073899358510971
+val accuracy  0.06041666666666667
+train accuracy  0.15052083333333333
+ average loss for epoch  378 :  -3.078633427619934
+val accuracy  0.059166666666666666
+train accuracy  0.15723958333333332
+ average loss for epoch  379 :  -3.087937891483307
+val accuracy  0.057604166666666665
+train accuracy  0.155625
+ average loss for epoch  380 :  -3.10352423787117
+val accuracy  0.056875
+train accuracy  0.1525
+ average loss for epoch  381 :  -3.112184315919876
+val accuracy  0.057604166666666665
+train accuracy  0.16088541666666667
+ average loss for epoch  382 :  -3.134763926267624
+val accuracy  0.059895833333333336
+train accuracy  0.15901041666666665
+ average loss for epoch  383 :  -3.1180989742279053
+val accuracy  0.06322916666666667
+train accuracy  0.14161458333333332
+ average loss for epoch  384 :  -3.091985136270523
+val accuracy  0.057708333333333334
+train accuracy  0.16041666666666665
+ average loss for epoch  385 :  -3.055482655763626
+val accuracy  0.06229166666666667
+train accuracy  0.15005208333333334
+ average loss for epoch  386 :  -3.0539269149303436
+val accuracy  0.06104166666666667
+train accuracy  0.15265625
+ average loss for epoch  387 :  -3.0608705282211304
+val accuracy  0.06385416666666667
+train accuracy  0.16161458333333334
+ average loss for epoch  388 :  -3.062544286251068
+val accuracy  0.059375
+train accuracy  0.15802083333333333
+ average loss for epoch  389 :  -3.1019020676612854
+val accuracy  0.056875
+train accuracy  0.16494791666666667
+ average loss for epoch  390 :  -3.1236834824085236
+val accuracy  0.06270833333333334
+train accuracy  0.15661458333333333
+ average loss for epoch  391 :  -3.1425236463546753
+val accuracy  0.059270833333333335
+train accuracy  0.15473958333333332
+ average loss for epoch  392 :  -3.1664722561836243
+val accuracy  0.057916666666666665
+train accuracy  0.155625
+ average loss for epoch  393 :  -3.1752938330173492
+val accuracy  0.06229166666666667
+train accuracy  0.15026041666666667
+ average loss for epoch  394 :  -3.175167739391327
+val accuracy  0.056875
+train accuracy  0.15453125
+ average loss for epoch  395 :  -3.1605230271816254
+val accuracy  0.07072916666666666
+train accuracy  0.15447916666666667
+ average loss for epoch  396 :  -3.1238280534744263
+val accuracy  0.056875
+train accuracy  0.15281250000000002
+ average loss for epoch  397 :  -3.073837637901306
+val accuracy  0.060833333333333336
+train accuracy  0.15234375
+ average loss for epoch  398 :  -3.12134325504303
+val accuracy  0.056875
+train accuracy  0.15682291666666667
+ average loss for epoch  399 :  -3.1568922102451324
+val accuracy  0.06208333333333333
+train accuracy  0.15671875000000002
+ average loss for epoch  400 :  -3.181047260761261
+val accuracy  0.0571875
+train accuracy  0.15812500000000002
+ average loss for epoch  401 :  -3.1897335946559906
+val accuracy  0.05739583333333333
+train accuracy  0.15604166666666666
+ average loss for epoch  402 :  -3.191865026950836
+val accuracy  0.06822916666666666
+train accuracy  0.16296875
+ average loss for epoch  403 :  -3.1694759130477905
+val accuracy  0.05708333333333333
+train accuracy  0.15776041666666668
+ average loss for epoch  404 :  -3.1623703241348267
+val accuracy  0.056875
+train accuracy  0.1496354166666667
+ average loss for epoch  405 :  -3.1425268054008484
+val accuracy  0.056875
+train accuracy  0.15765625
+ average loss for epoch  406 :  -3.123488485813141
+val accuracy  0.0690625
+train accuracy  0.16880208333333332
+ average loss for epoch  407 :  -3.099585622549057
+val accuracy  0.057916666666666665
+train accuracy  0.15536458333333333
+ average loss for epoch  408 :  -3.153643101453781
+val accuracy  0.059270833333333335
+train accuracy  0.17536458333333332
+ average loss for epoch  409 :  -3.164211928844452
+val accuracy  0.059270833333333335
+train accuracy  0.1734895833333333
+ average loss for epoch  410 :  -3.1840028166770935
+val accuracy  0.0575
+train accuracy  0.15026041666666667
+ average loss for epoch  411 :  -3.188708245754242
+val accuracy  0.0590625
+train accuracy  0.15630208333333334
+ average loss for epoch  412 :  -3.2154922485351562
+val accuracy  0.056875
+train accuracy  0.14984375
+ average loss for epoch  413 :  -3.2278140485286713
+val accuracy  0.0603125
+train accuracy  0.15411458333333333

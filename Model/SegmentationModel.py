@@ -44,7 +44,7 @@ class Segmenter():
         lr=self.lr,
         momentum=0.9,
         weight_decay=.001)
-        self.criterion = nn.NLLLoss(ignore_index=-1)
+        self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean')
 
     def load_data(self):
         self.x, self.y = self.data.process_data()
@@ -101,11 +101,20 @@ class Segmenter():
         print('test accuracy', self.pixel_accuracy(440, 500, batch_size), **cfg.prnt)
         print('accuracy for whole dataset', self.pixel_accuracy(0, 500, batch_size), **cfg.prnt)
 
-    def show_predictions(self):
-        pass
-        # ax[0].imshow(prediction)
-        # ax[1].imshow(ground_truth)
-        # plt.show()
+    def show_predictions(self, idx):
+        self.model.eval()
+        _, ax = plt.subplots(1, 2)
+        x_batch = torch.tensor(self.x[idx:idx+1]).to(**cfg.args)
+        prediction = self.model.forward(x_batch)
+        prediction = prediction.detach().cpu().numpy()
+        prediction = np.argmax(prediction, axis=1)
+        prediction = prediction[0]
+        ground_truth = self.y[idx:idx+1][0]
+        ax[0].imshow(prediction)
+        ax[1].imshow(ground_truth)
+        plt.show()
+        self.model.train()
+
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -124,10 +133,13 @@ def main():
     dataset = data.DataBSR(x_dtype=np.float32, y_dtype=np.int32,
                                                       downsample_ratio=downsample_ratio)
     segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = cfg.model_size, data = dataset)
-    segmenter.load_model()
-    # segmenter.train(epochs=3000, batch_size=20)
-    # segmenter.save_model()
-    segmenter.test(20)
+    if cfg.load:
+        segmenter.load_model()
+    else:
+        segmenter.train(epochs=cfg.epochs, batch_size=55)
+        segmenter.save_model()
+    print(segmenter.pixel_accuracy(0, 100, 25))
+    segmenter.show_predictions(0)
     print('_______________', **cfg.prnt)
 
 
