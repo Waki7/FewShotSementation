@@ -43,7 +43,8 @@ class Segmenter():
         self.model.parameters(),
         lr=self.lr,
         momentum=0.9,
-        weight_decay=.001)
+        # weight_decay=.001
+        )
         self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean')
 
     def load_data(self):
@@ -136,10 +137,10 @@ def main():
     if cfg.load:
         segmenter.load_model()
     else:
-        segmenter.train(epochs=cfg.epochs, batch_size=55)
+        segmenter.train(epochs=cfg.epochs, batch_size=25)
         segmenter.save_model()
-    print(segmenter.pixel_accuracy(0, 100, 25))
-    segmenter.show_predictions(0)
+    print(segmenter.pixel_accuracy(0, 100, 1))
+    segmenter.show_predictions(1)
     print('_______________', **cfg.prnt)
 
 
