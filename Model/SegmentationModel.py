@@ -87,14 +87,16 @@ class Segmenter():
         predictions = []
         ground_truths = []
         for i in range(start_idx, end_idx, batch_size):
-            x_batch = torch.tensor(self.x[i:i + 1]).to(**cfg.args)
+            x_batch = torch.tensor(self.x[i:i + batch_size]).to(**cfg.args)
             prediction = self.model.forward(x_batch)
             prediction = prediction.detach().cpu().numpy()
             prediction = np.argmax(prediction, axis=1)
-            prediction = prediction[0]
-            ground_truth = self.y[i:i + 1][0]
+            prediction = prediction
+            ground_truth = self.y[i:i + batch_size]
             predictions.append(prediction)
             ground_truths.append(ground_truth)
+        predictions = np.concatenate(predictions, axis=0)
+        ground_truths = np.concatenate(ground_truths, axis=0)
         self.model.train()
         return predictions, ground_truths
 
@@ -137,10 +139,12 @@ def main():
     if cfg.load:
         segmenter.load_model()
     else:
-        segmenter.train(epochs=cfg.epochs, batch_size=25)
+        segmenter.train(epochs=cfg.epochs, batch_size=cfg.batch_size)
         segmenter.save_model()
-    print(segmenter.pixel_accuracy(0, 100, 1))
-    segmenter.show_predictions(1)
+
+    print(segmenter.pixel_accuracy(0, 440, cfg.batch_size))
+    print(segmenter.pixel_accuracy(440, 500, cfg.batch_size))
+    # segmenter.show_predictions(1)
     print('_______________', **cfg.prnt)
 
 
