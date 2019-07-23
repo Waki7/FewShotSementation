@@ -1,4 +1,1 @@
 0.1
- average loss for epoch  0 :  -0.06793159805238247
-val accuracy  1.6203703703703704e-05
-train accuracy  3.858024691358025e-05

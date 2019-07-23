@@ -48,7 +48,8 @@ class Segmenter():
         self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean')
 
     def load_data(self):
-        self.x, self.y = self.data.process_data()
+        self.data.load_data()
+        self.x, self.y = self.data.get_full_data()
         self.class_weights = torch.tensor(self.data.get_class_weights()).to(**cfg.args)
 
 

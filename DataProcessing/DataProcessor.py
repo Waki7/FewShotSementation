@@ -35,21 +35,45 @@ class ProcessedDataSet():
         self.y_dtype = y_dtype
         self.class_weights = None
 
-
     def calc_class_weights(self, y):
         unique, counts = np.unique(y, return_counts=True)
         totalCount = sum(counts)
         self.class_weights = [totalCount / c for c in counts]
 
-    def get_data(self):
+    def get_train_data(self):
         if self.x is None and self.y is None:
-            self.process_data()
-        return self.x, self.y
+            self.load_data()
+        if len(self.x) is not 3:
+            raise NotImplementedError
+        return self.x[0], self.y[0]
+
+    def get_validation_data(self):
+        if self.x is None and self.y is None:
+            self.load_data()
+        if len(self.x) is not 3:
+            raise NotImplementedError
+        return self.x[1], self.y[1]
+
+    def get_test_data(self):
+        if self.x is None and self.y is None:
+            self.load_data()
+        if len(self.x) is not 3:
+            raise NotImplementedError
+        return self.x[2], self.y[2]
+
+    def get_full_data(self):
+        if self.x is None and self.y is None:
+            self.load_data()
+        print(np.shape(self.x))
+        print(np.shape(self.y))
+        print(np.shape(np.concatenate(self.x, axis=1)))
+        print(np.shape(np.concatenate(self.y, axis=1)))
+        return np.concatenate(self.x, axis=1), np.concatenate(self.y, axis=1)
 
     def get_class_weights(self):
         return self.class_weights
 
-    def process_data(self):
+    def load_data(self):
         raise NotImplementedError
 
 class DataBSR(ProcessedDataSet):
@@ -57,22 +81,19 @@ class DataBSR(ProcessedDataSet):
         super(DataBSR, self).__init__(x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
 
-    def process_data(self):  # c x h x w
+    def load_data(self):  # c x h x w
         labels = BSRLabels(self.downsample_ratio)
         images = BSRImages(self.downsample_ratio)
-        x_full, x = images.getData()
-        y_full, y = labels.getData()
-        self.calc_class_weights(y_full)
+        x_full, x = images.get_data()
+        y_full, y = labels.get_data()
+        self.calc_class_weights(y_full[0])
         self.n_classes = len(self.class_weights)
-        if self.x_dtype is not None and x.dtype != self.x_dtype:
-            x = x.astype(self.x_dtype)
-        if self.y_dtype is not None and y.dtype != self.y_dtype:
-            y = y.astype(self.y_dtype)
-        self.x = cleanInput(x)
+        if self.x_dtype is not None and x[0].dtype != self.x_dtype:
+            x = [xi.astype(self.x_dtype) for xi in x]
+        if self.y_dtype is not None and y[0].dtype != self.y_dtype:
+            y = [yi.astype(self.y_dtype) for yi in y]
+        self.x = [cleanInput(xi) for xi in x]
         self.y = y
-        assert not np.any(np.isnan(x))
-        assert not np.any(np.isnan(y))
-        return self.x, self.y
 
 class DataSet():
     def __init__(self):
@@ -84,7 +105,7 @@ class DataSet():
         self.paths = None
         self.downsample_ratio = 1
 
-    def readFile(self, file):
+    def read_file(self, file):
         raise NotImplementedError
 
     def pad(self, image: np.ndarray, maxShape):
@@ -93,13 +114,13 @@ class DataSet():
                       pad_width=pad_width, mode='constant')
 
 
-    def processImages(self, directoryPath):
+    def process_images(self, directoryPath):
         data = []
         data_downsampled = []
         for filename in os.listdir(directoryPath):
             if filename.endswith(self.file_ext):
                 samplePath = join(directoryPath, filename)
-                image, image_downsampled = self.readFile(samplePath)
+                image, image_downsampled = self.read_file(samplePath)
                 if image.shape[0] > image.shape[1]:  # want all images to be in portrait
                     image = np.swapaxes(image, 0, 1)
                     image_downsampled = np.swapaxes(image_downsampled, 0, 1)
@@ -107,28 +128,66 @@ class DataSet():
                 data_downsampled.append(image_downsampled)
         return np.stack(data), np.stack(data_downsampled)
 
-    def getData(self):
+    def get_data(self):
         data = []
         data_downsampled = []
         if isfile(self.stored_data_path + self.stored_file_name) and isfile(
                 self.stored_data_path + self.sampled_file_name):
             data = loadArray(self.stored_data_path, self.stored_file_name)
             data_downsampled = loadArray(self.stored_data_path, self.sampled_file_name)
-            print('...loaded arrays of shape ' + str(data.shape) + ' and downsampled to ' + str(data_downsampled.shape))
+            print('...loaded arrays of shape ' + str(np.shape(data)) + ' and downsampled to ' +
+                  str(np.shape(data_downsampled)))
             return data, data_downsampled
         for set in self.paths:
-            processed = self.processImages(set)
+            processed = self.process_images(set)
             data.append(processed[0])
             data_downsampled.append(processed[1])
-        data = np.vstack(data)
-        data_downsampled = np.vstack(data_downsampled)
+        assert not any(np.any(np.isnan(data_i)) for data_i in data)
         saveData(data, self.stored_data_path, self.stored_file_name)
         saveData(data_downsampled, self.stored_data_path, self.sampled_file_name)
         return data, data_downsampled
 
 
+class VOCImages(DataSet):
+    def __init__(self, downsample_ratio):
+        super(VOCImages, self).__init__()
+        self.file_ext = '.jpg'
+        self.root_path = '..\\Data\\VOC\\VOC2012\\JPEGImages\\'
+
+
+
+class VOCLabels(DataSet):
+    def __init__(self, downsample_ratio):
+        super(VOCLabels, self).__init__()
+        self.file_ext = '.png'
+        self.root_path = '..\\Data\\VOC\\VOC2012\\SegmentationClass\\'
+
+
+
+    def read_file(self):
+        pass
+
+
+class BSRImages(DataSet):
+    def __init__(self, downsample_ratio):
+        super(BSRImages, self).__init__()
+        self.file_ext = '.jpg'
+        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\images\\'
+        self.stored_data_path = self.root_path + 'ProcessedData\\'
+        self.stored_file_name = 'processedImages.pkl'
+        self.sampled_file_name = 'downsampledImages.pkl'
+        self.paths = [self.root_path + i for i in ['train', 'test', 'val']]
+        self.downsample_ratio = downsample_ratio
+
+    def read_file(self, file):
+        datum = scipy.misc.imread(file)
+        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
+                                       interpolation=cv2.INTER_LINEAR)
+        return datum, datum_downsampled
+
+
 class BSRLabels(DataSet):
-    def __init__(self, downsampleRatio):
+    def __init__(self, downsample_ratio):
         super(BSRLabels, self).__init__()
         self.file_ext = '.mat'
         self.root_path = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
@@ -139,9 +198,9 @@ class BSRLabels(DataSet):
         self.mat_key = 'groundTruth'
         self.segmentation_index = 0
         self.boundary_index = 1
-        self.downsample_ratio = downsampleRatio
+        self.downsample_ratio = downsample_ratio
 
-    def readFile(self, file):
+    def read_file(self, file):
         mat = scipy.io.loadmat(file)
         mat_data = np.squeeze(mat[self.mat_key][0, 0]).item(0)
         datum = mat_data[self.segmentation_index]  # segementation ground truth, mat_data[1] is the boundary boxes
@@ -151,24 +210,6 @@ class BSRLabels(DataSet):
         # datum1 = mat_data[1]
         # plt.imshow(datum)
         # plt.show()
-        return datum, datum_downsampled
-
-
-class BSRImages(DataSet):
-    def __init__(self, downsampleRatio):
-        super(BSRImages, self).__init__()
-        self.file_ext = '.jpg'
-        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\images\\'
-        self.stored_data_path = self.root_path + 'ProcessedData\\'
-        self.stored_file_name = 'processedImages.pkl'
-        self.sampled_file_name = 'downsampledImages.pkl'
-        self.paths = [self.root_path + i for i in ['train', 'test', 'val']]
-        self.downsample_ratio = downsampleRatio
-
-    def readFile(self, file):
-        datum = scipy.misc.imread(file)
-        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
-                                       interpolation=cv2.INTER_LINEAR)
         return datum, datum_downsampled
 
 
@@ -182,7 +223,7 @@ class KShotSegmentation():
         if self.meta_data is None:
             if x is None and y is None:
                 data = DataBSR(x_dtype=np.float32, y_dtype=np.int32)
-                x, y = data.process_data()
+                x, y = data.load_data()
             self.make_data(x, y, k)
         else:
             self.meta_xs = self.meta_data[0]
