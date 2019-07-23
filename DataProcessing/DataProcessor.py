@@ -34,6 +34,8 @@ class ProcessedDataSet():
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
         self.class_weights = None
+        self.data_labels = DataSet()
+        self.data_images = DataSet()
 
     def calc_class_weights(self, y):
         unique, counts = np.unique(y, return_counts=True)
@@ -45,30 +47,34 @@ class ProcessedDataSet():
             self.load_data()
         if len(self.x) is not 3:
             raise NotImplementedError
-        return self.x[0], self.y[0]
+        indeces = range(self.data_images.train_range)
+        return self.x[indeces], self.y[indeces]
 
     def get_validation_data(self):
         if self.x is None and self.y is None:
             self.load_data()
         if len(self.x) is not 3:
             raise NotImplementedError
-        return self.x[1], self.y[1]
+        indeces = range(self.data_images.validate_range)
+        return self.x[indeces], self.y[indeces]
 
     def get_test_data(self):
         if self.x is None and self.y is None:
             self.load_data()
         if len(self.x) is not 3:
             raise NotImplementedError
-        return self.x[2], self.y[2]
+        indeces = range(self.data_images.test_range)
+        return self.x[indeces], self.y[indeces]
 
     def get_full_data(self):
         if self.x is None and self.y is None:
             self.load_data()
-        print(np.shape(self.x))
-        print(np.shape(self.y))
-        print(np.shape(np.concatenate(self.x, axis=1)))
-        print(np.shape(np.concatenate(self.y, axis=1)))
-        return np.concatenate(self.x, axis=1), np.concatenate(self.y, axis=1)
+        # print(np.shape(self.x))
+        # print(np.shape(self.y))
+        # print(np.shape(np.concatenate(self.x, axis=1)))
+        # print(np.shape(np.concatenate(self.y, axis=1)))
+        # return np.concatenate(self.x, axis=1), np.concatenate(self.y, axis=1)
+        return self.x, self.y
 
     def get_class_weights(self):
         return self.class_weights
@@ -80,12 +86,12 @@ class DataBSR(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
         super(DataBSR, self).__init__(x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
+        self.data_images = BSRImages(self.downsample_ratio)
+        self.data_labels = BSRLabels(self.downsample_ratio)
 
     def load_data(self):  # c x h x w
-        labels = BSRLabels(self.downsample_ratio)
-        images = BSRImages(self.downsample_ratio)
-        x_full, x = images.get_data()
-        y_full, y = labels.get_data()
+        x_full, x = self.data_images.get_data()
+        y_full, y = self.data_labels.get_data()
         self.calc_class_weights(y_full[0])
         self.n_classes = len(self.class_weights)
         if self.x_dtype is not None and x[0].dtype != self.x_dtype:
@@ -104,6 +110,9 @@ class DataSet():
         self.sampled_file_name = None
         self.paths = None
         self.downsample_ratio = 1
+        self.train_range = None
+        self.test_range = None
+        self.validate_range = None
 
     def read_file(self, file):
         raise NotImplementedError
@@ -143,6 +152,8 @@ class DataSet():
             data.append(processed[0])
             data_downsampled.append(processed[1])
         assert not any(np.any(np.isnan(data_i)) for data_i in data)
+        data = np.vstack(data)
+        data_downsampled = np.vstack(data_downsampled)
         saveData(data, self.stored_data_path, self.stored_file_name)
         saveData(data_downsampled, self.stored_data_path, self.sampled_file_name)
         return data, data_downsampled
