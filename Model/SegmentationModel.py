@@ -55,10 +55,6 @@ class Segmenter():
     def train(self, epochs=10, batch_size=10):
         x_train, y_train = self.data.get_train_data()
         x_val, y_val = self.data.get_val_data()
-        print(x_val.shape)
-        print(x_train.shape)
-        print(self.data.test_range)
-        print(exit(9))
         n_train = x_train.shape[0]
         self.model.train()
         mean_loss = 0
@@ -69,6 +65,7 @@ class Segmenter():
                 x_batch, y_batch = x_train[indexes], y_train[indexes]
                 x_batch, y_batch = torch.tensor(x_batch).to(**cfg.args), torch.tensor(y_batch).to(cfg.device).long()
                 y_out = self.model.forward(x_batch)
+                print(y_out.shape) #todo n_class wrong? 18 classes?????
                 loss = self.criterion.forward(input=y_out, target=y_batch)
                 mean_loss += loss.data.item()
                 loss.backward(retain_graph=False)
@@ -107,8 +104,10 @@ class Segmenter():
         return predictions, ground_truths
 
     def test(self, batch_size):
-        print('test accuracy', self.pixel_accuracy(440, 500, batch_size), **cfg.prnt)
-        print('accuracy for whole dataset', self.pixel_accuracy(0, 500, batch_size), **cfg.prnt)
+        x_test, y_test = self.data.get_test_data()
+        print('test accuracy ', self.pixel_accuracy(x_test, y_test, batch_size), **cfg.prnt)
+        x_full, y_full = self.data.get_full_data()
+        print('accuracy for whole dataset', self.pixel_accuracy(x_full, y_full, batch_size), **cfg.prnt)
 
     def show_predictions(self, x, y, idx):
         self.model.eval()

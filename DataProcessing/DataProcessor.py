@@ -174,10 +174,6 @@ class DataSet():
         data = []
         data_downsampled = []
         file_sets = self.get_file_sets()
-        if len(file_sets) is 3:
-            self.train_range = range(0, len(file_sets[0]))
-            self.val_range = range(self.train_range[1], self.train_range[1] + len(file_sets[1]))
-            self.test_range = range(self.val_range[1], self.val_range[1] + len(file_sets[2]))
         for file_list in file_sets:
             processed = self.read_files(file_list)
             data.append(processed[0])
@@ -185,6 +181,11 @@ class DataSet():
         assert not any(np.any(np.isnan(data_i)) for data_i in data)
         data = np.vstack(data)
         data_downsampled = np.vstack(data_downsampled)
+        if len(file_sets) is 3:
+            train_val_split, val_test_split = len(file_sets[0]), len(file_sets[0]) + len(file_sets[1])
+            self.train_range = range(0, train_val_split)
+            self.val_range = range(train_val_split, val_test_split)
+            self.test_range = range(val_test_split, data.shape[0])
         return data, data_downsampled
 
 
