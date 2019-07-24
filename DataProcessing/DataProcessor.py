@@ -29,7 +29,7 @@ def load_object(path, filename = None):
         return None
 
 class ProcessedDataSet():
-    def __init__(self, x_dtype=None, y_dtype=None):
+    def __init__(self, x_dtype=None, y_dtype=None, downsample_ratio = 1):
         self.x = None
         self.y = None
         self.n_classes = None
@@ -37,9 +37,10 @@ class ProcessedDataSet():
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
         self.class_weights = None
-        self.data_labels = DataSet()
-        self.data_images = DataSet()
         self.stored_file_name = None
+        self.data_images = DataSet()
+        self.data_labels = DataSet()
+        self.downsample_ratio = downsample_ratio
 
     def calc_class_weights(self, y):
         unique, counts = np.unique(y, return_counts=True)
@@ -82,39 +83,54 @@ class ProcessedDataSet():
         if isfile(cfg.processed_data_path + self.stored_file_name):
             obj_dict = load_object(cfg.processed_data_path, self.stored_file_name)
             self.__dict__.update(obj_dict)
+            return True
+        return False
 
     def save(self):
         save_object(self.__dict__, cfg.processed_data_path, self.stored_file_name)
+
+    def load_data(self):
+        raise NotImplementedError
+
+    def set_data_split(self, train_val_split, val_test_split):
+        self.train_range = range(0, train_val_split)
+        self.val_range = range(train_val_split, val_test_split)
+        self.test_range = range(val_test_split, )
+
+    def load_data(self):  # c x h x w
+        if not self.try_load():
+            x_full, x = self.data_images.load_data_from_files()
+            y_full, y = self.data_labels.load_data_from_files()
+            self.calc_class_weights(y_full[0])
+            self.n_classes = len(self.class_weights)
+            if self.x_dtype is not None and x.dtype != self.x_dtype:
+                x = x.astype(self.x_dtype)
+            if self.y_dtype is not None and y.dtype != self.y_dtype:
+                y = y.astype(self.y_dtype)
+            self.x = self.cleanInput(x)
+            self.y = y
+            self.x_shape = self.x.shape
+            self.save()
+
+    def cleanInput(self, x):
+        print('...reshaped from ', x.shape)
+        for i in range(x.shape[-1]):
+            average = np.average(x[:, :, :, i])
+            x[:, :, :, i] = (x[:, :, :, i] - average) / average
+        if len(x.shape) > 3:
+            x = np.transpose(x, (0, 3, 1, 2))
+        print('to ', x.shape)
+        return x
+
 
 class DataBSR(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
         super(DataBSR, self).__init__(x_dtype, y_dtype)
         self.stored_file_name = 'BSR.pkl'
-
         self.downsample_ratio = downsample_ratio
-        self.data_images = BSRImages(self.downsample_ratio)
-        self.data_labels = BSRLabels(self.downsample_ratio)
+        self.data_images = BSRImages(downsample_ratio)
+        self.data_labels = BSRLabels(downsample_ratio)
 
-    def load_data(self):  # c x h x w
-        self.try_load()
-        if isfile(cfg.experiment_path + self.stored_file_name):
-            data = load_object(cfg.experiment_path, self.stored_file_name)
-            data_downsampled = load_object(self.stored_data_path, self.sampled_file_name)
-            print('...loaded arrays of shape ' + str(np.shape(data)) + ' and downsampled to ' +
-                  str(np.shape(data_downsampled)))
-            return data, data_downsampled
-        x_full, x = self.data_images.load_data_from_files()
-        y_full, y = self.data_labels.load_data_from_files()
-        self.calc_class_weights(y_full[0])
-        self.n_classes = len(self.class_weights)
-        if self.x_dtype is not None and x.dtype != self.x_dtype:
-            x = x.astype(self.x_dtype)
-        if self.y_dtype is not None and y.dtype != self.y_dtype:
-            y = y.astype(self.y_dtype)
-        self.x = cleanInput(x)
-        self.y = y
-        self.x_shape = self.x.shape
-        self.save()
 
 class DataSet():
     def __init__(self):
@@ -308,20 +324,3 @@ def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_w = img.shape[1] // ratio
     img = cv2.resize(img, (new_w, new_h), interpolation=interpolation) #opencv takes w x h instead of h x w in numpy
     return img
-
-
-def cleanInput(x):
-    print('...reshaped from ', x.shape)
-    channel_averages = [np.average(x[:, :, i]) for i in range(x.shape[-1])]
-    for i in range(x.shape[-1]):
-        average = np.average(x[:, :, :, i])
-        x[:, :, :, i] = (x[:, :, :, i] - average) / average
-        # print(average)
-        # print(x[:,:,:,i].shape)
-        # print(np.average(x[:,:,:,i]))
-    if len(x.shape) > 3:
-        x = np.transpose(x, (0, 3, 1, 2))
-        # x = x / np.max(x)  # scale [0,255] -> [0,1]
-    print('to ', x.shape)
-    return x
-

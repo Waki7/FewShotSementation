@@ -54,6 +54,11 @@ class Segmenter():
 
     def train(self, epochs=10, batch_size=10):
         x_train, y_train = self.data.get_train_data()
+        x_val, y_val = self.data.get_val_data()
+        print(x_val.shape)
+        print(x_train.shape)
+        print(self.data.test_range)
+        print(exit(9))
         n_train = x_train.shape[0]
         self.model.train()
         mean_loss = 0
@@ -70,8 +75,8 @@ class Segmenter():
                 self.opt.step()
                 self.opt.zero_grad()
             print(' average loss for epoch ', e, ': ', mean_loss, **cfg.prnt)
-            print('val accuracy ', self.pixel_accuracy(440, 460, batch_size), **cfg.prnt)
-            print('train accuracy ', self.pixel_accuracy(0, 100, batch_size), **cfg.prnt)
+            print('val accuracy ', self.pixel_accuracy(x_val, y_val, batch_size), **cfg.prnt)
+            print('train accuracy ', self.pixel_accuracy(x_train[0:100], y_train[0:100], batch_size), **cfg.prnt)
             mean_loss = 0
         return self.model
 
@@ -83,17 +88,17 @@ class Segmenter():
             accuracies.append(pixel_accuracy)
         return np.average(accuracies)
 
-    def predict(self, start_idx, end_idx, batch_size):
+    def predict(self, x, y, batch_size):
         self.model.eval()
         predictions = []
         ground_truths = []
-        for i in range(start_idx, end_idx, batch_size):
-            x_batch = torch.tensor(self.x[i:i + batch_size]).to(**cfg.args)
+        for i in range(0, x.shape[0], batch_size):
+            x_batch = torch.tensor(x[i:i + batch_size]).to(**cfg.args)
             prediction = self.model.forward(x_batch)
             prediction = prediction.detach().cpu().numpy()
             prediction = np.argmax(prediction, axis=1)
             prediction = prediction
-            ground_truth = self.y[i:i + batch_size]
+            ground_truth = y[i:i + batch_size]
             predictions.append(prediction)
             ground_truths.append(ground_truth)
         predictions = np.concatenate(predictions, axis=0)
@@ -105,15 +110,15 @@ class Segmenter():
         print('test accuracy', self.pixel_accuracy(440, 500, batch_size), **cfg.prnt)
         print('accuracy for whole dataset', self.pixel_accuracy(0, 500, batch_size), **cfg.prnt)
 
-    def show_predictions(self, idx):
+    def show_predictions(self, x, y, idx):
         self.model.eval()
         _, ax = plt.subplots(1, 2)
-        x_batch = torch.tensor(self.x[idx:idx+1]).to(**cfg.args)
+        x_batch = torch.tensor(x[idx:idx+1]).to(**cfg.args)
         prediction = self.model.forward(x_batch)
         prediction = prediction.detach().cpu().numpy()
         prediction = np.argmax(prediction, axis=1)
         prediction = prediction[0]
-        ground_truth = self.y[idx:idx+1][0]
+        ground_truth = y[idx:idx+1][0]
         ax[0].imshow(prediction)
         ax[1].imshow(ground_truth)
         plt.show()

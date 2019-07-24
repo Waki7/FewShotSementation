@@ -1,2 +1,1 @@
 0.1
- average loss for epoch  0 :  -0.2851429954171181

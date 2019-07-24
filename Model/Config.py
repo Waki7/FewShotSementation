@@ -14,7 +14,7 @@ args = {'device': device, 'dtype': dtype}
 
 
 load = False
-batch_size = 45 #roughly 45 for 64 model_size and half as u keep doubling
+batch_size = 30 #roughly 45 for 64 model_size and half as u keep doubling
 model_size = 32
 epochs = 500
 lr = .1
