@@ -36,7 +36,7 @@ class Segmenter():
     def build_model(self):
         self.load_data()
         self.classes = int(len(self.class_weights))
-        self.model = SegmentationModel(in_shape=self.x.shape,
+        self.model = SegmentationModel(in_shape=self.data.x_shape,
                                        n_class=self.classes,
                                        size=self.size_scale).to(**cfg.args)
         self.opt = torch.optim.SGD(
@@ -49,19 +49,20 @@ class Segmenter():
 
     def load_data(self):
         self.data.load_data()
-        self.x, self.y = self.data.get_full_data()
         self.class_weights = torch.tensor(self.data.get_class_weights()).to(**cfg.args)
 
 
     def train(self, epochs=10, batch_size=10):
-        n_train = 440#self.x.shape[0]
+        x_train, y_train = self.data.get_train_data()
+        n_train = x_train.shape[0]
+        print(exit(9))
         self.model.train()
         mean_loss = 0
         for e in range(epochs):
             shuffled_indexes = torch.randperm(n_train)
             for i in range(0, n_train, batch_size):
                 indexes = shuffled_indexes[i:i + batch_size]
-                x_batch, y_batch = self.x[indexes], self.y[indexes]
+                x_batch, y_batch = x_train[indexes], y_train[indexes]
                 x_batch, y_batch = torch.tensor(x_batch).to(**cfg.args), torch.tensor(y_batch).to(cfg.device).long()
                 y_out = self.model.forward(x_batch)
                 loss = self.criterion.forward(input=y_out, target=y_batch)
