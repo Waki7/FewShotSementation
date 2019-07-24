@@ -1,6 +1,6 @@
 .idea/misc.xml
 .idea/MMXSide.iml
-Data/BSR/BSDS500/Data/ProcessedData/*
+Data/ProcessedData/*
 Data/ADEChallengeData2016/*
 Data/MetaLearnerData/*
 Data/VOC/*
