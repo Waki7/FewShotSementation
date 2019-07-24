@@ -51,7 +51,7 @@ class ProcessedDataSet():
             self.load_data()
         if self.data_images.train_range is None:
             raise NotImplementedError
-        indeces = range(self.data_images.train_range)
+        indeces = self.data_images.train_range
         return self.x[indeces], self.y[indeces]
 
     def get_val_data(self):
@@ -59,7 +59,7 @@ class ProcessedDataSet():
             self.load_data()
         if self.data_images.val_range is None:
             raise NotImplementedError
-        indeces = range(self.data_images.val_range)
+        indeces = self.data_images.val_range
         return self.x[indeces], self.y[indeces]
 
     def get_test_data(self):
@@ -67,7 +67,7 @@ class ProcessedDataSet():
             self.load_data()
         if self.data_images.test_range is None:
             raise NotImplementedError
-        indeces = range(self.data_images.test_range)
+        indeces = self.data_images.test_range
         return self.x[indeces], self.y[indeces]
 
     def get_full_data(self):
@@ -78,18 +78,25 @@ class ProcessedDataSet():
     def get_class_weights(self):
         return self.class_weights
 
-    def load_data(self):
-        raise NotImplementedError
+    def try_load(self):
+        if isfile(cfg.processed_data_path + self.stored_file_name):
+            obj_dict = load_object(cfg.processed_data_path, self.stored_file_name)
+            self.__dict__.update(obj_dict)
+
+    def save(self):
+        save_object(self.__dict__, cfg.processed_data_path, self.stored_file_name)
 
 class DataBSR(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
         super(DataBSR, self).__init__(x_dtype, y_dtype)
+        self.stored_file_name = 'BSR.pkl'
+
         self.downsample_ratio = downsample_ratio
         self.data_images = BSRImages(self.downsample_ratio)
         self.data_labels = BSRLabels(self.downsample_ratio)
-        self.stored_file_name = 'BSR.pkl'
 
     def load_data(self):  # c x h x w
+        self.try_load()
         if isfile(cfg.experiment_path + self.stored_file_name):
             data = load_object(cfg.experiment_path, self.stored_file_name)
             data_downsampled = load_object(self.stored_data_path, self.sampled_file_name)
@@ -107,7 +114,7 @@ class DataBSR(ProcessedDataSet):
         self.x = cleanInput(x)
         self.y = y
         self.x_shape = self.x.shape
-        save_object(self, cfg.experiment_path, self.stored_file_name)
+        self.save()
 
 class DataSet():
     def __init__(self):
@@ -152,9 +159,9 @@ class DataSet():
         data_downsampled = []
         file_sets = self.get_file_sets()
         if len(file_sets) is 3:
-            self.train_range = (0, len(file_sets[0]))
-            self.val_range = (self.train_range[1], self.train_range[1] + len(file_sets[1]))
-            self.test_range = (self.val_range[1], self.val_range[1] + len(file_sets[2]))
+            self.train_range = range(0, len(file_sets[0]))
+            self.val_range = range(self.train_range[1], self.train_range[1] + len(file_sets[1]))
+            self.test_range = range(self.val_range[1], self.val_range[1] + len(file_sets[2]))
         for file_list in file_sets:
             processed = self.read_files(file_list)
             data.append(processed[0])

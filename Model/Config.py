@@ -23,7 +23,7 @@ lr = .1
 #Paths
 #################################################################################################################
 experiment_path = '..\\ExperimentResults\\BSR\\FullSeg\\v1\\' + str(model_size) + '\\'
-processed_data_path = '..\\Data\\processed_data\\'
+processed_data_path = '..\\Data\\ProcessedData\\'
 #################################################################################################################
 
 
