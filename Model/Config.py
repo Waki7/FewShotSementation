@@ -1,6 +1,8 @@
 import torch
 import os
 import sys
+import numpy as np
+import random
 from os.path import join
 
 #pytorch
@@ -14,11 +16,15 @@ args = {'device': device, 'dtype': dtype}
 
 
 load = False
-batch_size = 30 #roughly 45 for 64 model_size and half as u keep doubling
+batch_size = 90 #roughly 45 for 64 model_size and half as u keep doubling
 model_size = 32
 epochs = 500
 lr = .1
-
+np.random.seed(24)
+random.seed(24)
+torch.manual_seed(24)
+torch.cuda.manual_seed(24)
+torch.backends.cudnn.deterministic = True
 
 #Paths
 #################################################################################################################

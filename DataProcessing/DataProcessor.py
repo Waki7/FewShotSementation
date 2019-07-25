@@ -95,13 +95,13 @@ class ProcessedDataSet():
     def set_data_split(self, train_val_split, val_test_split):
         self.train_range = range(0, train_val_split)
         self.val_range = range(train_val_split, val_test_split)
-        self.test_range = range(val_test_split, )
+        self.test_range = range(val_test_split, self.x_shape[0])
 
     def load_data(self):  # c x h x w
         if not self.try_load():
             x_full, x = self.data_images.load_data_from_files()
             y_full, y = self.data_labels.load_data_from_files()
-            self.calc_class_weights(y_full[0])
+            self.calc_class_weights(y_full)
             self.n_classes = len(self.class_weights)
             if self.x_dtype is not None and x.dtype != self.x_dtype:
                 x = x.astype(self.x_dtype)

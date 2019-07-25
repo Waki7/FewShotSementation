@@ -65,9 +65,15 @@ class Segmenter():
                 x_batch, y_batch = x_train[indexes], y_train[indexes]
                 x_batch, y_batch = torch.tensor(x_batch).to(**cfg.args), torch.tensor(y_batch).to(cfg.device).long()
                 y_out = self.model.forward(x_batch)
-                print(y_out.shape) #todo n_class wrong? 18 classes?????
                 loss = self.criterion.forward(input=y_out, target=y_batch)
                 mean_loss += loss.data.item()
+                print(self.model.encoder.l1[0].weight.data[0,0,0,0])
+                print(self.model.encoder.l1[0].weight.data[0,0,0,0].item())
+
+                print(loss.data.item())
+                print(loss.data)
+
+                print(exit(9))
                 loss.backward(retain_graph=False)
                 self.opt.step()
                 self.opt.zero_grad()
