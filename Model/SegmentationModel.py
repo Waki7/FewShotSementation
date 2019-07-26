@@ -1,11 +1,11 @@
 from Model.Encoders import *
 from Model.Decoders import *
 import Model.Config as cfg
+import Model.Utilities as utils
 from os.path import join, isfile
 import DataProcessing.DataProcessor as data
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 
 
 class SegmentationModel(nn.Module):
@@ -52,7 +52,7 @@ class Segmenter():
         self.class_weights = torch.tensor(self.data.get_class_weights()).to(**cfg.args)
 
 
-    def train(self, epochs=10, batch_size=10):
+    def train(self, epochs=10, batch_size=10, checkpoint_space = 5):
         x_train, y_train = self.data.get_train_data()
         x_val, y_val = self.data.get_val_data()
         n_train = x_train.shape[0]
@@ -67,53 +67,44 @@ class Segmenter():
                 y_out = self.model.forward(x_batch)
                 loss = self.criterion.forward(input=y_out, target=y_batch)
                 mean_loss += loss.data.item()
-                print(self.model.encoder.l1[0].weight.data[0,0,0,0])
-                print(self.model.encoder.l1[0].weight.data[0,0,0,0].item())
-
-                print(loss.data.item())
-                print(loss.data)
-
-                print(exit(9))
                 loss.backward(retain_graph=False)
                 self.opt.step()
                 self.opt.zero_grad()
-            print(' average loss for epoch ', e, ': ', mean_loss, **cfg.prnt)
-            print('val accuracy ', self.pixel_accuracy(x_val, y_val, batch_size), **cfg.prnt)
-            print('train accuracy ', self.pixel_accuracy(x_train[0:100], y_train[0:100], batch_size), **cfg.prnt)
+            print(' average loss for epoch ', e, ': ', mean_loss / n_train, **cfg.prnt)
+            if e % checkpoint_space == checkpoint_space - 1:
+                print('val accuracy ', self.pixel_accuracy(x_val, y_val, batch_size), **cfg.prnt)
+                print('train accuracy ', self.pixel_accuracy(x_train, y_train, batch_size), **cfg.prnt)
             mean_loss = 0
         return self.model
 
-    def pixel_accuracy(self, start_idx, end_idx, batch_size):
-        predictions, ground_truths = self.predict(start_idx, end_idx, batch_size)
-        accuracies = []
-        for pred, truth in zip(predictions, ground_truths):
-            pixel_accuracy = np.average(pred == truth)
-            accuracies.append(pixel_accuracy)
-        return np.average(accuracies)
+    def pixel_accuracy(self, x, y, batch_size):
+        predictions = self.predict(x, batch_size)
+        return utils.accuracy(predictions, y)
 
-    def predict(self, x, y, batch_size):
+
+    def predict(self, x, batch_size=1):
         self.model.eval()
         predictions = []
-        ground_truths = []
         for i in range(0, x.shape[0], batch_size):
             x_batch = torch.tensor(x[i:i + batch_size]).to(**cfg.args)
             prediction = self.model.forward(x_batch)
             prediction = prediction.detach().cpu().numpy()
             prediction = np.argmax(prediction, axis=1)
             prediction = prediction
-            ground_truth = y[i:i + batch_size]
             predictions.append(prediction)
-            ground_truths.append(ground_truth)
         predictions = np.concatenate(predictions, axis=0)
-        ground_truths = np.concatenate(ground_truths, axis=0)
         self.model.train()
-        return predictions, ground_truths
+        return predictions
 
     def test(self, batch_size):
         x_test, y_test = self.data.get_test_data()
-        print('test accuracy ', self.pixel_accuracy(x_test, y_test, batch_size), **cfg.prnt)
+        y_pred_test = self.predict(x_test, batch_size)
+        print('test accuracy ', utils.accuracy(y_pred_test, y_test), **cfg.prnt)
         x_full, y_full = self.data.get_full_data()
-        print('accuracy for whole dataset', self.pixel_accuracy(x_full, y_full, batch_size), **cfg.prnt)
+        y_pred_full = self.predict(x_full, batch_size)
+        print('accuracy for whole dataset', utils.accuracy(y_pred_full, y_full), **cfg.prnt)
+        utils.plot_confusion_matrix(y_pred_test, y_test)
+        utils.plot_confusion_matrix(y_pred_full, y_full)
 
     def show_predictions(self, x, y, idx):
         self.model.eval()
@@ -153,8 +144,7 @@ def main():
         segmenter.train(epochs=cfg.epochs, batch_size=cfg.batch_size)
         segmenter.save_model()
 
-    print(segmenter.pixel_accuracy(0, 440, cfg.batch_size))
-    print(segmenter.pixel_accuracy(440, 500, cfg.batch_size))
+    segmenter.test(cfg.batch_size)
     # segmenter.show_predictions(1)
     print('_______________', **cfg.prnt)
 
