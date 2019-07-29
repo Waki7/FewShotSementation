@@ -16,9 +16,9 @@ args = {'device': device, 'dtype': dtype}
 
 
 load = False
-batch_size = 90 #roughly 45 for 64 model_size and half as u keep doubling
-model_size = 32
-epochs = 1
+batch_size = 45 #roughly 45 for 64 model_size and half as u keep doubling
+model_size = 64
+epochs = 1000
 lr = .075
 np.random.seed(24)
 random.seed(24)
@@ -29,13 +29,15 @@ torch.backends.cudnn.benchmark=False
 
 #Paths
 #################################################################################################################
-experiment_path = '..\\ExperimentResults\\BSR\\FullSeg\\v1\\' + str(model_size) + '\\'
+experiment_path = '..\\ExperimentResults\\BSR\\FullSeg\\ClassWeights\\' + str(model_size) + '\\'
 processed_data_path = '..\\Data\\ProcessedData\\'
+stored_model_path = join(experiment_path, 'FullBSRSegmenter'+str(lr))
+graph_file_path = join(experiment_path, 'heatmap_confusion_matrix' + str(lr))
 #################################################################################################################
 
 
 if not os.path.exists(experiment_path):
     os.makedirs(experiment_path)
-result_file_name = 'console'+str(lr)+'.txt'
-result_file_path = join(experiment_path, result_file_name)
-prnt = {'file': open(result_file_path, 'w'), 'flush': True} if not load else {}
+console_file_name = 'console' + str(lr) + '.txt'
+console_file_path = join(experiment_path, console_file_name)
+prnt = {'file': open(console_file_path, 'w'), 'flush': True} if not load else {}

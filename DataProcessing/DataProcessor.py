@@ -38,8 +38,8 @@ class ProcessedDataSet():
         self.y_dtype = y_dtype
         self.class_weights = None
         self.stored_file_name = None
-        self.data_images = DataSet()
-        self.data_labels = DataSet()
+        self.data_images = DataFileLoader()
+        self.data_labels = DataFileLoader()
         self.downsample_ratio = downsample_ratio
 
     def calc_class_weights(self, y):
@@ -131,11 +131,18 @@ class DataBSR(ProcessedDataSet):
         self.data_images = BSRImages(downsample_ratio)
         self.data_labels = BSRLabels(downsample_ratio)
 
+class DataVOC(ProcessedDataSet):
+    def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
+        super(DataBSR, self).__init__(x_dtype, y_dtype)
+        self.stored_file_name = 'BSR.pkl'
+        self.downsample_ratio = downsample_ratio
+        self.data_images = BSRImages(downsample_ratio)
+        self.data_labels = BSRLabels(downsample_ratio)
 
-class DataSet():
+
+
+class DataFileLoader():
     def __init__(self):
-        self.file_ext = None
-        self.root_path = None
         self.stored_data_path = None
         self.stored_file_name = None
         self.sampled_file_name = None
@@ -147,16 +154,16 @@ class DataSet():
     def read_file(self, file):
         raise NotImplementedError
 
-    def pad(self, image: np.ndarray, maxShape):
-        pad_width = [(0, maxShape[i] - image.shape[i]) for i in range(len(maxShape))]
-        return np.pad(image,
-                      pad_width=pad_width, mode='constant')
-
     def get_file_sets(self):
         '''
         :return: list of list of files, if applicable the first dimension should be split by train, val, test sets
         '''
         raise NotImplementedError
+
+    def pad(self, image: np.ndarray, maxShape):
+        pad_width = [(0, maxShape[i] - image.shape[i]) for i in range(len(maxShape))]
+        return np.pad(image,
+                      pad_width=pad_width, mode='constant')
 
     def read_files(self, files):
         data = []
@@ -189,30 +196,51 @@ class DataSet():
         return data, data_downsampled
 
 
-class VOCImages(DataSet):
+class VOCImages(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(VOCImages, self).__init__()
         self.file_ext = '.jpg'
+        self.root_path = '..\\Data\\VOC\\VOC2012\\'
         self.root_path = '..\\Data\\VOC\\VOC2012\\JPEGImages\\'
+        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
 
+    def read_file(self, file):
+        raise NotImplementedError
 
+    def get_file_sets(self):
+        '''
+        :return: list of list of files, if applicable the first dimension should be split by train, val, test sets
+        '''
+        file_sets = []
+        for path in self.image_set_paths:
+            file_names = []
+            with open(path, 'r') as f:
+                for line in f:
+                    print(line)
+                    sample_path = join(path, line)
+                    file_names.append(sample_path)
+            file_sets.append(file_names)
+        return file_sets
 
-class VOCLabels(DataSet):
+class VOCLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(VOCLabels, self).__init__()
         self.file_ext = '.png'
         self.root_path = '..\\Data\\VOC\\VOC2012\\SegmentationClass\\'
 
+    def read_file(self, file):
+        raise NotImplementedError
 
+    def get_file_sets(self):
+        '''
+        :return: list of list of files, if applicable the first dimension should be split by train, val, test sets
+        '''
+        raise NotImplementedError
 
     def read_file(self):
         pass
-    # datum1 = mat_data[1]
-    # plt.imshow(datum)
-    # plt.show()
 
-
-class BSRImages(DataSet):
+class BSRImages(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(BSRImages, self).__init__()
         self.file_ext = '.jpg'
@@ -238,7 +266,7 @@ class BSRImages(DataSet):
         return file_sets
 
 
-class BSRLabels(DataSet):
+class BSRLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(BSRLabels, self).__init__()
         self.file_ext = '.mat'

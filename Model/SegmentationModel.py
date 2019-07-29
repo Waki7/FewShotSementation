@@ -25,9 +25,7 @@ class Segmenter():
         self.size_scale = size_scale
         self.downsample_ratio=downsample_ratio
         self.lr = lr
-        self.model_directory = cfg.experiment_path
-        self.model_name = 'FullBSRSegmenter'+str(lr)+'.pkl'
-        self.model_path = join(self.model_directory, self.model_name)
+        self.model_path = cfg.stored_model_path + '.pkl'
         self.model = model
         self.data = data
         if model is None:
@@ -45,7 +43,8 @@ class Segmenter():
         momentum=0.9,
         # weight_decay=.001
         )
-        self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean')
+        self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean', weight=self.class_weights)
+
 
     def load_data(self):
         self.data.load_data()
@@ -103,8 +102,8 @@ class Segmenter():
         x_full, y_full = self.data.get_full_data()
         y_pred_full = self.predict(x_full, batch_size)
         print('accuracy for whole dataset', utils.accuracy(y_pred_full, y_full), **cfg.prnt)
-        utils.plot_confusion_matrix(y_pred_test, y_test)
-        utils.plot_confusion_matrix(y_pred_full, y_full)
+        utils.plot_confusion_matrix(y_pred_test, y_test, 'test')
+        utils.plot_confusion_matrix(y_pred_full, y_full, 'full')
 
     def show_predictions(self, x, y, idx):
         self.model.eval()

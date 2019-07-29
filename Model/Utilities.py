@@ -2,8 +2,12 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
+import seaborn as sns
+import Model.Config as cfg
+
 
 def plot_confusion_matrix(predictions, ground_truths,
+                          results_qualifier,
                           normalize=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
@@ -20,26 +24,11 @@ def plot_confusion_matrix(predictions, ground_truths,
     else:
         print('Confusion matrix, without normalization')
 
-    print(cm)
-
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
-
-    fmt = '.2f' if normalize else 'd'
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, format(cm[i, j], fmt),
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
+    ax = sns.heatmap(cm, linewidth=0.5, cmap="YlGnBu")
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.tight_layout()
-    plt.show()
+    plt.savefig(cfg.graph_file_path + results_qualifier + '.png', format='png', dpi=1000)
+
 
 def calc_confusion_matrix(predictions, ground_truths):
     predictions = predictions.flatten()

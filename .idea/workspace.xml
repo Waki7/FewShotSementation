@@ -5,16 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Model/Utilities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/FullBSRSegmenter0.075.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/console0.075.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/console0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/FullBSRSegmenter0.01.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/FullBSRSegmenter0.01.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/FullBSRSegmenter0.09.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/FullBSRSegmenter0.09.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/console0.01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/console0.01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/console0.09.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/console0.09.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/256/FullBSRSegmenter0.01.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/256/FullBSRSegmenter0.01.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/256/console0.01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/256/console0.01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/FullBSRSegmenter0.075.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/FullBSRSegmenter0.1.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/FullBSRSegmenter0.1.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/console0.075.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/FullBSRSegmenter0.1.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/FullBSRSegmenter0.1.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/console0.01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/console0.1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/console.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/console0.01" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/console_.01_2000.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/console_notinplace_.01_500.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Utilities.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
+            <state relative-caret-position="287">
+              <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -39,8 +48,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
-              <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+            <state relative-caret-position="187">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -48,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
+            <state relative-caret-position="80">
+              <caret line="136" column="26" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="26" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -57,11 +69,18 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/ClassWeights/64/console0.075.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-23462" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+            <state relative-caret-position="374">
+              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -70,20 +89,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/console0.075.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/heatmap_confusion_matrix0.075full.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2023">
-              <caret line="126" column="12" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/heatmap_confusion_matrix0.075test.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -94,24 +106,6 @@
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.01.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -127,7 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>1999 :</find>
       <find>train_learner</find>
       <find>[</find>
       <find>epoch  999</find>
@@ -142,7 +135,6 @@
       <find>drop</find>
       <find>stdout</find>
       <find>for</find>
-      <find>file_ext</find>
       <find>get_data</find>
       <find>x_dtypex_dtype</find>
       <find>process_images</find>
@@ -156,6 +148,8 @@
       <find>downsample</find>
       <find>train_range</find>
       <find>calc_class_weights</find>
+      <find>root_path</find>
+      <find>file_ext</find>
       <find>predict(</find>
     </findStrings>
   </component>
@@ -178,12 +172,12 @@
         <option value="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.01.txt" />
         <option value="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.1.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
         <option value="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/console0.1.txt" />
         <option value="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/a.txt" />
+        <option value="$PROJECT_DIR$/Model/Utilities.py" />
         <option value="$PROJECT_DIR$/Model/Config.py" />
         <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
-        <option value="$PROJECT_DIR$/Model/Utilities.py" />
+        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
       </list>
     </option>
   </component>
@@ -210,6 +204,46 @@
             <path>
               <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
               <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC" type="462c0819:PsiDirectoryNode" />
+              <item name="VOCdevkit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC" type="462c0819:PsiDirectoryNode" />
+              <item name="VOCdevkit" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC2012" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC" type="462c0819:PsiDirectoryNode" />
+              <item name="VOCdevkit" type="462c0819:PsiDirectoryNode" />
+              <item name="VOC2012" type="462c0819:PsiDirectoryNode" />
+              <item name="ImageSets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
+              <item name="DataProcessing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
               <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -217,30 +251,6 @@
               <item name="mmxside" type="462c0819:PsiDirectoryNode" />
               <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
               <item name="BSR" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
-              <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
-              <item name="BSR" type="462c0819:PsiDirectoryNode" />
-              <item name="FullSeg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
-              <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
-              <item name="BSR" type="462c0819:PsiDirectoryNode" />
-              <item name="FullSeg" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mmxside" type="462c0819:PsiDirectoryNode" />
-              <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
-              <item name="BSR" type="462c0819:PsiDirectoryNode" />
-              <item name="FullSeg" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
-              <item name="32" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mmxside" type="b2602c69:ProjectViewProjectNode" />
@@ -442,12 +452,12 @@
     <frame x="-6" y="-6" width="1719" height="932" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18278931" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22670624" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32692307" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31666666" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31666666" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39892665" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -481,43 +491,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Model/console_.01_2000.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/modules/conv.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/modules/container.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/modules/module.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/container.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/module.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/conv.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/pooling.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/activation.py" />
-    <entry file="file://$PROJECT_DIR$/Model/console_notinplace_.01_500.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6843">
-          <caret line="1501" column="3" selection-start-line="1501" selection-start-column="3" selection-end-line="1501" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/console.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-43146">
-          <caret line="412" column="52" selection-start-line="412" selection-start-column="52" selection-end-line="412" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/console0.01test" />
     <entry file="file://$PROJECT_DIR$/Data/ADEChallengeData2016/ADEChallengeData2016/sceneCategories.txt" />
     <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.1" />
     <entry file="file://$PROJECT_DIR$/Data/BSR/bench/source/csa.hh">
@@ -527,9 +500,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/console0.01.txt" />
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/128/console0.09.txt" />
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/256/console0.01.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/console0.01.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/128/console0.09.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/256/console0.01.txt" />
     <entry file="file://$PROJECT_DIR$/Data/VOC/VOCdevkit/VOC2012/JPEGImages/2007_000027.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -570,7 +543,7 @@
     <entry file="file://$PROJECT_DIR$/Data/VOC/VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.1.txt">
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/console0.1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-101576">
           <caret column="3" selection-start-column="3" selection-end-column="3" />
@@ -618,20 +591,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/64/console0.01.txt">
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/console0.01.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -639,16 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="102" column="63" selection-start-line="102" selection-start-column="63" selection-end-line="102" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -666,13 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/sklearn/metrics/classification.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -680,25 +626,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/console0.075.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Model/books_read.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="1364" column="4" selection-start-line="1364" selection-start-column="4" selection-end-line="1364" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/heatmap_confusion_matrix0.075full">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/destination_path.png">
+      <provider selected="true" editor-type-id="images" />
+      <provider editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-7293" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/console0.075.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2280" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/heatmap_confusion_matrix0.075test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/heatmap_confusion_matrix0.075full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/console0.075.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5013">
+          <caret line="2799" column="32" selection-start-line="2799" selection-start-column="16" selection-end-line="2799" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/heatmap_confusion_matrix0.075test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/64/heatmap_confusion_matrix0.075full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/ClassWeights/64/heatmap_confusion_matrix0.075full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/ClassWeights/64/heatmap_confusion_matrix0.075test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/ClassWeights/64/console0.075.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23462" />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
+        <state relative-caret-position="80">
+          <caret line="136" column="26" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="26" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
+    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="41" column="14" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+        <state relative-caret-position="287">
+          <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
