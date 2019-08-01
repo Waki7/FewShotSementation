@@ -29,7 +29,7 @@ torch.backends.cudnn.benchmark=False
 
 #Paths
 #################################################################################################################
-experiment_path = '..\\ExperimentResults\\BSR\\FullSeg\\ClassWeights\\' + str(model_size) + '\\'
+experiment_path = '..\\ExperimentResults\\VOC\\FullSeg\\ClassWeights\\' + str(model_size) + '\\'
 processed_data_path = '..\\Data\\ProcessedData\\'
 stored_model_path = join(experiment_path, 'FullBSRSegmenter'+str(lr))
 graph_file_path = join(experiment_path, 'heatmap_confusion_matrix' + str(lr))

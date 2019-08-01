@@ -38,8 +38,8 @@ class ProcessedDataSet():
         self.y_dtype = y_dtype
         self.class_weights = None
         self.stored_file_name = None
-        self.data_images = DataFileLoader()
-        self.data_labels = DataFileLoader()
+        self.data_images = DataFileLoader(downsample_ratio)
+        self.data_labels = DataFileLoader(downsample_ratio)
         self.downsample_ratio = downsample_ratio
 
     def calc_class_weights(self, y):
@@ -133,20 +133,20 @@ class DataBSR(ProcessedDataSet):
 
 class DataVOC(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
-        super(DataBSR, self).__init__(x_dtype, y_dtype)
-        self.stored_file_name = 'BSR.pkl'
+        super(DataVOC, self).__init__(x_dtype, y_dtype)
+        self.stored_file_name = 'VOC.pkl'
         self.downsample_ratio = downsample_ratio
-        self.data_images = BSRImages(downsample_ratio)
-        self.data_labels = BSRLabels(downsample_ratio)
+        self.data_images = VOCImages(downsample_ratio)
+        self.data_labels = VOCLabels(downsample_ratio)
 
 
 
 class DataFileLoader():
-    def __init__(self):
+    def __init__(self, downsample_ratio):
         self.stored_data_path = None
         self.stored_file_name = None
         self.sampled_file_name = None
-        self.downsample_ratio = 1
+        self.downsample_ratio = downsample_ratio
         self.train_range = None
         self.val_range = None
         self.test_range = None
@@ -198,55 +198,67 @@ class DataFileLoader():
 
 class VOCImages(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(VOCImages, self).__init__()
+        super(VOCImages, self).__init__(downsample_ratio)
         self.file_ext = '.jpg'
-        self.root_path = '..\\Data\\VOC\\VOC2012\\'
-        self.root_path = '..\\Data\\VOC\\VOC2012\\JPEGImages\\'
+        self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
+        self.images_path =  self.root_path + 'JPEGImages\\'
         self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
 
     def read_file(self, file):
-        raise NotImplementedError
+        datum = scipy.misc.imread(file)
+        print(datum.shape)
+        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
+                                       interpolation=cv2.INTER_LINEAR)
+        return datum, datum_downsampled
 
     def get_file_sets(self):
-        '''
-        :return: list of list of files, if applicable the first dimension should be split by train, val, test sets
-        '''
         file_sets = []
         for path in self.image_set_paths:
             file_names = []
             with open(path, 'r') as f:
                 for line in f:
-                    print(line)
-                    sample_path = join(path, line)
+                    image_name_line = line.strip() + self.file_ext
+                    sample_path = join(self.images_path, image_name_line)
                     file_names.append(sample_path)
             file_sets.append(file_names)
         return file_sets
 
 class VOCLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(VOCLabels, self).__init__()
+        super(VOCLabels, self).__init__(downsample_ratio)
         self.file_ext = '.png'
-        self.root_path = '..\\Data\\VOC\\VOC2012\\SegmentationClass\\'
+        self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
+        self.labels_path = self.root_path + 'SegmentationClass\\'
+        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
 
     def read_file(self, file):
-        raise NotImplementedError
+        datum = scipy.misc.imread(file)
+        plt.imshow(datum)
+        plt.show()
+        print(exit(9))
+        datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
+                                       interpolation=cv2.INTER_LINEAR)
+        return datum, datum_downsampled
 
     def get_file_sets(self):
-        '''
-        :return: list of list of files, if applicable the first dimension should be split by train, val, test sets
-        '''
-        raise NotImplementedError
+        file_sets = []
+        for path in self.image_set_paths:
+            file_names = []
+            with open(path, 'r') as f:
+                for line in f:
+                    image_name_line = line.strip() + self.file_ext
+                    sample_path = join(self.labels_path, image_name_line)
+                    file_names.append(sample_path)
+            file_sets.append(file_names)
+        return file_sets
 
-    def read_file(self):
-        pass
 
 class BSRImages(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(BSRImages, self).__init__()
+        super(BSRImages, self).__init__(downsample_ratio)
         self.file_ext = '.jpg'
         self.root_path = '..\\Data\\BSR\\BSDS500\\data\\images\\'
         self.image_set_paths = [self.root_path + i for i in ['train', 'val', 'test']]
-        self.downsample_ratio = downsample_ratio
 
     def read_file(self, file):
         datum = scipy.misc.imread(file)
@@ -268,14 +280,13 @@ class BSRImages(DataFileLoader):
 
 class BSRLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(BSRLabels, self).__init__()
+        super(BSRLabels, self).__init__(downsample_ratio)
         self.file_ext = '.mat'
         self.root_path = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
         self.image_set_paths = [self.root_path + i for i in ['train', 'val', 'test']]
         self.mat_key = 'groundTruth'
         self.segmentation_index = 0
         self.boundary_index = 1
-        self.downsample_ratio = downsample_ratio
 
     def read_file(self, file):
         mat = scipy.io.loadmat(file)
