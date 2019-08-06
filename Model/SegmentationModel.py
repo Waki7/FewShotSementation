@@ -130,7 +130,6 @@ class Segmenter():
         return False
 
 
-
 def main():
     print(cfg.lr, **cfg.prnt)
     downsample_ratio = 4

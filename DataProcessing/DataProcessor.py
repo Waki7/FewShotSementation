@@ -160,21 +160,29 @@ class DataFileLoader():
         '''
         raise NotImplementedError
 
-    def pad(self, image: np.ndarray, maxShape):
-        pad_width = [(0, maxShape[i] - image.shape[i]) for i in range(len(maxShape))]
+    def pad(self, image: np.ndarray, max_shape: list):
+        pad_width = [(0, max_shape[i] - image.shape[i]) for i in range(len(max_shape))]
         return np.pad(image,
                       pad_width=pad_width, mode='constant')
+
+    def shape_data_uniform(self, data: list): # todo bucketize if different sizes
+        max_dims = [0]*len(data[0].shape)
+        for i in range(0, len(data)):
+            image = data[i]
+            if image.shape[0] > image.shape[1]:  # want all images to be in portrait
+                image = np.swapaxes(image, 0, 1)
+            max_dims = [max(image.shape[dim_idx], max_dims[dim_idx]) for dim_idx in range(0, len(max_dims))]
+        return [self.pad(image=image, max_shape=max_dims) for image in data]
 
     def read_files(self, files):
         data = []
         data_downsampled = []
         for sample_path in files:
             image, image_downsampled = self.read_file(sample_path)
-            if image.shape[0] > image.shape[1]:  # want all images to be in portrait
-                image = np.swapaxes(image, 0, 1)
-                image_downsampled = np.swapaxes(image_downsampled, 0, 1)
             data.append(image)
             data_downsampled.append(image_downsampled)
+        data = self.shape_data_uniform(data)
+        data_downsampled = self.shape_data_uniform(data_downsampled)
         return np.stack(data), np.stack(data_downsampled)
 
     def load_data_from_files(self):
@@ -206,7 +214,6 @@ class VOCImages(DataFileLoader):
 
     def read_file(self, file):
         datum = scipy.misc.imread(file)
-        print(datum.shape)
         datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
                                        interpolation=cv2.INTER_LINEAR)
         return datum, datum_downsampled

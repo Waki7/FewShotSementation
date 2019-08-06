@@ -4,6 +4,12 @@ import sys
 import numpy as np
 import random
 from os.path import join
+from enum import Enum
+class DataSet(Enum):
+   RED = 1
+   GREEN = 2
+
+
 
 #pytorch
 #################################################################################################################
