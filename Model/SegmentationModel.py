@@ -54,6 +54,7 @@ class Segmenter():
     def train(self, epochs=10, batch_size=10, checkpoint_space = 5):
         x_train, y_train = self.data.get_train_data()
         x_val, y_val = self.data.get_val_data()
+        print(x_train.shape)
         n_train = x_train.shape[0]
         self.model.train()
         mean_loss = 0

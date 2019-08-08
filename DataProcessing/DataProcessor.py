@@ -6,8 +6,8 @@ import cv2
 import pickle
 import Model.Config as cfg
 import matplotlib.pyplot as plt
-from scipy.io import loadmat
-from torchvision import transforms
+from PIL import Image
+
 
 def get_experiment_data():
     switcher = {
@@ -242,15 +242,8 @@ class VOCLabels(DataFileLoader):
         self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
 
     def read_file(self, file):
-        datum = scipy.misc.imread(file)
-        a, b = np.unique(return_counts=True)
-        print(a)
-        print(b)
-        print(datum)
-        print(datum.shape)
-        plt.imshow(datum)
-        plt.show()
-        print(exit(9))
+        img = Image.open(file)
+        datum = np.array(img)
         datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
                                        interpolation=cv2.INTER_LINEAR)
         return datum, datum_downsampled
