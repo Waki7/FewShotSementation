@@ -133,7 +133,7 @@ class Segmenter():
 def main():
     print(cfg.lr, **cfg.prnt)
     downsample_ratio = 4
-    dataset = data.DataVOC(x_dtype=np.float32, y_dtype=np.int32,
+    dataset = data.get_experiment_data()(x_dtype=np.float32, y_dtype=np.int32,
                                                       downsample_ratio=downsample_ratio)
     segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = cfg.model_size, data = dataset)
     if cfg.load:

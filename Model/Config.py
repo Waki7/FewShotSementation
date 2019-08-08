@@ -1,15 +1,16 @@
 import torch
 import os
-import sys
+from os.path import join
 import numpy as np
 import random
-from os.path import join
 from enum import Enum
-class DataSet(Enum):
-   RED = 1
-   GREEN = 2
 
 
+class DataSetNames(Enum):
+   BSR = 'BSR'
+   VOC = 'VOC'
+
+dataset_name = DataSetNames.VOC
 
 #pytorch
 #################################################################################################################
@@ -35,9 +36,9 @@ torch.backends.cudnn.benchmark=False
 
 #Paths
 #################################################################################################################
-experiment_path = '..\\ExperimentResults\\VOC\\FullSeg\\ClassWeights\\' + str(model_size) + '\\'
+experiment_path = '..\\ExperimentResults\\' + dataset_name.value + '\\FullSeg\\ClassWeights\\' + str(model_size) + '\\'
 processed_data_path = '..\\Data\\ProcessedData\\'
-stored_model_path = join(experiment_path, 'FullBSRSegmenter'+str(lr))
+stored_model_path = join(experiment_path, 'Full'+dataset_name.value+'Segmenter'+str(lr))
 graph_file_path = join(experiment_path, 'heatmap_confusion_matrix' + str(lr))
 #################################################################################################################
 

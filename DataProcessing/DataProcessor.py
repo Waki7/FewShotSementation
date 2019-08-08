@@ -9,6 +9,12 @@ import matplotlib.pyplot as plt
 from scipy.io import loadmat
 from torchvision import transforms
 
+def get_experiment_data():
+    switcher = {
+        cfg.DataSetNames.VOC : DataVOC,
+        cfg.DataSetNames.BSR : DataBSR,
+    }
+    return switcher.get(cfg.dataset_name)
 
 def save_object(array, path, filename = None):
     if filename is not None:
@@ -29,15 +35,16 @@ def load_object(path, filename = None):
         return None
 
 class ProcessedDataSet():
-    def __init__(self, x_dtype=None, y_dtype=None, downsample_ratio = 1):
+    def __init__(self, dataset_name, x_dtype=None, y_dtype=None, downsample_ratio = 1):
         self.x = None
         self.y = None
+        self.dataset_name = dataset_name
+        self.stored_file_name = self.dataset_name + '.pkl'
         self.n_classes = None
         self.x_shape = None
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
         self.class_weights = None
-        self.stored_file_name = None
         self.data_images = DataFileLoader(downsample_ratio)
         self.data_labels = DataFileLoader(downsample_ratio)
         self.downsample_ratio = downsample_ratio
@@ -125,21 +132,17 @@ class ProcessedDataSet():
 
 class DataBSR(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
-        super(DataBSR, self).__init__(x_dtype, y_dtype)
-        self.stored_file_name = 'BSR.pkl'
+        super(DataBSR, self).__init__('BSR', x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
         self.data_images = BSRImages(downsample_ratio)
         self.data_labels = BSRLabels(downsample_ratio)
 
 class DataVOC(ProcessedDataSet):
     def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
-        super(DataVOC, self).__init__(x_dtype, y_dtype)
-        self.stored_file_name = 'VOC.pkl'
+        super(DataVOC, self).__init__('VOC', x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
         self.data_images = VOCImages(downsample_ratio)
         self.data_labels = VOCLabels(downsample_ratio)
-
-
 
 class DataFileLoader():
     def __init__(self, downsample_ratio):
@@ -240,6 +243,11 @@ class VOCLabels(DataFileLoader):
 
     def read_file(self, file):
         datum = scipy.misc.imread(file)
+        a, b = np.unique(return_counts=True)
+        print(a)
+        print(b)
+        print(datum)
+        print(datum.shape)
         plt.imshow(datum)
         plt.show()
         print(exit(9))
