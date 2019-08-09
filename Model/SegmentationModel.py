@@ -43,7 +43,8 @@ class Segmenter():
         momentum=0.9,
         # weight_decay=.001
         )
-        self.criterion = nn.NLLLoss(ignore_index=-1, reduction='mean', weight=self.class_weights)
+        self.criterion = nn.NLLLoss(ignore_index=self.data.ignore_index,
+                                    reduction='mean', weight=self.class_weights)
 
 
     def load_data(self):
@@ -54,7 +55,6 @@ class Segmenter():
     def train(self, epochs=10, batch_size=10, checkpoint_space = 5):
         x_train, y_train = self.data.get_train_data()
         x_val, y_val = self.data.get_val_data()
-        print(x_train.shape)
         n_train = x_train.shape[0]
         self.model.train()
         mean_loss = 0
@@ -133,11 +133,9 @@ class Segmenter():
 
 def main():
     print(cfg.lr, **cfg.prnt)
-    downsample_ratio = 4
-    dataset = data.get_experiment_data()(x_dtype=np.float32, y_dtype=np.int32,
-                                                      downsample_ratio=downsample_ratio)
-    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=downsample_ratio, size_scale = cfg.model_size, data = dataset)
-    if cfg.load:
+    dataset = data.get_experiment_data()(downsample_ratio=cfg.downsample_ratio)
+    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=cfg.downsample_ratio, size_scale = cfg.model_size, data = dataset)
+    if cfg.load_model:
         segmenter.load_model()
     else:
         segmenter.train(epochs=cfg.epochs, batch_size=cfg.batch_size)

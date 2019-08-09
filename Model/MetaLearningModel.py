@@ -2,10 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from os.path import join, isfile
-import DataProcessing.DataProcessor as data
+import DataProcessing.DataProcessor as dp
 import Model.SegmentationModel as seg
 import numpy as np
 import Model.Config as cfg
+import DataProcessing.KShotDataGenerator as kshot_dp
 
 
 
@@ -169,12 +170,11 @@ class MetaLearner():
         pass
 
     def load_data(self):
-        self.data = data.KShotSegmentation(k=self.k)
+        self.data = dp.KShotSegmentation(k=self.k)
 
 def main():
-    meta_learner = MetaLearner()
-    meta_learner.load_data()
-    meta_learner.train_meta_learner()
+    data = dp.DataVOC(downsample_ratio=cfg.downsample_ratio)
+    metadata = kshot_dp.KShotSegmentationDataGenerator(data)
 
 
 if __name__ == "__main__":

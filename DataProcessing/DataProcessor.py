@@ -5,7 +5,6 @@ import numpy as np
 import cv2
 import pickle
 import Model.Config as cfg
-import matplotlib.pyplot as plt
 from PIL import Image
 
 
@@ -35,19 +34,24 @@ def load_object(path, filename = None):
         return None
 
 class ProcessedDataSet():
-    def __init__(self, dataset_name, x_dtype=None, y_dtype=None, downsample_ratio = 1):
+    def __init__(self, dataset_name, x_dtype=None, y_dtype=None,
+                 downsample_ratio = 1, test_ratio = .2, validate_ratio = .2):
         self.x = None
         self.y = None
         self.dataset_name = dataset_name
         self.stored_file_name = self.dataset_name + '.pkl'
         self.n_classes = None
         self.x_shape = None
+        self.n_samples = None
         self.x_dtype = x_dtype
         self.y_dtype = y_dtype
         self.class_weights = None
-        self.data_images = DataFileLoader(downsample_ratio)
+        self.ignore_index = -1
+        self.data_observations = DataFileLoader(downsample_ratio)
         self.data_labels = DataFileLoader(downsample_ratio)
         self.downsample_ratio = downsample_ratio
+        self.test_ratio = test_ratio
+        self.validate_ratio = validate_ratio
 
     def calc_class_weights(self, y):
         unique, counts = np.unique(y, return_counts=True)
@@ -57,25 +61,19 @@ class ProcessedDataSet():
     def get_train_data(self):
         if self.x is None and self.y is None:
             self.load_data()
-        if self.data_images.train_range is None:
-            raise NotImplementedError
-        indeces = self.data_images.train_range
+        indeces = self.train_range
         return self.x[indeces], self.y[indeces]
 
     def get_val_data(self):
         if self.x is None and self.y is None:
             self.load_data()
-        if self.data_images.val_range is None:
-            raise NotImplementedError
-        indeces = self.data_images.val_range
+        indeces = self.val_range
         return self.x[indeces], self.y[indeces]
 
     def get_test_data(self):
         if self.x is None and self.y is None:
             self.load_data()
-        if self.data_images.test_range is None:
-            raise NotImplementedError
-        indeces = self.data_images.test_range
+        indeces = self.test_range
         return self.x[indeces], self.y[indeces]
 
     def get_full_data(self):
@@ -85,6 +83,21 @@ class ProcessedDataSet():
 
     def get_class_weights(self):
         return self.class_weights
+
+    def split_data(self): #todo, right no we take the validation set from the testing dp, either generalize or follow proper practice
+        new_splits = []
+        data_splits = self.data_observations.data_splits
+        if len(data_splits) == 0: # we are assigning the train,validate,test set here
+            new_splits.append(self.n_samples*(1.0-self.test_ratio))
+            new_splits.append(new_splits[-1] + (self.n_samples - new_splits[-1])*(self.validate_ratio))
+        if len(data_splits) == 1: # we are assigning the validate split here
+            new_splits = [data_splits[-1], data_splits[-1] + (self.n_samples - data_splits[-1])*(self.validate_ratio)]
+        self.set_data_split(int(new_splits[0]), int(new_splits[1]))
+
+    def set_data_split(self, train_val_split, val_test_split):
+        self.train_range = range(0, train_val_split)
+        self.val_range = range(train_val_split, val_test_split)
+        self.test_range = range(val_test_split, self.n_samples)
 
     def try_load(self):
         if isfile(cfg.processed_data_path + self.stored_file_name):
@@ -96,18 +109,12 @@ class ProcessedDataSet():
     def save(self):
         save_object(self.__dict__, cfg.processed_data_path, self.stored_file_name)
 
-    def load_data(self):
-        raise NotImplementedError
-
-    def set_data_split(self, train_val_split, val_test_split):
-        self.train_range = range(0, train_val_split)
-        self.val_range = range(train_val_split, val_test_split)
-        self.test_range = range(val_test_split, self.x_shape[0])
-
     def load_data(self):  # c x h x w
         if not self.try_load():
-            x_full, x = self.data_images.load_data_from_files()
+            x_full, x = self.data_observations.load_data_from_files()
             y_full, y = self.data_labels.load_data_from_files()
+            self.n_samples = x_full.shape[0]
+            self.split_data()
             self.calc_class_weights(y_full)
             self.n_classes = len(self.class_weights)
             if self.x_dtype is not None and x.dtype != self.x_dtype:
@@ -131,18 +138,19 @@ class ProcessedDataSet():
 
 
 class DataBSR(ProcessedDataSet):
-    def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
+    def __init__(self, x_dtype=np.float32, y_dtype=np.int32, downsample_ratio=4):
         super(DataBSR, self).__init__('BSR', x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
-        self.data_images = BSRImages(downsample_ratio)
+        self.data_observations = BSRImages(downsample_ratio)
         self.data_labels = BSRLabels(downsample_ratio)
 
 class DataVOC(ProcessedDataSet):
-    def __init__(self, x_dtype=np.float32, y_dtype=np.float32, downsample_ratio=4):
+    def __init__(self, x_dtype=np.float32, y_dtype=np.int32, downsample_ratio=4):
         super(DataVOC, self).__init__('VOC', x_dtype, y_dtype)
         self.downsample_ratio = downsample_ratio
-        self.data_images = VOCImages(downsample_ratio)
+        self.data_observations = VOCImages(downsample_ratio)
         self.data_labels = VOCLabels(downsample_ratio)
+        self.ignore_index = 255 # according to voc2012, 255 is unlabeled/void
 
 class DataFileLoader():
     def __init__(self, downsample_ratio):
@@ -199,11 +207,7 @@ class DataFileLoader():
         assert not any(np.any(np.isnan(data_i)) for data_i in data)
         data = np.vstack(data)
         data_downsampled = np.vstack(data_downsampled)
-        if len(file_sets) is 3:
-            train_val_split, val_test_split = len(file_sets[0]), len(file_sets[0]) + len(file_sets[1])
-            self.train_range = range(0, train_val_split)
-            self.val_range = range(train_val_split, val_test_split)
-            self.test_range = range(val_test_split, data.shape[0])
+        self.data_splits = [len(file_sets[i]) for i in range(0, len(file_sets)-1)]
         return data, data_downsampled
 
 
@@ -213,7 +217,7 @@ class VOCImages(DataFileLoader):
         self.file_ext = '.jpg'
         self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
         self.images_path =  self.root_path + 'JPEGImages\\'
-        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
+        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'val']]
 
     def read_file(self, file):
         datum = scipy.misc.imread(file)
@@ -245,7 +249,7 @@ class VOCLabels(DataFileLoader):
         img = Image.open(file)
         datum = np.array(img)
         datum_downsampled = downsample(datum, ratio=self.downsample_ratio,
-                                       interpolation=cv2.INTER_LINEAR)
+                                       interpolation=cv2.INTER_NEAREST)
         return datum, datum_downsampled
 
     def get_file_sets(self):
@@ -265,7 +269,7 @@ class BSRImages(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(BSRImages, self).__init__(downsample_ratio)
         self.file_ext = '.jpg'
-        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\images\\'
+        self.root_path = '..\\Data\\BSR\\BSDS500\\dp\\images\\'
         self.image_set_paths = [self.root_path + i for i in ['train', 'val', 'test']]
 
     def read_file(self, file):
@@ -290,7 +294,7 @@ class BSRLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(BSRLabels, self).__init__(downsample_ratio)
         self.file_ext = '.mat'
-        self.root_path = '..\\Data\\BSR\\BSDS500\\data\\groundTruth\\'
+        self.root_path = '..\\Data\\BSR\\BSDS500\\dp\\groundTruth\\'
         self.image_set_paths = [self.root_path + i for i in ['train', 'val', 'test']]
         self.mat_key = 'groundTruth'
         self.segmentation_index = 0
@@ -315,57 +319,6 @@ class BSRLabels(DataFileLoader):
                     file_names.append(sample_path)
             file_sets.append(file_names)
         return file_sets
-
-class KShotSegmentation():
-    def __init__(self, x=None, y=None, k=5, downsample_ratio = 2):
-        self.folder_path = '..\\Data\\MetaLearnerData\\'
-        self.file_name = 'BSR_meta_data'+str(k)+'.pkl'
-        self.stored_path = join(self.folder_path, self.file_name)
-        self.meta_data = load_object(self.folder_path, self.file_name)
-        self.downsample_ratio = downsample_ratio
-        if self.meta_data is None:
-            if x is None and y is None:
-                data = DataBSR(x_dtype=np.float32, y_dtype=np.int32)
-                data.load_data()
-                x, y = data.get_full_data()
-            self.make_data(x, y, k)
-        else:
-            self.meta_xs = self.meta_data[0]
-            self.meta_ys = self.meta_data[1]
-
-
-    def make_data(self, x, y, k):
-        meta_xs = []
-        meta_ys = []
-
-        for meta_idx in range(0, x.shape[0]):
-            target_x = x[meta_idx]
-            target_y = y[meta_idx]
-            labels = np.unique(target_y, return_counts=False)
-            ks = [k]*len(labels)
-            meta_ys.append((target_x, target_y))
-            meta_x = []
-            for label_idx in range(len(labels)):
-                label = labels[label_idx]
-                ks[label_idx] -= np.sum([label in img[1] for img in meta_x])
-                for data_idx in range(0, x.shape[0]):
-                    if data_idx != meta_idx:
-                        if ks[label_idx] <= 0:
-                            break
-                        data_x = x[data_idx]
-                        data_y = y[data_idx]
-                        if label in data_y:
-                            ks[label_idx] -= 1
-                            meta_x.append((data_x, data_y))
-            meta_xs.append(meta_x)
-        self.meta_xs = meta_xs
-        self.meta_ys = meta_ys
-        save_object([meta_xs, meta_ys], self.folder_path, self.file_name)
-
-    def get_dataset(self, idx):
-        return self.meta_xs[idx], self.meta_ys[idx]
-
-
 
 def downsample(img, ratio, interpolation=cv2.INTER_NEAREST):
     new_h = img.shape[0] // ratio

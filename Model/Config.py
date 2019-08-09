@@ -18,13 +18,15 @@ use_cpu = False
 device = torch.device('cpu') if use_cpu else torch.device('cuda')
 dtype = torch.float32  # if use_cpu else torch.float32 #xentropy doesn't support float16
 args = {'device': device, 'dtype': dtype}
+torch.cuda.set_device(0)
 #################################################################################################################
 
 
 
-load = False
-batch_size = 10 #roughly 45 for 64 model_size and half as u keep doubling
-model_size = 64
+load_model = False
+downsample_ratio = 4
+batch_size = 15 #roughly 45 for 64 model_size and half as u keep doubling
+model_size = 32
 epochs = 1000
 lr = .075
 np.random.seed(24)
@@ -47,4 +49,4 @@ if not os.path.exists(experiment_path):
     os.makedirs(experiment_path)
 console_file_name = 'console' + str(lr) + '.txt'
 console_file_path = join(experiment_path, console_file_name)
-prnt = {'file': open(console_file_path, 'w'), 'flush': True} if not load else {}
+prnt = {'file': open(console_file_path, 'w'), 'flush': True} if not load_model else {}

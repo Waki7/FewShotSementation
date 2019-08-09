@@ -13,7 +13,7 @@ def getTrainer():
 
 def train_meta_learner(data: np.ndarray, trainer: ml.MetaLearningModel, models: List, kshots = 20, lr = .0005, decay = .005):
     """
-    :param kshots: if data can't fit on gpu then increase number of kshots, implemented so that whole batch is ran on gpu
+    :param kshots: if dp can't fit on gpu then increase number of kshots, implemented so that whole batch is ran on gpu
 
     :return:
     """
