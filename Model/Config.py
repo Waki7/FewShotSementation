@@ -25,7 +25,8 @@ torch.cuda.set_device(0)
 model_size = 64
 lr = .075
 dataset_name = DataSetNames.VOC
-experiment = 'FullSeg'
+weights = False # todo implementation for voc is probably wrong, i'm guessing related to ignored index
+experiment = 'FullSeg'+('_Weights' if weights else '')
 
 load_model = False
 downsample_ratio = 4

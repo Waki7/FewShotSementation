@@ -44,7 +44,7 @@ class Segmenter():
         # weight_decay=.001
         )
         self.criterion = nn.NLLLoss(ignore_index=self.data.ignore_index,
-                                    reduction='mean', weight=self.class_weights)
+                                    reduction='mean', weight=self.class_weights if cfg.weights else None)
 
 
     def load_data(self):

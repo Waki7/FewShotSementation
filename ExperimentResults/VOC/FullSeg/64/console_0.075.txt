@@ -1,1 +1,12 @@
 0.075
+ average loss for epoch  0 :  -0.006862901382738613
+ average loss for epoch  1 :  -0.012421402856300437
+ average loss for epoch  2 :  -0.012532184277075887
+ average loss for epoch  3 :  -0.012550773475665212
+ average loss for epoch  4 :  -0.012527801096439362
+val accuracy  0.48724041522491346
+train accuracy  0.4946966994535519
+ average loss for epoch  5 :  -0.012532135787231674
+ average loss for epoch  6 :  -0.012549285476650697
+ average loss for epoch  7 :  -0.01251729382354705
+ average loss for epoch  8 :  -0.012526476765916648
