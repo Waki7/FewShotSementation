@@ -174,7 +174,10 @@ class MetaLearner():
 
 def main():
     data = dp.DataVOC(downsample_ratio=cfg.downsample_ratio)
+    data.load_data()
     metadata = kshot_dp.KShotSegmentationDataGenerator(data)
+    metadata.load_data()
+    metadata.load_data()
 
 
 if __name__ == "__main__":

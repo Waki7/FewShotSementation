@@ -8,15 +8,19 @@ class KShotSegmentationDataGenerator(dp.ProcessedDataSet):
         super(KShotSegmentationDataGenerator, self).__init__('{}_{}-shot'.format(data_set.dataset_name, k))
         self.folder_path = '..\\Data\\MetaLearnerData\\'
         self.data_set = data_set
+        if self.data_set.n_samples is None:
+            raise ValueError('data is not loaded')
         if n_samples is None:
-            self.n_samples = self.data_set.test_range[1] = self.data_set.test_range[0]
+            self.n_samples = len(self.data_set.test_range)
 
         self.k = k
+        self.meta_x_indeces = None
+        self.meta_y_indeces = None
 
-    def __getstate__(self):
+    def save(self):
         state = self.__dict__.copy()
         del state['data_set']
-        return state
+        dp.save_object(state, cfg.processed_data_path, self.stored_file_name)
 
     def create_meta_sets(self):  # c x h x w
         meta_x_indeces = []
@@ -44,24 +48,9 @@ class KShotSegmentationDataGenerator(dp.ProcessedDataSet):
             meta_x_indeces.append(meta_x)
         self.meta_x_indeces = meta_x_indeces
         self.meta_y_indeces = meta_y_indeces
-        dp.save_object([meta_x_indeces, meta_y_indeces], self.folder_path, self.file_name)
+        print(np.shape(self.meta_x_indeces))
 
     def load_data(self):  # c x h x w
         if not self.try_load():
             self.create_meta_sets()
-
-            ###3##totodoododtdodo todo jalksd
-            x_full, x = self.data_observations.load_data_from_files()
-            y_full, y = self.data_labels.load_data_from_files()
-            self.n_samples = x_full.shape[0]
-            self.split_data()
-            self.calc_class_weights(y_full)
-            self.n_classes = len(self.class_weights)
-            if self.x_dtype is not None and x.dtype != self.x_dtype:
-                x = x.astype(self.x_dtype)
-            if self.y_dtype is not None and y.dtype != self.y_dtype:
-                y = y.astype(self.y_dtype)
-            self.x = self.cleanInput(x)
-            self.y = y
-            self.x_shape = self.x.shape
             self.save()
