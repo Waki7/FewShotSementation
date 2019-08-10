@@ -109,7 +109,7 @@ class ProcessedDataSet():
     def save(self):
         save_object(self.__dict__, cfg.processed_data_path, self.stored_file_name)
 
-    def load_data(self):  # c x h x w
+    def load_data(self):  # c x h x w this implementation is load_data for images
         if not self.try_load():
             x_full, x = self.data_observations.load_data_from_files()
             y_full, y = self.data_labels.load_data_from_files()
@@ -153,7 +153,8 @@ class DataVOC(ProcessedDataSet):
         self.ignore_index = 255 # according to voc2012, 255 is unlabeled/void
 
 class DataFileLoader():
-    def __init__(self, downsample_ratio):
+    def __init__(self, downsample_ratio, pad_value = 0):
+        self.pad_value = pad_value
         self.stored_data_path = None
         self.stored_file_name = None
         self.sampled_file_name = None
@@ -174,7 +175,7 @@ class DataFileLoader():
     def pad(self, image: np.ndarray, max_shape: list):
         pad_width = [(0, max_shape[i] - image.shape[i]) for i in range(len(max_shape))]
         return np.pad(image,
-                      pad_width=pad_width, mode='constant')
+                      pad_width=pad_width, mode='constant', constant_values=self.pad_value)
 
     def shape_data_uniform(self, data: list): # todo bucketize if different sizes
         max_dims = [0]*len(data[0].shape)
@@ -213,7 +214,7 @@ class DataFileLoader():
 
 class VOCImages(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(VOCImages, self).__init__(downsample_ratio)
+        super(VOCImages, self).__init__(downsample_ratio, pad_value=255)
         self.file_ext = '.jpg'
         self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
         self.images_path =  self.root_path + 'JPEGImages\\'
@@ -239,7 +240,7 @@ class VOCImages(DataFileLoader):
 
 class VOCLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
-        super(VOCLabels, self).__init__(downsample_ratio)
+        super(VOCLabels, self).__init__(downsample_ratio, pad_value=255)
         self.file_ext = '.png'
         self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
         self.labels_path = self.root_path + 'SegmentationClass\\'

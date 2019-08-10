@@ -29,7 +29,7 @@ experiment = 'FullSeg'
 
 load_model = False
 downsample_ratio = 4
-batch_size = 45 #roughly 45 for 64 model_size and half as u keep doubling
+batch_size = 60 #roughly 45 for 64 model_size and half as u keep doubling
 epochs = 1000
 np.random.seed(24)
 random.seed(24)
