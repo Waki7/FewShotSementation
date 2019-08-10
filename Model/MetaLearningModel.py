@@ -60,7 +60,7 @@ class MetaLearningModel(nn.Module):
 
 
 class MetaLearner():
-    def __init__(self, k = 5, lr = .01, decay = .00001):
+    def __init__(self, dataset:kshot_dp.KShotSegmentationDataGenerator, k = 5, lr = .01, decay = .00001):
         self.k = 5
         self.lr = lr
         self.decay = decay
@@ -69,14 +69,16 @@ class MetaLearner():
         self.model_path = join(self.model_path, self.model_name)
         self.model = None
         self.load_model()
+        self.data = dataset
 
     def load_model(self):
         if isfile(self.model_path):
             self.model = torch.load(self.model_path)
             return True
-        self.model = MetaLearningModel()
-        self.states_initialized = False
         return False
+
+    def save_model(self):
+        torch.save(self.model, self.model_path)
 
     def initalize_states(self, th_t1):  # initialize bias to be higher for forget gate i believe and lwoer for other
         self.model.i_t1 = torch.ones(self.model.input_size)
@@ -92,11 +94,11 @@ class MetaLearner():
 
     def get_optimizer(self, parameters):
         if self.model is None:
-            self.train_meta_learner()
+            self.train()
         self.set_learner(parameters)
         return self.model
 
-    def train_meta_learner(self):
+    def train(self):
         n_train = 5
         for i in range(0, n_train):
             meta_x, meta_y = self.data.get_dataset(i)
@@ -169,15 +171,17 @@ class MetaLearner():
     def zero_grad(self):
         pass
 
-    def load_data(self):
-        self.data = dp.KShotSegmentation(k=self.k)
 
 def main():
     data = dp.DataVOC(downsample_ratio=cfg.downsample_ratio)
     data.load_data()
-    metadata = kshot_dp.KShotSegmentationDataGenerator(data)
+    metadata = kshot_dp.KShotSegmentationDataGenerator(data, k=5)
     metadata.load_data()
-    metadata.load_data()
+    model = MetaLearner(data)
+    if cfg.load_model:
+        model.load_model()
+    else:
+        model.train()
 
 
 if __name__ == "__main__":
