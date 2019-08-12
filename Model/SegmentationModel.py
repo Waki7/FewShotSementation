@@ -79,7 +79,7 @@ class Segmenter():
 
     def pixel_accuracy(self, x, y, batch_size):
         predictions = self.predict(x, batch_size)
-        return utils.accuracy(predictions, y)
+        return utils.accuracy(predictions, y, self.data.ignore_index)
 
 
     def predict(self, x, batch_size=1):
@@ -99,10 +99,12 @@ class Segmenter():
     def test(self, batch_size):
         x_test, y_test = self.data.get_test_data()
         y_pred_test = self.predict(x_test, batch_size)
-        print('test accuracy ', utils.accuracy(y_pred_test, y_test), **cfg.prnt)
+        print('test accuracy ', utils.accuracy(y_pred_test, y_test, self.data.ignore_index), **cfg.prnt)
+
         x_full, y_full = self.data.get_full_data()
         y_pred_full = self.predict(x_full, batch_size)
-        print('accuracy for whole dataset', utils.accuracy(y_pred_full, y_full), **cfg.prnt)
+        print('accuracy for whole dataset', utils.accuracy(y_pred_full, y_full, self.data.ignore_index), **cfg.prnt)
+
         utils.plot_confusion_matrix(y_pred_test, y_test, 'test')
         utils.plot_confusion_matrix(y_pred_full, y_full, 'full')
 

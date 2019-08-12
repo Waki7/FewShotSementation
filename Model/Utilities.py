@@ -35,9 +35,13 @@ def calc_confusion_matrix(predictions, ground_truths):
     ground_truths = ground_truths.flatten()
     return confusion_matrix(ground_truths, predictions)
 
-def accuracy(predictions, ground_truths):
+def accuracy(predictions, ground_truths, ignore_index = None):
     accuracies = []
     for pred, truth in zip(predictions, ground_truths):
-        accuracy = np.average(pred == truth)
-        accuracies.append(accuracy)
+        accuracy = np.sum(pred == truth)
+        if ignore_index is not None:
+            total = np.sum(truth != ignore_index)
+        else:
+            total = np.product(truth.shape)
+        accuracies.append(accuracy/total)
     return np.average(accuracies)

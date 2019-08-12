@@ -10,3 +10,14 @@ train accuracy  0.4946966994535519
  average loss for epoch  6 :  -0.012549285476650697
  average loss for epoch  7 :  -0.01251729382354705
  average loss for epoch  8 :  -0.012526476765916648
+ average loss for epoch  9 :  -0.012537540389540417
+val accuracy  0.48724041522491346
+train accuracy  0.4946966994535519
+ average loss for epoch  10 :  -0.012555304568647688
+ average loss for epoch  11 :  -0.012533023505588698
+ average loss for epoch  12 :  -0.012536597422889022
+ average loss for epoch  13 :  -0.012531995244039213
+ average loss for epoch  14 :  -0.012542253187119635
+val accuracy  0.48724041522491346
+train accuracy  0.4946966994535519
+ average loss for epoch  15 :  -0.012513393302107118

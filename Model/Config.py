@@ -22,15 +22,15 @@ torch.cuda.set_device(0)
 
 
 
-model_size = 64
-lr = .075
+model_size = 128
+lr = .05
 dataset_name = DataSetNames.VOC
-weights = False # todo implementation for voc is probably wrong, i'm guessing related to ignored index
+weights = True # todo implementation for voc is probably wrong, i'm guessing related to ignored index
 experiment = 'FullSeg'+('_Weights' if weights else '')
 
 load_model = False
 downsample_ratio = 4
-batch_size = 60 #roughly 45 for 64 model_size and half as u keep doubling
+batch_size = 30 #roughly 45 for 64 model_size and half as u keep doubling
 epochs = 1000
 np.random.seed(24)
 random.seed(24)
@@ -42,6 +42,7 @@ torch.backends.cudnn.benchmark=False
 #Paths
 #################################################################################################################
 experiment_path = '..\\ExperimentResults\\' + dataset_name.value + '\\'+experiment+'\\' + str(model_size) + '\\'
+print(experiment_path)
 processed_data_path = '..\\Data\\ProcessedData\\'
 stored_model_path = join(experiment_path, 'model_'+str(lr))
 graph_file_path = join(experiment_path, 'heatmap_confusion_matrix' + str(lr))

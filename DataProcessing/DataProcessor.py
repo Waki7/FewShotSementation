@@ -244,7 +244,7 @@ class VOCLabels(DataFileLoader):
         self.file_ext = '.png'
         self.root_path = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
         self.labels_path = self.root_path + 'SegmentationClass\\'
-        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'trainval', 'val']]
+        self.image_set_paths = [self.root_path + 'ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'val']]
 
     def read_file(self, file):
         img = Image.open(file)
