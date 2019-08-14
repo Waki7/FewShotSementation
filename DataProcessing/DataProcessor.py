@@ -216,8 +216,8 @@ class VOCImages(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(VOCImages, self).__init__(downsample_ratio, pad_value=255)
         self.file_ext = '.jpg'
-        self.year_paths = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
-        self.images_paths =  [root_path + 'JPEGImages\\' for root_path in self.year_paths]
+        self.year_paths = ['..\\Data\\VOC\\VOCdevkit\\VOC20{}\\'.format(i) for i in ['08', '09', '10', '11', '12']]
+        self.image_paths =  [root_path + 'JPEGImages\\' for root_path in self.year_paths]
         self.image_set_paths = ['ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'val']]
 
     def read_file(self, file):
@@ -228,14 +228,14 @@ class VOCImages(DataFileLoader):
 
     def get_file_sets(self):
         file_sets = []
-        for image_list_path in self.image_set_paths:
+        for image_lists_path in self.image_set_paths:
             file_names = []
-            for year_path in self.year_paths:
-                image_list_path = year_path + image_list_path
-                with open(image_list_path, 'r') as f:
+            for year_path, image_path in zip(self.year_paths, self.image_paths):
+                set_list_path = year_path + image_lists_path
+                with open(set_list_path, 'r') as f:
                     for line in f:
                         image_name_line = line.strip() + self.file_ext
-                        sample_path = join(self.images_path, image_name_line)
+                        sample_path = join(image_path, image_name_line)
                         file_names.append(sample_path)
             file_sets.append(file_names)
         return file_sets
@@ -244,8 +244,8 @@ class VOCLabels(DataFileLoader):
     def __init__(self, downsample_ratio):
         super(VOCLabels, self).__init__(downsample_ratio, pad_value=255)
         self.file_ext = '.png'
-        self.year_paths = '..\\Data\\VOC\\VOCdevkit\\VOC2012\\'
-        self.images_paths =  [root_path + 'SegmentationClass\\' for root_path in self.year_paths]
+        self.year_paths = ['..\\Data\\VOC\\VOCdevkit\\VOC20{}\\'.format(i) for i in ['08', '09', '10', '11', '12']]
+        self.image_paths =  [root_path + 'SegmentationClass\\' for root_path in self.year_paths]
         self.image_set_paths = ['ImageSets\\Segmentation\\' + i + '.txt' for i in ['train', 'val']]
 
     def read_file(self, file):
@@ -257,14 +257,14 @@ class VOCLabels(DataFileLoader):
 
     def get_file_sets(self):
         file_sets = []
-        for image_list_path in self.image_set_paths:
+        for image_lists_path in self.image_set_paths:
             file_names = []
-            for year_path in self.year_paths:
-                image_list_path = year_path + image_list_path
-                with open(image_list_path, 'r') as f:
+            for year_path, image_path in zip(self.year_paths, self.image_paths):
+                set_list_path = year_path + image_lists_path
+                with open(set_list_path, 'r') as f:
                     for line in f:
                         image_name_line = line.strip() + self.file_ext
-                        sample_path = join(self.images_path, image_name_line)
+                        sample_path = join(image_path, image_name_line)
                         file_names.append(sample_path)
             file_sets.append(file_names)
         return file_sets

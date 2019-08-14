@@ -32,8 +32,8 @@ experiment = 'FullSeg'+('_Weights' if weights else '')
 
 load_model = False
 downsample_ratio = 4
-batch_size = 35 #roughly 45 for 64 model_size and half as u keep doubling
-epochs = 1000
+batch_size = 30 #roughly 45 for 64 model_size and half as u keep doubling
+epochs = 100
 np.random.seed(24)
 random.seed(24)
 torch.manual_seed(24)
