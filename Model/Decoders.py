@@ -41,8 +41,10 @@ class SegDecoder(nn.Module):  # based on PPM
             ))
         self.l1 = nn.ModuleList(self.ppm)
 
+        l2_in_channels = n_encoded_channels + len(pool_scales)*out_channels_1
+
         self.l2 = nn.Sequential(
-            nn.Conv2d(in_channels=n_encoded_channels + len(pool_scales) * out_channels_1,
+            nn.Conv2d(in_channels=l2_in_channels,
                       out_channels=out_channels_2,
                       kernel_size=kernel2, padding=kernel2 // 2, bias=bias),
             nn.BatchNorm2d(out_channels_2),
@@ -65,7 +67,7 @@ class SegDecoder(nn.Module):  # based on PPM
                 (input_size[2], input_size[3]),
                 mode='bilinear', align_corners=False))
         x = torch.cat(ppm_out, 1)
-        x = self.l2(x)
+        x = self.l2(encoded_features)
         if self.scale_up:  # is True during inference
             x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)

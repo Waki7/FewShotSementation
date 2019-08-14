@@ -20,17 +20,19 @@ args = {'device': device, 'dtype': dtype}
 torch.cuda.set_device(0)
 #################################################################################################################
 
-
-
+#### experiments
+weights = True # todo implementation for voc is probably wrong, i'm guessing related to ignored index
+#### experiments
 model_size = 128
 lr = .05
 dataset_name = DataSetNames.VOC
-weights = True # todo implementation for voc is probably wrong, i'm guessing related to ignored index
 experiment = 'FullSeg'+('_Weights' if weights else '')
+
+
 
 load_model = False
 downsample_ratio = 4
-batch_size = 30 #roughly 45 for 64 model_size and half as u keep doubling
+batch_size = 35 #roughly 45 for 64 model_size and half as u keep doubling
 epochs = 1000
 np.random.seed(24)
 random.seed(24)
