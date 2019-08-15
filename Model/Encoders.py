@@ -2,7 +2,7 @@ import torch.nn as nn
 
 
 class SegEncoder(nn.Module): # will maintain same shape as input
-    def __init__(self, in_shape, out_shape=32, dilation = 4, size = 256):
+    def __init__(self, in_shape, model_size=32, out_shape = 128, dilation = 4):
         super(SegEncoder, self).__init__()
 
         bias = True
@@ -10,8 +10,10 @@ class SegEncoder(nn.Module): # will maintain same shape as input
         stride1 = 1
         kernel1 = 7
 
-        out_channels_1 = size
-        out_channels_2 = size
+        out_channels_1 = model_size
+        out_channels_2 = (out_shape + model_size) // 2
+        out_channels_final = out_shape
+
         self.l1 = nn.Sequential(
             # dw
             nn.Conv2d(in_channels=channels,
@@ -41,10 +43,10 @@ class SegEncoder(nn.Module): # will maintain same shape as input
             nn.ReLU6(inplace=True),
             # pw-linear
             nn.Conv2d(in_channels=out_channels_2,
-                      out_channels=out_shape, kernel_size=kernel2,
+                      out_channels=out_channels_final, kernel_size=kernel2,
                       stride=stride2, padding=self.calc_padding(kernel2, dilation),
                       dilation=dilation, bias=bias),
-            nn.BatchNorm2d(out_shape),
+            nn.BatchNorm2d(out_channels_final),
         )
         # final_dim = ((in_shape[-1]*in_shape[-2])//stride2) * out_channels_2
         # self.fc = nn.Linear(in_features=final_dim, out_features=n_class)

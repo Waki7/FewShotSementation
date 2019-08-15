@@ -9,21 +9,23 @@ import numpy as np
 
 
 class SegmentationModel(nn.Module):
-    def __init__(self, in_shape, n_class, dilation = 2, size = 1):
+    def __init__(self, in_shape, n_class, dilation=2, size=128, encoding_size=256):
         super(SegmentationModel, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape, out_shape=size, dilation = dilation, size=size)
-        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape, size = size)
+        self.encoder = SegEncoder(in_shape=in_shape, model_size=size, out_shape=encoding_size, dilation=dilation)
+        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape, size=size)
 
     def forward(self, input):
         encoded_features = self.encoder(input)
         pred = self.decoder(encoded_features)
         return pred
 
+
 class Segmenter():
     def __init__(self, model: SegmentationModel = None, downsample_ratio=2,
-                 lr = .01, size_scale=2, data : data.ProcessedDataSet = None):
-        self.size_scale = size_scale
-        self.downsample_ratio=downsample_ratio
+                 lr=.01, model_size=128, encoding_size=512, data: data.ProcessedDataSet = None):
+        self.size_scale = model_size
+        self.encoding_size = encoding_size
+        self.downsample_ratio = downsample_ratio
         self.lr = lr
         self.model_path = cfg.stored_model_path + '.pkl'
         self.model = model
@@ -36,23 +38,22 @@ class Segmenter():
         self.classes = int(len(self.class_weights))
         self.model = SegmentationModel(in_shape=self.data.x_shape,
                                        n_class=self.classes,
-                                       size=self.size_scale).to(**cfg.args)
+                                       size=self.size_scale,
+                                       encoding_size=self.encoding_size).to(**cfg.args)
         self.opt = torch.optim.SGD(
-        self.model.parameters(),
-        lr=self.lr,
-        momentum=0.9,
-        # weight_decay=.001
+            self.model.parameters(),
+            lr=self.lr,
+            momentum=0.9,
+            # weight_decay=.001
         )
         self.criterion = nn.NLLLoss(ignore_index=self.data.ignore_index,
                                     reduction='mean', weight=self.class_weights if cfg.weights else None)
-
 
     def load_data(self):
         self.data.load_data()
         self.class_weights = torch.tensor(self.data.get_class_weights()).to(**cfg.args)
 
-
-    def train(self, epochs=10, batch_size=10, checkpoint_space = 5):
+    def train(self, epochs=10, batch_size=10, checkpoint_space=5):
         x_train, y_train = self.data.get_train_data()
         x_val, y_val = self.data.get_val_data()
         n_train = x_train.shape[0]
@@ -80,7 +81,6 @@ class Segmenter():
     def pixel_accuracy(self, x, y, batch_size):
         predictions = self.predict(x, batch_size)
         return utils.accuracy(predictions, y, self.data.ignore_index)
-
 
     def predict(self, x, batch_size=1):
         self.model.eval()
@@ -111,17 +111,16 @@ class Segmenter():
     def show_predictions(self, x, y, idx):
         self.model.eval()
         _, ax = plt.subplots(1, 2)
-        x_batch = torch.tensor(x[idx:idx+1]).to(**cfg.args)
+        x_batch = torch.tensor(x[idx:idx + 1]).to(**cfg.args)
         prediction = self.model.forward(x_batch)
         prediction = prediction.detach().cpu().numpy()
         prediction = np.argmax(prediction, axis=1)
         prediction = prediction[0]
-        ground_truth = y[idx:idx+1][0]
+        ground_truth = y[idx:idx + 1][0]
         ax[0].imshow(prediction)
         ax[1].imshow(ground_truth)
         plt.show()
         self.model.train()
-
 
     def save_model(self):
         torch.save(self.model, self.model_path)
@@ -136,7 +135,8 @@ class Segmenter():
 def main():
     print(cfg.lr, **cfg.prnt)
     dataset = data.get_experiment_data()(downsample_ratio=cfg.downsample_ratio)
-    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=cfg.downsample_ratio, size_scale = cfg.model_size, data = dataset)
+    segmenter = Segmenter(lr=cfg.lr, downsample_ratio=cfg.downsample_ratio, model_size=cfg.model_size,
+                          encoding_size=cfg.encoding_size, data=dataset)
     if cfg.load_model:
         segmenter.load_model()
     else:
