@@ -53,7 +53,7 @@ class ProcessedDataSet():
         self.test_ratio = test_ratio
         self.validate_ratio = validate_ratio
 
-    def calc_class_weights(self, y): #assign classes variables here
+    def calc_class_weights(self, y): #todo assign classes variables here
         unique, counts = np.unique(y, return_counts=True)
         totalCount = sum(counts)
         self.class_weights = [(totalCount + 1000 ) / c for c in counts]

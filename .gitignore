@@ -2,6 +2,6 @@
 .idea/MMXSide.iml
 Data/ProcessedData/*
 Data/ADEChallengeData2016/*
-Data/MetaLearnerData/*
+Data/meta_learner_data/*
 Data/VOC/*
 .idea/workspace.xml
