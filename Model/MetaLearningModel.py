@@ -2,11 +2,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from os.path import join, isfile
-import DataProcessing.DataProcessor as dp
+import data_processing.DataProcessor as dp
 import Model.SegmentationModel as seg
 import numpy as np
 import Model.Config as cfg
-import DataProcessing.KShotDataGenerator as kshot_dp
+import data_processing.KShotDataGenerator as kshot_dp
 
 
 

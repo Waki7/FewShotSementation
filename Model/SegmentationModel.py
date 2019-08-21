@@ -3,16 +3,18 @@ from Model.Decoders import *
 import Model.Config as cfg
 import Model.Utilities as utils
 from os.path import join, isfile
-import DataProcessing.DataProcessor as data
+import data_processing.DataProcessor as data
 import matplotlib.pyplot as plt
 import numpy as np
 
 
 class SegmentationModel(nn.Module):
-    def __init__(self, in_shape, n_class, dilation=2, size=128, encoding_size=256):
+    def __init__(self, in_shape, n_class, out_shape, dilation=2, size=128, encoding_size=256):
         super(SegmentationModel, self).__init__()
-        self.encoder = SegEncoder(in_shape=in_shape, model_size=size, out_shape=encoding_size, dilation=dilation)
-        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape, size=size)
+        self.encoder = SegEncoder(in_shape=in_shape, model_size=size, out_shape=encoding_size, dilation=dilation,
+                                  encoding_downsample = cfg.encoding_downsample)
+        self.decoder = SegDecoder(n_class=n_class, n_encoded_channels=self.encoder.out_shape,
+                                  out_shape=out_shape, size=size)
 
     def forward(self, input):
         encoded_features = self.encoder(input)
@@ -22,7 +24,8 @@ class SegmentationModel(nn.Module):
 
 class Segmenter():
     def __init__(self, model: SegmentationModel = None, downsample_ratio=2,
-                 lr=.01, model_size=128, encoding_size=512, data: data.ProcessedDataSet = None):
+                 lr=.01, model_size=128, encoding_size=512,
+                 data: data.ProcessedDataSet = None):
         self.size_scale = model_size
         self.encoding_size = encoding_size
         self.downsample_ratio = downsample_ratio
@@ -38,6 +41,7 @@ class Segmenter():
         self.classes = int(len(self.class_weights))
         self.model = SegmentationModel(in_shape=self.data.x_shape,
                                        n_class=self.classes,
+                                       out_shape=self.data.y.shape[-2:],
                                        size=self.size_scale,
                                        encoding_size=self.encoding_size).to(**cfg.args)
         self.opt = torch.optim.SGD(
@@ -143,8 +147,11 @@ def main():
         segmenter.train(epochs=cfg.epochs, batch_size=cfg.batch_size)
         segmenter.save_model()
 
-    segmenter.test(cfg.batch_size)
-    # segmenter.show_predictions(1)
+        segmenter.test(cfg.batch_size)
+    x, y = segmenter.data.get_train_data()
+    segmenter.show_predictions(x, y, 1)
+    x, y = segmenter.data.get_test_data()
+    segmenter.show_predictions(x, y, 1)
     print('_______________', **cfg.prnt)
 
 

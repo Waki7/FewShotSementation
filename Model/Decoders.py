@@ -17,10 +17,11 @@ def conv3x3_bn_relu(in_planes, out_planes, stride=1):
             )
 
 class SegDecoder(nn.Module):  # based on PPM
-    def __init__(self, n_class, n_encoded_channels,
+    def __init__(self, n_class, n_encoded_channels, out_shape,
                  scale_up=False, pool_scales=(2, 5, 8), size = 256):
         super(SegDecoder, self).__init__()
         self.scale_up = scale_up
+        self.out_shape = out_shape
 
         out_channels_1 = size
         out_channels_2 = size
@@ -67,7 +68,9 @@ class SegDecoder(nn.Module):  # based on PPM
                 (input_size[2], input_size[3]),
                 mode='bilinear', align_corners=False))
         x = torch.cat(ppm_out, 1)
+        x = nn.functional.interpolate(x, self.out_shape)
         x = self.l2(x)
+
         if self.scale_up:  # is True during inference
             x = nn.functional.interpolate(
                 x, size=segSize, mode='bilinear', align_corners=False)

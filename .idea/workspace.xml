@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/console_0.05.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/console_0.05.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/meta_learner_data/BSR_meta_data5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/DataProcessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/DocImageGen.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/DocImageGen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/KShotDataGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/KShotDataGenerator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessing/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/console_0.01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/console_0.01.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Decoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Decoders.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Encoders.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Encoders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/MetaLearningModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/MetaLearningModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Utilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Utilities.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,10 +28,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
+        <entry file="file://$PROJECT_DIR$/data_processing/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2237">
-              <caret line="232" column="44" selection-start-line="232" selection-start-column="44" selection-end-line="232" selection-end-column="44" />
+            <state relative-caret-position="197">
+              <caret line="219" column="69" selection-start-line="219" selection-start-column="69" selection-end-line="219" selection-end-column="69" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -31,41 +39,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="37" column="50" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="50" />
+            <state relative-caret-position="392">
+              <caret line="53" column="61" selection-start-line="53" selection-start-column="61" selection-end-line="53" selection-end-column="61" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#0#44#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/functional.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="1622" selection-start-line="1622" selection-end-line="1622" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/module.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1728">
-              <caret line="488" selection-start-line="488" selection-end-line="488" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+            <state relative-caret-position="374">
+              <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -74,15 +64,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/console_0.01.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1256">
-              <caret line="137" column="63" selection-start-line="137" selection-start-column="63" selection-end-line="137" selection-end-column="63" />
+            <state relative-caret-position="2601">
+              <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -91,10 +85,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
+        <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/console_0.05.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
+            <state relative-caret-position="8959">
+              <caret line="527" column="26" selection-start-line="527" selection-start-column="26" selection-end-line="527" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/conv.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5083">
+              <caret line="306" column="8" selection-start-line="306" selection-start-column="8" selection-end-line="306" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -110,7 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>x_dtypex_dtype</find>
       <find>process_images</find>
       <find>validate</find>
       <find>data_labels</find>
@@ -140,6 +154,7 @@
       <find>self.root_path</find>
       <find>zip</find>
       <find>utils.accuracy</find>
+      <find>255</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,23 +177,23 @@
         <option value="$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/v1/32/a.txt" />
         <option value="$PROJECT_DIR$/DataProcessing/KShotDataGenerator.py" />
         <option value="$PROJECT_DIR$/Model/MetaLearningModel.py" />
-        <option value="$PROJECT_DIR$/Model/Utilities.py" />
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
-        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
+        <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/Decoders.py" />
         <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
         <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
-        <option value="$PROJECT_DIR$/Model/Encoders.py" />
+        <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
         <option value="$PROJECT_DIR$/Model/Config.py" />
         <option value="$PROJECT_DIR$/Model/Config.py" />
+        <option value="$PROJECT_DIR$/Model/Utilities.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-4" />
-    <option name="y" value="-4" />
-    <option name="width" value="776" />
-    <option name="height" value="420" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="3866" />
+    <option name="height" value="2186" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -186,7 +201,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,6 +216,12 @@
             <path>
               <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
               <item name="FewShotSegmentation" type="462c0819:PsiDirectoryNode" />
+              <item name="Data" type="462c0819:PsiDirectoryNode" />
+              <item name="ProcessedData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FewShotSegmentation" type="462c0819:PsiDirectoryNode" />
               <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -216,14 +236,6 @@
               <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
               <item name="VOC" type="462c0819:PsiDirectoryNode" />
               <item name="FullSeg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FewShotSegmentation" type="462c0819:PsiDirectoryNode" />
-              <item name="ExperimentResults" type="462c0819:PsiDirectoryNode" />
-              <item name="VOC" type="462c0819:PsiDirectoryNode" />
-              <item name="FullSeg" type="462c0819:PsiDirectoryNode" />
-              <item name="128-256" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
@@ -234,6 +246,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -338,10 +351,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15964173" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15972589" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -380,65 +393,10 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/_tensor_str.py" />
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/torch/nn/modules/loss.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/-19825236/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/ClassWeights/32/console0.075.txt" />
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/ClassWeights/16/console0.075.txt" />
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/BSR/FullSeg/Basic/32/console0.075.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2279" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/console_0.01.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1069" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/64/console_0.075.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/console_0.075.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/numpy/lib/arraypad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-957">
-          <caret line="964" column="4" selection-start-line="964" selection-start-column="4" selection-end-line="964" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/sklearn/utils/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="234" selection-start-line="234" selection-end-line="234" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/sklearn/metrics/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="252" selection-start-line="252" selection-end-line="252" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/console_0.1.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/heatmap_confusion_matrix0.1full.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/heatmap_confusion_matrix0.1test.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/KShotDataGenerator.py">
+    <entry file="file://$PROJECT_DIR$/data_processing/KShotDataGenerator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
@@ -448,50 +406,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSegDecay_Weights/64/console_0.1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23374" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/64/console_0.1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="1464" lean-forward="true" selection-start-line="1464" selection-end-line="1464" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_003747.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_000027.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004707.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-192" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004768.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004538.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_003668.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/console_0.1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_003747.xml" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_000027.xml" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004707.xml" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004768.xml" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_004538.xml" />
+    <entry file="file://$PROJECT_DIR$/VOCdevkit/VOC2012/Annotations/2007_003668.xml" />
     <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
@@ -499,13 +420,6 @@
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/conv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="319" selection-start-line="319" selection-end-line="319" />
         </state>
       </provider>
     </entry>
@@ -572,77 +486,163 @@
     <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/heatmap_confusion_matrix0.05full.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-1024/console_0.01.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-512/console_0.01.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/console_0.1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11390" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/64/console_0.075.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/functional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27302">
+          <caret line="1622" selection-start-line="1622" selection-end-line="1622" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8177">
+          <caret line="488" selection-start-line="488" selection-end-line="488" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/heatmap_confusion_matrix0.01test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128-256/heatmap_confusion_matrix0.01full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128-256/heatmap_confusion_matrix0.01test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128-256/console_0.01.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSegDecay_Weights/64/console_0.1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3723" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/console_0.1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-305" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/128/console_0.05.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1954" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessing/DataProcessor.py">
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/64/console_0.1.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2237">
-          <caret line="232" column="44" selection-start-line="232" selection-start-column="44" selection-end-line="232" selection-end-column="44" />
+        <state relative-caret-position="-1581" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/heatmap_confusion_matrix0.01full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/console_0.01.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1938" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/console_0.1.txt" />
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/console_0.05.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8959">
+          <caret line="527" column="26" selection-start-line="527" selection-start-column="26" selection-end-line="527" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/conv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5083">
+          <caret line="306" column="8" selection-start-line="306" selection-start-column="8" selection-end-line="306" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/heatmap_confusion_matrix0.05full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.05.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_processing/DataProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="219" column="69" selection-start-line="219" selection-start-column="69" selection-end-line="219" selection-end-column="69" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/functional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="1622" selection-start-line="1622" selection-end-line="1622" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Encoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
+    <entry file="file://$PROJECT_DIR$/Model/Config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="37" column="50" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="50" />
+          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-1024/console_0.01.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/NewBrain/Lib/site-packages/torch/nn/modules/module.py">
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1728">
-          <caret line="488" selection-start-line="488" selection-end-line="488" />
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-512/console_0.01.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1256">
-          <caret line="137" column="63" selection-start-line="137" selection-start-column="63" selection-end-line="137" selection-end-column="63" />
+        <state relative-caret-position="2601">
+          <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/128-256/console_0.01.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Config.py">
+    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+        <state relative-caret-position="392">
+          <caret line="53" column="61" selection-start-line="53" selection-start-column="61" selection-end-line="53" selection-end-column="61" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>

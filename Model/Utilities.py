@@ -35,9 +35,9 @@ def calc_confusion_matrix(predictions, ground_truths):
     ground_truths = ground_truths.flatten()
     return confusion_matrix(ground_truths, predictions)
 
-def accuracy(predictions, ground_truths, ignore_index = None):
+def accuracy(y_pred, y_true, ignore_index = None):
     accuracies = []
-    for pred, truth in zip(predictions, ground_truths):
+    for pred, truth in zip(y_pred, y_true):
         accuracy = np.sum(pred == truth)
         if ignore_index is not None:
             total = np.sum(truth != ignore_index)
@@ -45,3 +45,17 @@ def accuracy(predictions, ground_truths, ignore_index = None):
             total = np.product(truth.shape)
         accuracies.append(accuracy/total)
     return np.average(accuracies)
+
+
+def compute_iou(y_pred, y_true, labels):
+    # ytrue, ypred is a flatten vector
+    y_pred = y_pred.flatten()
+    y_true = y_true.flatten()
+    current = confusion_matrix(y_true, y_pred, labels=labels)
+    # compute mean iou
+    intersection = np.diag(current)
+    ground_truth_set = current.sum(axis=1)
+    predicted_set = current.sum(axis=0)
+    union = ground_truth_set + predicted_set - intersection
+    IoU = intersection / union.astype(np.float32)
+    return np.mean(IoU)

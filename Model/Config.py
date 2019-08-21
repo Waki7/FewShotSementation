@@ -21,18 +21,19 @@ torch.cuda.set_device(0)
 #################################################################################################################
 
 #### experiments
-weights = False  # todo implementation for voc is probably wrong, i'm guessing related to ignored index
+weights = False
 #### experiments
-model_size = 128
-encoding_size = 256
-lr = .01
+model_size = 256
+encoding_size = 1024
+lr = .5
 dataset_name = DataSetNames.VOC
 experiment = 'FullSeg' + ('_Weights' if weights else '')
 
 load_model = False
-downsample_ratio = 6
-batch_size = 30  # roughly 45 for 64 model_size and half as u keep doubling
-epochs = 100
+downsample_ratio = 4
+encoding_downsample = 4
+batch_size = 10  # roughly 45 for 64 model_size and half as u keep doubling
+epochs = 10
 np.random.seed(24)
 random.seed(24)
 torch.manual_seed(24)
