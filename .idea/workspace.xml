@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aa74731-df5d-4c8e-b7dd-a3807b35aea0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_processing/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_processing/DataProcessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/SegmentationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model/SegmentationModel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_processing/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="913">
+            <state relative-caret-position="818">
               <caret line="58" column="65" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -32,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="180" column="22" lean-forward="true" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
+            <state relative-caret-position="971">
+              <caret line="180" column="22" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -44,7 +43,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_processing/KShotDataGenerator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
+            <state relative-caret-position="102">
               <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
@@ -53,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="102">
+              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -65,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
+            <state relative-caret-position="408">
               <caret line="29" column="7" selection-start-line="29" selection-end-line="29" selection-end-column="7" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -77,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/Config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="493">
               <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -91,11 +90,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2601">
-              <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
+            <state relative-caret-position="393">
+              <caret line="138" column="64" selection-start-line="138" selection-start-column="64" selection-end-line="138" selection-end-column="64" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -189,14 +188,14 @@
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
         <option value="$PROJECT_DIR$/Model/Encoders.py" />
         <option value="$PROJECT_DIR$/Model/Decoders.py" />
-        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
-        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
         <option value="$PROJECT_DIR$/DataProcessing/DataProcessor.py" />
         <option value="$PROJECT_DIR$/Model/Config.py" />
         <option value="$PROJECT_DIR$/Model/Config.py" />
         <option value="$PROJECT_DIR$/Model/Utilities.py" />
         <option value="$PROJECT_DIR$/data_processing/DataProcessor.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
+        <option value="$PROJECT_DIR$/Model/SegmentationModel.py" />
       </list>
     </option>
   </component>
@@ -223,12 +222,6 @@
               <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
               <item name="FewShotSegmentation" type="462c0819:PsiDirectoryNode" />
               <item name="Data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FewShotSegmentation" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-              <item name="meta_learner_data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FewShotSegmentation" type="b2602c69:ProjectViewProjectNode" />
@@ -553,6 +546,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/heatmap_confusion_matrix0.05full.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.05.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="7" selection-start-line="29" selection-end-line="29" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Model/Decoders.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -570,58 +602,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05full.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/heatmap_confusion_matrix0.05full.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg_Weights/256-512/heatmap_confusion_matrix0.05test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.05.txt">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
+        <state relative-caret-position="102">
+          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Config.py">
+    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+        <state relative-caret-position="971">
+          <caret line="180" column="22" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ExperimentResults/VOC/FullSeg/256-1024/console_0.5.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/Utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="29" column="7" selection-start-line="29" selection-end-line="29" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_processing/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="913">
+        <state relative-caret-position="818">
           <caret line="58" column="65" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -629,19 +629,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model/MetaLearningModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="180" column="22" lean-forward="true" selection-start-line="180" selection-start-column="22" selection-end-line="180" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_processing/KShotDataGenerator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
+        <state relative-caret-position="102">
           <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
@@ -649,10 +639,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/Model/SegmentationModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="393">
+          <caret line="138" column="64" selection-start-line="138" selection-start-column="64" selection-end-line="138" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

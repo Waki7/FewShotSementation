@@ -136,7 +136,7 @@ class Segmenter():
         return False
 
 
-def main():
+def main(): #todo https://github.com/meetshah1995/pytorch-semseg
     print(cfg.lr, **cfg.prnt)
     dataset = data.get_experiment_data()(downsample_ratio=cfg.downsample_ratio)
     segmenter = Segmenter(lr=cfg.lr, downsample_ratio=cfg.downsample_ratio, model_size=cfg.model_size,
