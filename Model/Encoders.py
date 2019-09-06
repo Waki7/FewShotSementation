@@ -6,52 +6,35 @@ class SegEncoder(nn.Module): # will maintain same shape as input
                  dilation = 4, encoding_downsample=1):
         super(SegEncoder, self).__init__()
 
-        bias = True
-        channels = in_shape[1] if len(in_shape) > 3 else 1
-        stride1 = 1
-        kernel1 = 7
+        def __init__(
+                self, n_classes=21, block_config=[3, 4, 23, 3], input_size=(473, 473), version=None
+        ):
+            super(pspnet, self).__init__()
 
-        out_channels_1 = model_size
-        out_channels_2 = (out_shape + model_size) // 2
-        out_channels_final = out_shape
+            self.block_config = (
+                pspnet_specs[version]["block_config"] if version is not None else block_config
+            )
+            self.n_classes = pspnet_specs[version]["n_classes"] if version is not None else n_classes
+            self.input_size = pspnet_specs[version]["input_size"] if version is not None else input_size
 
-        self.l1 = nn.Sequential(
-            # dw
-            nn.Conv2d(in_channels=channels,
-                      out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calc_padding(kernel1, dilation),
-                      dilation=dilation, bias=bias),
-            nn.BatchNorm2d(out_channels_1),
-            nn.ReLU6(inplace=True),
-            # pw-linear
-            nn.Conv2d(in_channels=out_channels_1,
-                      out_channels=out_channels_1, kernel_size=kernel1,
-                      stride=stride1, padding=self.calc_padding(kernel1, dilation),
-                      dilation=dilation, bias=bias),
-            nn.BatchNorm2d(out_channels_1),
-        )
+            # Encoder
+            self.convbnrelu1_1 = conv2DBatchNormRelu(
+                in_channels=3, k_size=3, n_filters=64, padding=1, stride=2, bias=False
+            )
+            self.convbnrelu1_2 = conv2DBatchNormRelu(
+                in_channels=64, k_size=3, n_filters=64, padding=1, stride=1, bias=False
+            )
+            self.convbnrelu1_3 = conv2DBatchNormRelu(
+                in_channels=64, k_size=3, n_filters=128, padding=1, stride=1, bias=False
+            )
 
-        stride2 = 1
-        kernel2 = 3
+            # Vanilla Residual Blocks
+            self.res_block2 = residualBlockPSP(self.block_config[0], 128, 64, 256, 1, 1)
+            self.res_block3 = residualBlockPSP(self.block_config[1], 256, 128, 512, 2, 1)
 
-        self.l2 = nn.Sequential(
-            # dw
-            nn.Conv2d(in_channels=out_channels_1,
-                      out_channels=out_channels_2, kernel_size=kernel2,
-                      stride=stride2, padding=self.calc_padding(kernel2, dilation),
-                      dilation=dilation, bias=bias),
-            nn.BatchNorm2d(out_channels_2),
-            nn.ReLU6(inplace=True),
-            # pw-linear
-            nn.Conv2d(in_channels=out_channels_2,
-                      out_channels=out_channels_final, kernel_size=kernel2,
-                      stride=encoding_downsample, padding=self.calc_padding(kernel2, dilation),
-                      dilation=dilation, bias=bias),
-            nn.BatchNorm2d(out_channels_final),
-        )
-        # final_dim = ((in_shape[-1]*in_shape[-2])//stride2) * out_channels_2
-        # self.fc = nn.Linear(in_features=final_dim, out_features=n_class)
-        self.out_shape = out_shape
+            # Dilated Residual Blocks
+            self.res_block4 = residualBlockPSP(self.block_config[2], 512, 256, 1024, 1, 2)
+            self.res_block5 = residualBlockPSP(self.block_config[3], 1024, 512, 2048, 1, 4)
 
     def calc_padding(self, kernel, dilation):
         return (dilation)*(kernel//2)
